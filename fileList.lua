@@ -1,8 +1,9 @@
-local fileList = {
+
+FileList = {
 
     ["scripts"] = {
         ["wheels"] = {
-            "collision.lua",
+            "collisions"
         }
     }
 }
@@ -19,12 +20,12 @@ function LoadTableFiles(table, path)
     for folder, item in pairs(table) do
         if type(item) == "table" then
             LoadTableFiles(item, path.."/"..folder)
-        else
+        elseif type(item) == "string" then
             Log("Landcruisers: Loading ".. RGBAtoHex(50, 150, 50, 255, false)..path.."/"..item..".lua")
-            _G[item] = dofile(path .. "/"..item..".lua")
+            dofile(path .. "/"..item..".lua")
         end
     end
 end
-function LoadFiles()
-    LoadTableFiles(fileList, path)
+function FileList.LoadFiles()
+    LoadTableFiles(FileList, path)
 end
