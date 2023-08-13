@@ -21,13 +21,16 @@ function DeviceManager.IndexAtLoad()
         for deviceIndex = 0, deviceCount - 1 do
             local id = GetDeviceIdSide(side, deviceIndex)
             local teamId = GetDeviceTeamId(id)
-            local wheel = Wheel:new(id, teamId)
-            table.insert(data.wheels, wheel)
+            local wheel = Wheel(id, teamId)
+            if wheel then
+                table.insert(data.wheels, wheel)
+            end
+            
         end
     end
 end
 function DeviceManager.OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
-    local wheel = Wheel:new(deviceId, teamId)
+    local wheel = Wheel(deviceId, teamId)
     table.insert(data.wheels, wheel)
 end
 
