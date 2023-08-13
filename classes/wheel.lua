@@ -1,5 +1,4 @@
---Forts mod api
-Wheel = {
+WheelMetatable = {
     deviceId = 0,
     nodeIdA = 0, --platform node
     nodeidB = 0, --platform node
@@ -8,15 +7,17 @@ Wheel = {
 
     saveName = "",
 
-    devicePos = Vec3(0,0,0),
+    devicePos = Vec3(0,0),
     nodePosA = Vec3(0,0,0),
     nodePosB = Vec3(0,0,0),
     actualPos = Vec3(0,0,0),
-    
-    type = WheelType,
+    type = DefaultWheelDefinition
 }
 
-function Wheel:new(deviceId, teamId)
+function Wheel(deviceid, teamId)
+    return WheelMetatable:new(deviceid, teamId)
+end
+function WheelMetatable:new(deviceId, teamId)
     local o = {}
     setmetatable(o, self)
     self.__index = self
@@ -32,37 +33,46 @@ function Wheel:new(deviceId, teamId)
     o.devicePos = GetDevicePosition(deviceId)
     o.nodePosA = NodePosition(o.nodeIdA)
     o.nodePosB = NodePosition(o.nodeIdB)
-
-    o.actualPos = Vec3(0,0,0) --to be added later
-
+    o.actualPos = Vec3(0,0)
+    o.type = WheelDefinitionHelpers.GetWheelDefinitionBySaveName(o.saveName)
+    if not o.type then return nil end
     return o
 end
 
-function Wheel:Update()
+
+
+function WheelMetatable:Update()
     self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
     self.nodePosB = NodePosition(self.nodeIdB)
+    local platformVector = Vec2Normalize(self.nodePosB - self.nodePosA)
+    local platformPerp = Vec2Perp(platformVector)
+    local platformOffset = self.type:GetHeight() * platformPerp
+    self.actualPos = self.devicePos + platformOffset
+    
 end
 
-function Wheel:UpdateTeam(teamId)
+function WheelMetatable:UpdateTeam(teamId)
     self.teamId = teamId
 end
 
-function Wheel:UpdateStructure(structureId)
+function WheelMetatable:UpdateStructure(structureId)
     self.structureId = structureId
 end
 
-function Wheel:CalculateActualPos()
 
-end
-
-function Wheel:GetPosition()
-    return self.devicePos --TEMP TEMP TEMP
+function WheelMetatable:GetPos()
+    return self.actualPos
 end
 --Wheel statistics, eg small medium large
-WheelType = {
+WheelDefinition = {
     radius = 0,
     height = 0,
     dampening = 0,
     spring = 0,
+    sprocketSprite = "",
+    wheelSprite = "",
+    saveName = "",
+
+    
 }
