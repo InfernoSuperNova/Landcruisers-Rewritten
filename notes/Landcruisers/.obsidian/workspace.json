@@ -62,9 +62,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "4c946d96b279222c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Fuuuutureee/Classes.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -130,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Global tables.md",
+                "file": "Fuuuutureee/Classes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Global tables.md",
+                "file": "Fuuuutureee/Classes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Global tables.md"
+                "file": "Fuuuutureee/Classes.md"
               }
             }
           }
@@ -191,10 +203,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d0575f248fcd4ca7",
+  "active": "4c946d96b279222c",
   "lastOpenFiles": [
-    "General notes.md",
     "Global tables.md",
+    "Fuuuutureee/Classes.md",
+    "Fuuuutureee",
+    "General notes.md",
     "script.lua/Important Notes!.md",
     "script.lua",
     "DeviceManager/General notes.md",
