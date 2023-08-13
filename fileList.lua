@@ -17,7 +17,7 @@ FileList = {
             "deviceManager"
         },
         ["debug"] = {
-            "highlighting"
+            "highlighting",
             "updateLogging",
         },
         ["terrain"] = {

@@ -18,6 +18,9 @@ function Update(frame)
     UpdateFunction("UpdateLogging", "Update", frame)
 
     UpdateFunction("TerrainManager", "Update", frame)
+    UpdateFunction("Collisions", "Update", frame)
+    UpdateFunction("DeviceManager", "Update", frame)
+    
 end
 
 function OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
