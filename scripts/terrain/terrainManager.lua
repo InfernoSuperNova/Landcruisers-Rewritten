@@ -27,5 +27,8 @@ end
 function TerrainManager.Update(frame)
     for _, block in pairs(data.terrain) do
         block:Update()
+
+        Nodes = block:GetNodes()
+        Highlighting.HighlightCoords(Nodes)
     end
 end
