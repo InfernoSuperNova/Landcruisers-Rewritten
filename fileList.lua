@@ -1,9 +1,18 @@
 
 FileList = {
 
+    ["classes"] = {
+        "wheel",
+    },
     ["scripts"] = {
         ["wheels"] = {
             "collisions"
+        },
+        ["devices"] = {
+            "deviceManager"
+        },
+        ["debug"] = {
+            "highlighting"
         }
     }
 }
