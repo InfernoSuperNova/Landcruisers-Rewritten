@@ -30,3 +30,7 @@ function Block:Update()
         end
     end
 end
+
+function Block:GetNodes()
+    return self.nodes
+end
