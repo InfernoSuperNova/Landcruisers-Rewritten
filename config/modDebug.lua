@@ -1,0 +1,3 @@
+ModDebug = {
+    update = true,
+}

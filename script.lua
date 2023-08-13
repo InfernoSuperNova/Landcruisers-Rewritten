@@ -14,8 +14,9 @@ function Load(gameStart)
 end
 
 function Update(frame)
-    Collisions.Update(frame)
-    DeviceManager.Update(frame)
+    
+    UpdateFunction("UpdateLogging", "Update", frame)
+
     UpdateFunction("TerrainManager", "Update", frame)
 end
 

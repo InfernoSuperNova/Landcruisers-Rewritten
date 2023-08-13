@@ -6,6 +6,7 @@ FileList = {
         "terrain",
     },
     ["config"] = {
+        "modDebug",
         "terrainConfig",
     },
     ["scripts"] = {
@@ -17,6 +18,8 @@ FileList = {
         },
         ["debug"] = {
             "highlighting"
+            "updateLogging",
+        },
         ["terrain"] = {
             "terrainManager"
         }
