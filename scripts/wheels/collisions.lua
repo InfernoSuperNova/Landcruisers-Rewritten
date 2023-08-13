@@ -2,5 +2,5 @@
 Collisions = {}
 
 function Collisions.Update(frame)
-    Log("Hello, World!")
+    --Log("Hello, World!")
 end
