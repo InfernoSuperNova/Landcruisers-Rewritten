@@ -11,7 +11,7 @@ end
 function DeviceManager.Update(frame)
     for _, wheel in ipairs(data.wheels) do
         wheel:Update()
-        Highlighting.HighlightCoords({wheel:GetPosition()})
+        --Highlighting.HighlightCoords({wheel:GetPosition()})
     end
 end
 function DeviceManager.IndexAtLoad()
