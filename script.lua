@@ -50,7 +50,7 @@ function ModLoop(frame)
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
         local delta = (endUpdateTime - startUpdateTime) * 1000
-        UpdateLogging.Log("Update took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
+        UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
     end
     
 end
