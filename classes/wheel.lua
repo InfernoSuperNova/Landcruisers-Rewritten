@@ -56,6 +56,9 @@ function Wheel:CalculateActualPos()
 
 end
 
+function Wheel:GetPosition()
+    return self.devicePos --TEMP TEMP TEMP
+end
 --Wheel statistics, eg small medium large
 WheelType = {
     radius = 0,
