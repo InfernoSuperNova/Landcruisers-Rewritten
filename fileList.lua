@@ -3,6 +3,10 @@ FileList = {
 
     ["classes"] = {
         "wheel",
+        "terrain",
+    },
+    ["config"] = {
+        "terrainConfig",
     },
     ["scripts"] = {
         ["wheels"] = {
@@ -13,6 +17,8 @@ FileList = {
         },
         ["debug"] = {
             "highlighting"
+        ["terrain"] = {
+            "terrainManager"
         }
     }
 }

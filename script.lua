@@ -10,11 +10,13 @@ dofile(path .. "/BetterLog.lua")
 function Load(gameStart)
     
     DeviceManager.Load()
+    TerrainManager.Load()
 end
 
 function Update(frame)
     Collisions.Update(frame)
     DeviceManager.Update(frame)
+    UpdateFunction("TerrainManager", "Update", frame)
 end
 
 function OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
