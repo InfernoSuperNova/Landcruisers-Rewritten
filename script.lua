@@ -2,8 +2,8 @@
 dofile(path .. "/debugMagic.lua")
 dofile("scripts/forts.lua")
 dofile(path .. "/fileList.lua")
-FileList.LoadFiles()
 dofile(path .. "/BetterLog.lua")
+FileList.LoadFiles()
 
 ---------------API EVENTS----------------
 function Load(gameStart)
@@ -31,10 +31,10 @@ end
 -----------------MOD-------------------
 
 function LoadMod(gameStart)
+    WheelDefinitionHelpers.ConstructWheelDefs()
     DeviceManager.Load()
     TerrainManager.Load()
 end
-
 
 function ModLoop(frame)
     local startUpdateTime
