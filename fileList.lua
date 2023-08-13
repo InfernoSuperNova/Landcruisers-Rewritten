@@ -8,13 +8,16 @@ FileList = {
     ["config"] = {
         "modDebug",
         "terrainConfig",
+        "wheelDefinitions",
+        "wheelConfig",
     },
     ["scripts"] = {
         ["wheels"] = {
             "collisions"
         },
         ["devices"] = {
-            "deviceManager"
+            "deviceManager",
+            "wheelManager",
         },
         ["debug"] = {
             "highlighting",
@@ -22,6 +25,9 @@ FileList = {
         },
         ["terrain"] = {
             "terrainManager"
+        },
+        ["math"] = {
+            "vector"
         }
     }
 }
