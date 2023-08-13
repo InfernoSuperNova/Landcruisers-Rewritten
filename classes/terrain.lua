@@ -1,10 +1,13 @@
-Block = {
+BlockMetaTable = {
     blockIndex = 0,
     nodes = {},
     continuousUpdate = false,
 }
 
-function Block:new(blockIndex, continuousUpdate)
+function Block(blockIndex, continuousUpdate)
+    return BlockMetaTable:new(blockIndex, continuousUpdate)
+end
+function BlockMetaTable:new(blockIndex, continuousUpdate)
 
     local o = {}
     setmetatable(o, self)
@@ -20,7 +23,7 @@ function Block:new(blockIndex, continuousUpdate)
     return o
 end
 
-function Block:Update()
+function BlockMetaTable:Update()
     if self.continuousUpdate then
         self.nodes = {}
         local nodeCount = GetBlockVertexCount(self.blockIndex)
@@ -31,6 +34,6 @@ function Block:Update()
     end
 end
 
-function Block:GetNodes()
+function BlockMetaTable:GetNodes()
     return self.nodes
 end

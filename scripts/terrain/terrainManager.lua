@@ -19,13 +19,14 @@ function TerrainManager.IndexAtLoad()
             end
         end
         if ignoreBlock then continue end
-        local block = Block:new(blockIndex, continuousUpdate)
+        local block = Block(blockIndex, continuousUpdate)
         table.insert(data.terrain, block)
     end
 end
 
 function TerrainManager.Update(frame)
-    for _, block in pairs(data.terrain) do
-        block:Update()
-    end
+    -- for _, block in pairs(data.terrain) do
+    --     block:Update()
+    -- end
 end
+
