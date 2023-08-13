@@ -76,3 +76,46 @@ WheelDefinition = {
 
     
 }
+
+
+function WheelDefinition:new(radius, height, dampening, spring, saveName, sprocketSprite, wheelSprite)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+
+    o.radius = radius
+    o.height = height
+    o.dampening = dampening
+    o.spring = spring
+    o.saveName = saveName
+    o.sprocketSprite = sprocketSprite
+    o.wheelSprite = wheelSprite
+
+    return o
+end
+
+function WheelDefinition:GetRadius()
+    return self.radius
+end
+
+function WheelDefinition:GetHeight()
+    return self.height
+end
+
+function WheelDefinition:GetDampening()
+    return self.dampening
+end
+
+function WheelDefinition:GetSpring()
+    return self.spring
+end
+
+function WheelDefinition:GetSaveName()
+    return self.saveName
+end
+
+function WheelDefinition:DeepCopy()
+    return WheelDefinition:new(self.radius, self.height, self.dampening, self.spring, self.saveName, self.sprocketSprite, self.wheelSprite)
+end
+
+
