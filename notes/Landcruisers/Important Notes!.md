@@ -1,0 +1,1 @@
+Don't get complacent! Keep helper functions out of script.lua (Unless it's the only place it makes sense, IE you don't want to be calling Table.Function() every time you want to update)
