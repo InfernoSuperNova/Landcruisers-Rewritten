@@ -7,7 +7,16 @@ FileList.LoadFiles()
 
 ---------------API EVENTS----------------
 function Load(gameStart)
-    LoadMod(gameStart)
+    LoadMod()
+end
+function OnRestart()
+    LoadMod()
+end
+function OnSeek()
+    LoadMod()
+end
+function OnSeekStart()
+    LoadMod()
 end
 function Update(frame)
     ModLoop(frame)
@@ -30,7 +39,9 @@ end
 
 -----------------MOD-------------------
 
-function LoadMod(gameStart)
+data.wheels = {}
+data.terrain = {}
+function LoadMod()
     WheelDefinitionHelpers.ConstructWheelDefs()
     DeviceManager.Load()
     TerrainManager.Load()
