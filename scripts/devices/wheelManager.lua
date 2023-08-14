@@ -64,3 +64,17 @@ function WheelManager.CheckWheelGroupOnSegmentColliders(wheelGroup, wheelCollide
     end
 end
 
+function CheckWheelsOnSegmentCollider(wheelGroup, segmentCollider, segment, prevSegmentStart, nextSegmentEnd)
+    for _, wheel in pairs(wheelGroup) do
+        local wheelPos = wheel:GetPos()
+        local segmentColliderPos = Vec3(segmentCollider.x, segmentCollider.y)
+        local distance = Vec3Dist(wheelPos, segmentColliderPos)
+        
+        if distance < segmentCollider.r + wheel.type:GetRadius() then
+            if ModDebug.collisions then
+                SpawnLine(wheelPos, segmentColliderPos, White(), 0.04)
+            end
+            CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
+        end
+    end
+end
