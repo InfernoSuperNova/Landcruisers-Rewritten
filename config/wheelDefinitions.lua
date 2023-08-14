@@ -28,6 +28,7 @@ WheelDefinitions = {
     },
     
 }
+LargestWheelRadius = 0
 
 DefaultWheelDefinition = WheelDefinition:new(75, 0, 30000, 3000, "smallSuspension", "/effects/track_sprocket.lua", "/effects/wheel.lua")
 
@@ -54,6 +55,7 @@ function WheelDefinitionHelpers.ConstructWheelDefs()
         local wheel = WheelDefinition:new(wheelDefinition.radius, wheelDefinition.height, wheelDefinition.dampening, wheelDefinition.spring, 
         wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite)
         table.insert(newDefinitions, wheel)
+        if wheelDefinition.radius > LargestWheelRadius then LargestWheelRadius = wheelDefinition.radius end
     end
     WheelDefinitions = newDefinitions
 end
