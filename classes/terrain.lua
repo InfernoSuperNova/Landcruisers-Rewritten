@@ -33,7 +33,12 @@ function BlockMetaTable:Update()
         end
     end
 end
-
+function BlockMetaTable:GetColliderPos()
+    return self.colliderPos
+end
+function BlockMetaTable:GetColliderRadius()
+    return self.colliderRadius
+end
 function BlockMetaTable:GetNodes()
     return self.nodes
 end
