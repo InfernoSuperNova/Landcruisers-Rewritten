@@ -53,10 +53,10 @@ function ModLoop(frame)
         startUpdateTime = GetRealTime()
     end
     UpdateFunction("UpdateLogging", "Update", frame)
-
     UpdateFunction("TerrainManager", "Update", frame)
     UpdateFunction("Collisions", "Update", frame)
     UpdateFunction("DeviceManager", "Update", frame)
+    UpdateFunction("WheelManager", "Update", frame)
 
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
