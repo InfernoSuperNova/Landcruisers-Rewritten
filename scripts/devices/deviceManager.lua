@@ -11,7 +11,7 @@ end
 function DeviceManager.Update(frame)
     for _, wheel in ipairs(data.wheels) do
         wheel:Update()
-        SpawnCircle(wheel:GetPos(), wheel.type:GetRadius(), Blue(), 0.04)
+
     end
 end
 function DeviceManager.IndexAtLoad()
