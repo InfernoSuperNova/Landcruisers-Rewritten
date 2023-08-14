@@ -29,6 +29,19 @@ function WheelManager.GetWheelCollider(wheelGroup)
     return wheelGroupBoundary
 end
 
+function WheelManager.CheckWheelGroupCollisions(wheelCollider)
+    local colliding = {}
+    for _, block in pairs(data.terrain) do
+        local blockCollider = block:GetColliderPos()
+        local blockRadius = block:GetColliderRadius()
+        local colliderPos = Vec3(wheelCollider.x, wheelCollider.y)
+        local distance = Vec2Mag(blockCollider - colliderPos)
+        if distance < blockRadius + wheelCollider.r then
+            table.insert(colliding, block)
+        end
+    end
+    return colliding
+end
 
 
 
