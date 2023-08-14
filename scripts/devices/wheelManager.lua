@@ -20,6 +20,14 @@ function WheelManager.Update(frame)
     end
 end
 
+function WheelManager.GetWheelCollider(wheelGroup)
+    local wheelGroupBoundary = MinimumWheelCircularBoundary(wheelGroup)
+    wheelGroupBoundary.r = wheelGroupBoundary.r + LargestWheelRadius
+    if ModDebug.collisions then
+        SpawnCircle(wheelGroupBoundary, wheelGroupBoundary.r, Red(), 0.04)
+    end
+    return wheelGroupBoundary
+end
 
 
 
