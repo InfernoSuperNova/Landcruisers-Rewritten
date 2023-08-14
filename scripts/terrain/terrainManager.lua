@@ -25,8 +25,17 @@ function TerrainManager.IndexAtLoad()
 end
 
 function TerrainManager.Update(frame)
-    -- for _, block in pairs(data.terrain) do
-    --     block:Update()
-    -- end
+
+    for _, block in pairs(data.terrain) do
+
+        block:Update()
+        local nodes = block:GetNodes()
+        local collider = block:GetColliderPos()
+        local radius = block:GetColliderRadius()
+        if ModDebug.collisions then
+            SpawnCircle(Vec3(collider.x, collider.y), radius, Blue(), 0.04)
+        end
+        
+    end
 end
 
