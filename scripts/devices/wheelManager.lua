@@ -78,3 +78,54 @@ function CheckWheelsOnSegmentCollider(wheelGroup, segmentCollider, segment, prev
         end
     end
 end
+
+function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
+    local wheelPos = wheel:GetPos()
+    local segmentStart = segment[1]
+    local segmentEnd = segment[2]
+    local segmentDir = segmentEnd - segmentStart
+    local segmentNormal = Vec2Normalize(Vec2Perp(segmentDir))  -- Calculate the perpendicular vector
+    local wheelToSegment = segmentStart - wheelPos
+    local distance = Vec2Dot(wheelToSegment, segmentNormal)
+    local radius = wheel.type:GetRadius()
+    local terrainValue = 0
+
+
+    local prevSegmentNormal = Vec2Normalize(Vec2Perp(segmentStart - prevSegmentStart))
+    local nextSegmentNormal = Vec2Normalize(Vec2Perp(nextSegmentEnd - segmentEnd))
+    local prevSegmentBoundary = -Vec2Average({prevSegmentNormal, segmentNormal})
+    local nextSegmentBoundary = -Vec2Average({nextSegmentNormal, segmentNormal})
+    local segment1ToWheel = wheelPos - segmentStart
+    local segment2ToWheel = wheelPos - segmentEnd
+
+    if ModDebug.collisions then
+        Highlighting.HighlightDirectionalVector(segmentStart, prevSegmentBoundary, 500, Green())
+        Highlighting.HighlightDirectionalVector(segmentEnd, nextSegmentBoundary, 500, Green())
+    end
+    if Vec2Cross(segment1ToWheel, prevSegmentBoundary) > 0 
+    or Vec2Cross(segment2ToWheel, nextSegmentBoundary) < 0 
+    then return end
+    if distance > radius then
+        return
+    else
+        terrainValue = (radius - distance)
+    end
+    
+    -- if terrainValue == 0 then
+    --     return
+    -- end
+    
+    local displacement = terrainValue * -1 * segmentNormal
+
+    local force = {
+        x = Dampening.SpringDampening(wheel.type.spring, displacement.x, wheel.type.dampening * math.abs(segmentNormal.x) ^ math.pi, NodeVelocity(wheel.nodeIdA).x ),
+        y = Dampening.SpringDampening(wheel.type.spring, displacement.y, wheel.type.dampening * math.abs(segmentNormal.y) ^ math.pi, NodeVelocity(wheel.nodeIdB).y )
+    }
+    if ModDebug.collisions then
+        SpawnCircle(wheelPos + displacement, radius, Red(), 0.04)
+        Highlighting.HighlightDirectionalVector(wheelPos, force, 0.01, Red())
+    end
+    
+    dlc2_ApplyForce(wheel.nodeIdA, force)
+    dlc2_ApplyForce(wheel.nodeIdB, force)
+end
