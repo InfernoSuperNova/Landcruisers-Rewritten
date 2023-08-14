@@ -33,6 +33,13 @@ function Highlighting.FlattenTable(tbl)
     return newTable
 end
 
+function Highlighting.HighlightDirectionalVector(pos, direction, mag, col)
+    col = col or {r = 255, g = 255, b= 255, a = 255}
+    local pos2 = Vec3( pos.x + direction.x * mag, pos.y + direction.y * mag, -10)
+    SpawnLine(pos, pos2, col, 0.04)
+    SpawnCircle(pos, Vec3Dist(pos, pos2) / 5, col, 0.04)
+end
+
 function Highlighting.GetHighestIndex(tbl)
     local highest = 0
     for k, v in pairs(tbl) do
