@@ -13,7 +13,7 @@ FileList = {
     },
     ["scripts"] = {
         ["wheels"] = {
-            "collisions"
+            "collisions",
         },
         ["devices"] = {
             "deviceManager",
@@ -24,10 +24,11 @@ FileList = {
             "updateLogging",
         },
         ["terrain"] = {
-            "terrainManager"
+            "terrainManager",
         },
         ["math"] = {
-            "vector"
+            "vector",
+            "dampening",
         }
     }
 }
