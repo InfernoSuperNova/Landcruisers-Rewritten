@@ -2,5 +2,8 @@
     "Lua.workspace.userThirdParty": [
         "c:\\Users\\willi\\.vscode\\extensions\\atomontageinc.vscode-atomontage-lua-0.8.11\\am_library"
     ],
-    "Lua.workspace.checkThirdParty": false
+    "Lua.workspace.checkThirdParty": false,
+    "Lua.workspace.library": [
+        "c:\\Users\\willi\\.vscode\\extensions\\tretinv3.forts-api-extention-0.3.0\\fortsAPI"
+    ]
 }
