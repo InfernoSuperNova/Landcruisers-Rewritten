@@ -43,5 +43,24 @@ function WheelManager.CheckWheelGroupCollisions(wheelCollider)
     return colliding
 end
 
+function WheelManager.CheckWheelGroupOnSegmentColliders(wheelGroup, wheelCollider, block)
+    local blockNodes = block:GetNodes()
+    for index, nodePos in pairs(blockNodes) do
+        local nodeA = nodePos
+        local nodeB = blockNodes[index + 1 % #blockNodes]
+        local segment = {nodeA, nodeB}
+        local nextSegmentEnd = blockNodes[index + 2 % #blockNodes]
+        local prevSegmentStart = blockNodes[(index - 2) % #blockNodes + 1]
+        
 
+        local segmentCollider = MinimumCircularBoundary(segment)
+        local segmentColliderPos = Vec3(segmentCollider.x, segmentCollider.y)
+        local wheelColliderPos = Vec3(wheelCollider.x, wheelCollider.y)
+        local distance = Vec3Dist(segmentColliderPos, wheelColliderPos)
+        if distance < segmentCollider.r + wheelCollider.r then
+            CheckWheelsOnSegmentCollider(wheelGroup, segmentCollider, segment, prevSegmentStart, nextSegmentEnd)
+        end
+        
+    end
+end
 
