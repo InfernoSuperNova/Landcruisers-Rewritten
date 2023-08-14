@@ -66,6 +66,4 @@ function ModLoop(frame)
     
 end
 
-
---Call again to ensure functionality
 dofile(path .. "/debugMagic.lua")
