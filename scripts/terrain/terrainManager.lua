@@ -7,9 +7,11 @@ end
 function TerrainManager.IndexAtLoad()
     data.terrain = {}
     local terrainCount = GetBlockCount()
+    --loop through all blocks
     for blockIndex = 0, terrainCount - 1 do
         local ignoreBlock = false
         local continuousUpdate = false
+        --Check if ignored
         for i = 1, terrainCount do
             if GetTerrainBlockIndex(TerrainConfig.ignoredName) == blockIndex then
                 ignoreBlock = true
