@@ -12,7 +12,10 @@ WheelMetaTable = {
     devicePos = Vec3(0,0),
     nodePosA = Vec3(0,0,0),
     nodePosB = Vec3(0,0,0),
+    nodeVelA = Vec3(0,0,0),
+    nodeVelB = Vec3(0,0,0),
     actualPos = Vec3(0,0,0),
+    displacedPos = Vec3(0,0,0),
     type = DefaultWheelDefinition
 }
 
@@ -47,10 +50,14 @@ function WheelMetaTable:Update()
     self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
     self.nodePosB = NodePosition(self.nodeIdB)
+    self.nodeVelA = NodeVelocity(self.nodeIdA)
+    self.nodeVelB = NodeVelocity(self.nodeIdB)
+    self.structureId = GetDeviceStructureId(self.deviceId) --Wait for devs to add OnDeviceStructureUpdated, then can remove this
     local platformVector = Vec2Normalize(self.nodePosB - self.nodePosA)
     local platformPerp = Vec2Perp(platformVector)
     local platformOffset = self.type:GetHeight() * platformPerp
     self.actualPos = self.devicePos + platformOffset
+    self.displacedPos = self.actualPos
     
 end
 
@@ -65,6 +72,19 @@ end
 
 function WheelMetaTable:GetPos()
     return self.actualPos
+end
+function WheelMetaTable:GetNodeVelA()
+    return self.nodeVelA
+end
+function WheelMetaTable:GetNodeVelB()
+    return self.nodeVelB
+end
+function WheelMetaTable:SetDisplacedPos(displacedPos)
+    self.displacedPos = displacedPos
+end
+
+function WheelMetaTable:GetDisplacedPos()
+    return self.displacedPos
 end
 
 
