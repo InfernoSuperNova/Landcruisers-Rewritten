@@ -82,6 +82,7 @@ WheelDefinition = {
     height = 0,
     dampening = 0,
     spring = 0,
+    friction = 0,
     sprocketSprite = "",
     wheelSprite = "",
     saveName = "",
@@ -90,7 +91,7 @@ WheelDefinition = {
 }
 
 --Constructor
-function WheelDefinition:new(radius, height, dampening, spring, saveName, sprocketSprite, wheelSprite)
+function WheelDefinition:new(radius, height, dampening, spring, friction, saveName, sprocketSprite, wheelSprite)
     local o = {}
     setmetatable(o, self)
     self.__index = self
@@ -99,6 +100,7 @@ function WheelDefinition:new(radius, height, dampening, spring, saveName, sprock
     o.height = height
     o.dampening = dampening
     o.spring = spring
+    o.friction = friction
     o.saveName = saveName
     o.sprocketSprite = sprocketSprite
     o.wheelSprite = wheelSprite
@@ -120,6 +122,10 @@ end
 
 function WheelDefinition:GetSpring()
     return self.spring
+end
+
+function WheelDefinition:GetFriction()
+    return self.friction
 end
 
 function WheelDefinition:GetSaveName()
