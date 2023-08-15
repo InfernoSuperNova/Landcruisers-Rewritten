@@ -86,9 +86,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "8c79efa656111832",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Track set/How best to structure track object.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -154,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Vector notes.md",
+                "file": "Track set/How best to structure track object.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Vector notes.md",
+                "file": "Track set/How best to structure track object.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Vector notes.md"
+                "file": "Track set/How best to structure track object.md"
               }
             }
           }
@@ -215,10 +227,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "af19b21f9f2840bb",
+  "active": "8c79efa656111832",
   "lastOpenFiles": [
-    "Fuuuutureee/Classes.md",
     "Vector notes.md",
+    "Track set/How best to structure track object.md",
+    "Track set",
+    "Fuuuutureee/Classes.md",
     "Global tables.md",
     "Fuuuutureee",
     "General notes.md",
