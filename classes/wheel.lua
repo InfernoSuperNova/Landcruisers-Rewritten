@@ -1,4 +1,6 @@
-WheelMetatable = {
+--WHEEL OBJECT
+
+WheelMetaTable = {
     deviceId = 0,
     nodeIdA = 0, --platform node
     nodeidB = 0, --platform node
@@ -15,9 +17,9 @@ WheelMetatable = {
 }
 
 function Wheel(deviceid, teamId)
-    return WheelMetatable:new(deviceid, teamId)
+    return WheelMetaTable:new(deviceid, teamId)
 end
-function WheelMetatable:new(deviceId, teamId)
+function WheelMetaTable:new(deviceId, teamId)
     local o = {}
     setmetatable(o, self)
     self.__index = self
@@ -41,7 +43,7 @@ end
 
 
 
-function WheelMetatable:Update()
+function WheelMetaTable:Update()
     self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
     self.nodePosB = NodePosition(self.nodeIdB)
@@ -52,18 +54,28 @@ function WheelMetatable:Update()
     
 end
 
-function WheelMetatable:UpdateTeam(teamId)
+function WheelMetaTable:UpdateTeam(teamId)
     self.teamId = teamId
 end
 
-function WheelMetatable:UpdateStructure(structureId)
+function WheelMetaTable:UpdateStructure(structureId)
     self.structureId = structureId
 end
 
 
-function WheelMetatable:GetPos()
+function WheelMetaTable:GetPos()
     return self.actualPos
 end
+
+
+
+
+
+
+
+--WHEEL TYPES
+
+
 --Wheel statistics, eg small medium large
 WheelDefinition = {
     radius = 0,
@@ -77,7 +89,7 @@ WheelDefinition = {
     
 }
 
-
+--Constructor
 function WheelDefinition:new(radius, height, dampening, spring, saveName, sprocketSprite, wheelSprite)
     local o = {}
     setmetatable(o, self)
@@ -93,7 +105,7 @@ function WheelDefinition:new(radius, height, dampening, spring, saveName, sprock
 
     return o
 end
-
+--Getters
 function WheelDefinition:GetRadius()
     return self.radius
 end
