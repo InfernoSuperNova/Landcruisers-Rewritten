@@ -116,10 +116,13 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     -- end
     
     local displacement = terrainValue * -1 * segmentNormal
-
+    wheel:SetDisplacedPos(wheelPos + displacement)
+    local velA = wheel:GetNodeVelA()
+    local velB = wheel:GetNodeVelB()
+    local vel = Vec2Average({velA, velB})
     local force = {
-        x = Dampening.SpringDampening(wheel.type.spring, displacement.x, wheel.type.dampening * math.abs(segmentNormal.x) ^ math.pi, NodeVelocity(wheel.nodeIdA).x ),
-        y = Dampening.SpringDampening(wheel.type.spring, displacement.y, wheel.type.dampening * math.abs(segmentNormal.y) ^ math.pi, NodeVelocity(wheel.nodeIdB).y )
+        x = Dampening.SpringDampening(wheel.type.spring, displacement.x, wheel.type.dampening * math.abs(segmentNormal.x) ^ math.pi, vel.x ),
+        y = Dampening.SpringDampening(wheel.type.spring, displacement.y, wheel.type.dampening * math.abs(segmentNormal.y) ^ math.pi, vel.y )
     }
     if ModDebug.collisions then
         SpawnCircle(wheelPos + displacement, radius, Red(), 0.04)
