@@ -2,14 +2,22 @@ TrackSetMetaTable = {
     straights = {}
 }
 
-function TrackSet(points)
-    return TrackSetMetaTable:new(points)
+function TrackSet(wheels)
+    return TrackSetMetaTable:new(wheels)
 end
 
-function TrackSetMetaTable:new(points)
+function TrackSetMetaTable:new(wheels)
     local o = {}
     setmetatable(o, self)
     self.__index = self
+    local circles = {}
+    for _, wheel in pairs(wheels) do
+        local pos = wheel:GetDisplacedPos()
+        local radius = wheel.type:GetRadius()
+        table.insert(circles, {pos = pos, radius = radius})
+    end
+    local hull = Tracks.GiftWrapping(circles)
+    o.straights = Tracks.GetStraights(hull)
 end
 
 
@@ -20,10 +28,12 @@ TrackStraightMetaTable = {
     b = Vec3(),
 }
 function TrackStraight(a, b)
-    return TrackSetMetaTable:new(a, b)
+    return TrackStraightMetaTable:new(a, b)
 end
 
 function TrackStraightMetaTable:new(a, b)
+
+
     local o = {}
     setmetatable(o, self)
     self.__index = self
