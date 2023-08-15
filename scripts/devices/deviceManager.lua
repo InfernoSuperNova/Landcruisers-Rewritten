@@ -31,7 +31,10 @@ function DeviceManager.IndexAtLoad()
 end
 function DeviceManager.OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
     local wheel = Wheel(deviceId, teamId)
-    table.insert(data.wheels, wheel)
+    if wheel then
+        table.insert(data.wheels, wheel)
+    end
+    
 end
 
 function DeviceManager.OnDeviceMoved(teamId, deviceId, temporaryDeviceId, saveName)
