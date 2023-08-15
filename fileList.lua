@@ -4,6 +4,7 @@ FileList = {
     ["classes"] = {
         "wheel",
         "terrain",
+        "trackSet",
     },
     ["config"] = {
         "modDebug",
@@ -13,11 +14,11 @@ FileList = {
     },
     ["scripts"] = {
         ["wheels"] = {
-            "collisions",
+            "wheelManager",
+            "trackmanager",
         },
         ["devices"] = {
             "deviceManager",
-            "wheelManager",
         },
         ["debug"] = {
             "highlighting",
@@ -29,6 +30,7 @@ FileList = {
         ["math"] = {
             "vector",
             "dampening",
+            "tracks",
         }
     }
 }
