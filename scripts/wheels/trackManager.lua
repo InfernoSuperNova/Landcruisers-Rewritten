@@ -4,8 +4,18 @@ function TrackManager.Update()
     for _, wheels in pairs(wheelStructures) do
         TrackSet(wheels)
     end
+function TrackManager.AddWheel(wheel)
     
-    
+    local structureId = wheel.structureId
+    local trackSet = TrackManager.trackSets[structureId]
+    if not trackSet then
+        trackSet = TrackSet({wheel})
+        
+    else
+        trackSet:AddWheel(wheel)
+    end
+    TrackManager.trackSets[structureId] = trackSet
+end
     
 end
 

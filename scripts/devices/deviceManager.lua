@@ -32,7 +32,8 @@ end
 function DeviceManager.OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
     local wheel = Wheel(deviceId, teamId)
     if wheel then
-        table.insert(data.wheels, wheel)
+        WheelManager.AddWheel(wheel)
+        TrackManager.AddWheel(wheel)
     end
     
 end
@@ -53,6 +54,7 @@ function DeviceManager.OnDeviceTeamUpdated(oldTeamId, newTeamId, deviceId, saveN
     for _, device in ipairs(data.wheels) do
         if device.deviceId == deviceId then
             device:UpdateTeam(newTeamId)
+            TrackManager.AddWheel(wheel)
             return
         end
     end

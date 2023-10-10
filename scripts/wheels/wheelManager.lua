@@ -43,6 +43,9 @@ function WheelManager.CheckWheelGroupCollisions(wheelCollider)
     return colliding
 end
 
+function WheelManager.AddWheel(wheel)
+    table.insert(data.wheels, wheel)
+end
 function WheelManager.CheckWheelGroupOnSegmentColliders(wheelGroup, wheelCollider, block)
     local blockNodes = block:GetNodes()
     for index, nodePos in pairs(blockNodes) do
