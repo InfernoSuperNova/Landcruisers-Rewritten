@@ -25,7 +25,6 @@ function DeviceManager.IndexAtLoad()
             if wheel then
                 table.insert(data.wheels, wheel)
             end
-            
         end
     end
 end
@@ -51,10 +50,15 @@ function DeviceManager.OnDeviceDestroyed(teamId, deviceId, saveName, nodeA, node
 end
 
 function DeviceManager.OnDeviceTeamUpdated(oldTeamId, newTeamId, deviceId, saveName)
-    for _, device in ipairs(data.wheels) do
-        if device.deviceId == deviceId then
-            device:UpdateTeam(newTeamId)
+    for _, wheel in ipairs(data.wheels) do
+        if wheel.deviceId == deviceId then
+            wheel:UpdateTeam(newTeamId)
+            TrackManager.RemoveWheel(wheel)
             TrackManager.AddWheel(wheel)
+            --temporary solution until OnDeviceStructureUpdated is added
+            local structureId = GetDeviceStructureId(deviceId)
+            BetterLog(structureId)
+            wheel:UpdateStructure(structureId)
             return
         end
     end
@@ -67,6 +71,7 @@ function DeviceManager.RemoveWheel(deviceId)
     for index, wheel in ipairs(data.wheels) do
         if wheel.deviceId == deviceId then
             table.remove(data.wheels, index)
+            TrackManager.RemoveWheel(wheel)
             return
         end
     end
