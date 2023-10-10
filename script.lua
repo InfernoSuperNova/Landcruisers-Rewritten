@@ -42,7 +42,7 @@ end
 data.wheels = {}
 data.terrain = {}
 function LoadMod()
-    WheelDefinitionHelpers.ConstructWheelDefs()
+    WheelDefinitionHelpers.ConstructWheelDefinitions()
     DeviceManager.Load()
     TerrainManager.Load()
 end

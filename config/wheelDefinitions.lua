@@ -29,7 +29,6 @@ WheelDefinitions = {
         sprocketSprite = "/effects/track_sprocket_large.lua",
         wheelSprite = "/effects/wheel_large.lua"
     },
-    
 }
 LargestWheelRadius = 0
 
@@ -48,11 +47,11 @@ function WheelDefinitionHelpers.GetWheelDefinitionBySaveName(saveName)
             wheelDefinition.height = -wheelDefinition.height
             return wheelDefinition
         end
-    end
+    end 
     return nil
 end
 
-function WheelDefinitionHelpers.ConstructWheelDefs()
+function WheelDefinitionHelpers.ConstructWheelDefinitions()
     local newDefinitions = {}
     for _, wheelDefinition in ipairs(WheelDefinitions) do
         local wheel = WheelDefinition:new(wheelDefinition.radius, wheelDefinition.height, wheelDefinition.dampening, wheelDefinition.spring, wheelDefinition.friction,
