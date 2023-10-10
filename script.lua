@@ -44,6 +44,7 @@ data.terrain = {}
 function LoadMod()
     WheelDefinitionHelpers.ConstructWheelDefinitions()
     DeviceManager.Load()
+    TrackManager.Load()
     TerrainManager.Load()
 end
 
