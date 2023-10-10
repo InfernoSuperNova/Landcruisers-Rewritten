@@ -91,7 +91,7 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     local wheelToSegment = segmentStart - wheelPos
     local distance = Vec2Dot(wheelToSegment, segmentNormal)
     local radius = wheel.type:GetRadius()
-    local terrainValue = 0
+    local intersectionValue = 0
 
 
     local prevSegmentNormal = Vec2Normalize(Vec2Perp(segmentStart - prevSegmentStart))
@@ -102,8 +102,8 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     local segment2ToWheel = wheelPos - segmentEnd
 
     if ModDebug.collisions then
-        Highlighting.HighlightDirectionalVector(segmentStart, prevSegmentBoundary, 500, Green())
-        Highlighting.HighlightDirectionalVector(segmentEnd, nextSegmentBoundary, 500, Green())
+        Highlighting.HighlightUnitVector(segmentStart, prevSegmentBoundary, 500, Green())
+        Highlighting.HighlightUnitVector(segmentEnd, nextSegmentBoundary, 500, Green())
     end
     if Vec2Cross(segment1ToWheel, prevSegmentBoundary) > 0 
     or Vec2Cross(segment2ToWheel, nextSegmentBoundary) < 0 
@@ -111,27 +111,34 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     if distance > radius then
         return
     else
-        terrainValue = (radius - distance)
+        intersectionValue = (radius - distance)
     end
     
     -- if terrainValue == 0 then
     --     return
     -- end
     
-    local displacement = terrainValue * -1 * segmentNormal
+    CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPos)
+end
+
+
+function CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPos)
+    local displacement = intersectionValue * -1 * segmentNormal
     wheel:SetDisplacedPos(wheelPos + displacement)
     local velA = wheel:GetNodeVelA()
     local velB = wheel:GetNodeVelB()
-    local vel = Vec2Average({velA, velB})
-    local force = {
-        x = Dampening.SpringDampening(wheel.type.spring, displacement.x, wheel.type.dampening * math.abs(segmentNormal.x) ^ math.pi, vel.x ),
-        y = Dampening.SpringDampening(wheel.type.spring, displacement.y, wheel.type.dampening * math.abs(segmentNormal.y) ^ math.pi, vel.y )
-    }
+    local velocity = Vec2Average({velA, velB})
+    BetterLog(velocity.x)
+    BetterLog(velocity.y)
+    local force = Dampening.DirectionalDampening(wheel.type.spring, displacement, wheel.type.dampening, velocity, segmentNormal)
+
     if ModDebug.collisions then
         SpawnCircle(wheelPos + displacement, radius, Red(), 0.04)
-        Highlighting.HighlightDirectionalVector(wheelPos, force, 0.01, Red())
+        Highlighting.HighlightUnitVector(wheelPos, force, 0.01, Red())
     end
     
     dlc2_ApplyForce(wheel.nodeIdA, force)
     dlc2_ApplyForce(wheel.nodeIdB, force)
 end
+
+

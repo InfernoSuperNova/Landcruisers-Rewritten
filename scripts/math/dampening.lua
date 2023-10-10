@@ -3,3 +3,11 @@ function Dampening.SpringDampening(springConst, displacement, dampening, velocit
     local force = springConst * displacement - dampening * velocity
     return force
 end
+
+--velocity as a vector
+function Dampening.DirectionalDampening(springConst, displacement, dampening, velocity, directionVector)
+    local velocityInDirection = Vec2Dot(velocity, directionVector)
+    local force = springConst * displacement - dampening * velocityInDirection * directionVector
+    
+    return force
+end
