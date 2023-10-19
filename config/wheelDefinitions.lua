@@ -6,6 +6,7 @@ WheelDefinitions = {
         spring = 30000,
         dampening = 3000,
         traction = 100,
+        mass = 100,
         sprocketSprite = "/effects/track_sprocket.lua",
         wheelSprite = "/effects/wheel.lua"
     },
@@ -16,6 +17,7 @@ WheelDefinitions = {
         spring = 30000,
         dampening = 3000,
         traction = 100,
+        mass = 100,
         sprocketSprite = "/effects/track_sprocket.lua",
         wheelSprite = "/effects/wheel.lua"
     },
@@ -26,13 +28,14 @@ WheelDefinitions = {
         spring = 60000,
         dampening = 3000,
         traction = 100,
+        mass = 400,
         sprocketSprite = "/effects/track_sprocket_large.lua",
         wheelSprite = "/effects/wheel_large.lua"
     },
 }
 LargestWheelRadius = 0
 
-DefaultWheelDefinition = WheelDefinition:new(75, 0, 30000, 3000, 100, "smallSuspension", "/effects/track_sprocket.lua", "/effects/wheel.lua")
+DefaultWheelDefinition = WheelDefinition:new(75, 0, 30000, 3000, 100, 100, "smallSuspension", "/effects/track_sprocket.lua", "/effects/wheel.lua")
 
 WheelDefinitionHelpers = {}
 
@@ -55,7 +58,7 @@ function WheelDefinitionHelpers.ConstructWheelDefinitions()
     local newDefinitions = {}
     for _, wheelDefinition in ipairs(WheelDefinitions) do
         local wheel = WheelDefinition:new(wheelDefinition.radius, wheelDefinition.height, wheelDefinition.dampening, wheelDefinition.spring, wheelDefinition.traction,
-        wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite)
+        wheelDefinition.mass, wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite)
         table.insert(newDefinitions, wheel)
         if wheelDefinition.radius > LargestWheelRadius then LargestWheelRadius = wheelDefinition.radius end
     end

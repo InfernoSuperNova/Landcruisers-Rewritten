@@ -6,7 +6,6 @@ WheelMetaTable = {
     nodeidB = 0, --platform node
     teamId = 0,
     structureId = 0,
-
     saveName = "",
 
     devicePos = Vec3(0,0),
@@ -17,6 +16,7 @@ WheelMetaTable = {
     actualPos = Vec3(0,0,0),
     displacedPos = Vec3(0,0,0),
     previousPos = Vec3(0,0,0),
+    angularVelocity = 0,
     type = DefaultWheelDefinition
 }
 
@@ -33,7 +33,6 @@ function WheelMetaTable:new(deviceId, teamId)
     o.nodeIdB = GetDevicePlatformB(deviceId)
     o.teamId = teamId
     o.structureId = GetDeviceStructureId(deviceId)
-
     o.saveName = GetDeviceType(deviceId)
     
     o.devicePos = GetDevicePosition(deviceId)
@@ -41,6 +40,7 @@ function WheelMetaTable:new(deviceId, teamId)
     o.nodePosB = NodePosition(o.nodeIdB)
     o.actualPos = Vec3(0,0)
     o.previousPos = Vec3(0,0)
+    o.angularVelocity = 0
     o.type = WheelDefinitionHelpers.GetWheelDefinitionBySaveName(o.saveName)
     if not o.type then return nil end
     return o
@@ -119,13 +119,14 @@ WheelDefinition = {
     dampening = 0,
     spring = 0,
     traction = 0,
+    mass = 0,
     sprocketSprite = "",
     wheelSprite = "",
     saveName = "",
 }
 
 --Constructor
-function WheelDefinition:new(radius, height, dampening, spring, traction, saveName, sprocketSprite, wheelSprite)
+function WheelDefinition:new(radius, height, dampening, spring, traction, mass, saveName, sprocketSprite, wheelSprite)
     local o = {}
     setmetatable(o, self)
     self.__index = self
@@ -135,6 +136,7 @@ function WheelDefinition:new(radius, height, dampening, spring, traction, saveNa
     o.dampening = dampening
     o.spring = spring
     o.traction = traction
+    o.mass = mass
     o.saveName = saveName
     o.sprocketSprite = sprocketSprite
     o.wheelSprite = wheelSprite
@@ -158,8 +160,12 @@ function WheelDefinition:GetSpring()
     return self.spring
 end
 
-function WheelDefinition:GetFriction()
-    return self.friction
+function WheelDefinition:GetTraction()
+    return self.traction
+end
+
+function WheelDefinition:GetMass()
+    return self.mass
 end
 
 function WheelDefinition:GetSaveName()
