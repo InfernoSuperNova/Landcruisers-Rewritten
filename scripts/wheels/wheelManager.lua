@@ -49,13 +49,16 @@ end
 function WheelManager.CheckWheelGroupOnSegmentColliders(wheelGroup, wheelCollider, block)
     local blockNodes = block:GetNodes()
     for index, nodePos in pairs(blockNodes) do
-        local nodeA = nodePos
-        local nodeB = blockNodes[index + 1 % #blockNodes]
-        local segment = {nodeA, nodeB}
-        local nextSegmentEnd = blockNodes[index + 2 % #blockNodes]
-        local prevSegmentStart = blockNodes[(index - 2) % #blockNodes + 1]
-        
 
+        local prevSegmentStart = blockNodes[(index - 2) % #blockNodes + 1]  --index - 1
+        local nodeA = nodePos                                               --index
+        local nodeB = blockNodes[index % #blockNodes + 1]                   --index + 1
+        local nextSegmentEnd = blockNodes[(index + 2 - 1) % #blockNodes + 1]--index + 2
+
+        local segment = {nodeA, nodeB}
+        
+        
+        
         local segmentCollider = MinimumCircularBoundary(segment)
         local segmentColliderPos = Vec3(segmentCollider.x, segmentCollider.y)
         local wheelColliderPos = Vec3(wheelCollider.x, wheelCollider.y)
@@ -75,7 +78,7 @@ function CheckWheelsOnSegmentCollider(wheelGroup, segmentCollider, segment, prev
         
         if distance < segmentCollider.r + wheel.type:GetRadius() then
             if ModDebug.collisions then
-                SpawnLine(wheelPos, segmentColliderPos, White(), 0.04)
+                SpawnLine(wheelPos, segmentColliderPos, {r = 255, g = 128, b = 0, a = 255}, 0.04)
             end
             CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
         end
@@ -89,34 +92,34 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     local segmentDir = segmentEnd - segmentStart
     local segmentNormal = Vec2Normalize(Vec2Perp(segmentDir))  -- Calculate the perpendicular vector
     local wheelToSegment = segmentStart - wheelPos
-    local distance = Vec2Dot(wheelToSegment, segmentNormal)
+    local distance = math.abs(Vec2Dot(wheelToSegment, segmentNormal))
     local radius = wheel.type:GetRadius()
     local intersectionValue = 0
-
-
+    --we should move to doing normalization only once per segment, as this will add up very quickly
     local prevSegmentNormal = Vec2Normalize(Vec2Perp(segmentStart - prevSegmentStart))
     local nextSegmentNormal = Vec2Normalize(Vec2Perp(nextSegmentEnd - segmentEnd))
     local prevSegmentBoundary = -Vec2Average({prevSegmentNormal, segmentNormal})
     local nextSegmentBoundary = -Vec2Average({nextSegmentNormal, segmentNormal})
     local segment1ToWheel = wheelPos - segmentStart
     local segment2ToWheel = wheelPos - segmentEnd
+    
 
     if ModDebug.collisions then
         Highlighting.HighlightUnitVector(segmentStart, prevSegmentBoundary, 500, Green())
         Highlighting.HighlightUnitVector(segmentEnd, nextSegmentBoundary, 500, Green())
+        SpawnLine(wheelPos, segmentStart, {r = 255, g = 128, b = 0, a = 100}, 0.04)
+        SpawnLine(wheelPos, segmentEnd, {r = 255, g = 128, b = 0, a = 100}, 0.04)
     end
+
     if Vec2Cross(segment1ToWheel, prevSegmentBoundary) > 0 
     or Vec2Cross(segment2ToWheel, nextSegmentBoundary) < 0 
     then return end
+    --remove this check to enable sticky wheels or set radius to *2
     if distance > radius then
         return
     else
         intersectionValue = (radius - distance)
     end
-    
-    -- if terrainValue == 0 then
-    --     return
-    -- end
     
     CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPos)
 end
@@ -128,17 +131,14 @@ function CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPo
     local velA = wheel:GetNodeVelA()
     local velB = wheel:GetNodeVelB()
     local velocity = Vec2Average({velA, velB})
-    BetterLog(velocity.x)
-    BetterLog(velocity.y)
     local force = Dampening.DirectionalDampening(wheel.type.spring, displacement, wheel.type.dampening, velocity, segmentNormal)
 
-    if ModDebug.collisions then
-        SpawnCircle(wheelPos + displacement, radius, Red(), 0.04)
-        Highlighting.HighlightUnitVector(wheelPos, force, 0.01, Red())
-    end
+
     
     dlc2_ApplyForce(wheel.nodeIdA, force)
     dlc2_ApplyForce(wheel.nodeIdB, force)
+
 end
 
 
+--function CalculateFrictionForce
