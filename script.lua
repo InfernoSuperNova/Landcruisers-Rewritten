@@ -100,4 +100,6 @@ function DeepCopy(orig)
     end
     return copy
 end
+
+RadToDeg = 180 / math.pi
 dofile(path .. "/debugMagic.lua")
