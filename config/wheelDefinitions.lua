@@ -6,11 +6,11 @@ WheelDefinitions = {
         radius = 75,
         spring = 35000,
         dampening = 3000,
-        traction = 1,
-        bearingEnergyLoss = 4,
+        traction = 100,
+        bearingEnergyLoss = 1.1,
         mass = 100,
-        sprocketSprite = "/effects/track_sprocket.lua",
-        wheelSprite = "/effects/wheel.lua"
+        sprocketSprite = path .. "/effects/track_sprocket.lua",
+        wheelSprite = path .. "/effects/wheel.lua"
     },
     {
         saveName = "suspension",
@@ -18,11 +18,11 @@ WheelDefinitions = {
         radius = 75,
         spring = 30000,
         dampening = 3000,
-        traction = 1,
-        bearingEnergyLoss = 5,
+        traction = 100,
+        bearingEnergyLoss = 1.1,
         mass = 100,
-        sprocketSprite = "/effects/track_sprocket.lua",
-        wheelSprite = "/effects/wheel.lua"
+        sprocketSprite = path .. "/effects/track_sprocket.lua",
+        wheelSprite = path .. "/effects/wheel.lua"
     },
     {
         saveName = "largeSuspension",
@@ -30,11 +30,11 @@ WheelDefinitions = {
         radius = 150,
         spring = 60000,
         dampening = 3000,
-        traction = 1,
-        bearingEnergyLoss = 10,
+        traction = 100,
+        bearingEnergyLoss = 1.1,
         mass = 450,
-        sprocketSprite = "/effects/track_sprocket_large.lua",
-        wheelSprite = "/effects/wheel_large.lua"
+        sprocketSprite = path .. "/effects/track_sprocket_large.lua",
+        wheelSprite = path .. "/effects/wheel_large.lua"
     },
 }
 LargestWheelRadius = 0
@@ -48,7 +48,7 @@ function WheelDefinitionHelpers.GetWheelDefinitionBySaveName(saveName)
         if saveName == definitionSaveName then
            return wheelDefinition
         elseif saveName == definitionSaveName .. WheelConfig.invertedNameTag then
-            local wheelDefinition = wheelDefinition:DeepCopy(wheelDefinition)
+            local wheelDefinition = DeepCopy(wheelDefinition)
             wheelDefinition.height = -wheelDefinition.height
             return wheelDefinition
         end
