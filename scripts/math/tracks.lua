@@ -74,7 +74,6 @@ function Tracks.GetStraights(hull)
         local newPosB = circB.pos + perp * circB.radius
         local straight = TrackStraight(newPosA, newPosB)
         table.insert(straights, straight)
-        SpawnLine(straight.a, straight.b, {r = 255, g = 255, b = 255, a = 255}, 0.04)
     end
     return straights
 end
