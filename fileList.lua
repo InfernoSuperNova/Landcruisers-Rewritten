@@ -33,6 +33,7 @@ FileList = {
             "vector",
             "dampening",
             "tracks",
+            "math",
         },
         ["force"] = {
             "forceManager"
