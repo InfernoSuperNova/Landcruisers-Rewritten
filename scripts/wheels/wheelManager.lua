@@ -99,7 +99,6 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     local radius = wheel.type:GetRadius()
     --remove this check to enable sticky wheels or set radius to *2
     if math.abs(distance) > radius then
-        wheel:SetOnGround(false)
         return
     end
     wheel:SetOnGround(true)

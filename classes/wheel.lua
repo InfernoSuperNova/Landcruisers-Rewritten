@@ -109,6 +109,7 @@ function WheelMetaTable:UpdateVelocity()
 
         local vehicleForce = vehicleGain * delta * Vec2Normalize(self.velocityVector)
         self:ApplyForce(vehicleForce)
+        self.onGround = false
     end
     --For animation
     self.rotation = self.rotation + self.angularVelocity % 360
