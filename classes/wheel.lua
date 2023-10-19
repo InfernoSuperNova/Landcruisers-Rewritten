@@ -50,7 +50,7 @@ function WheelMetaTable:new(deviceId, teamId)
     o.previousDisplacedPos = Vec3(0,0)
     o.velocity = 0
     o.velocityVector = Vec3(0,0)
-    o.angularVelocity = 0
+    o.angularVelocity = 10000
     o.rotation = 0
     o.direction = 0
     o.groundVector = Vec3(0,0)
@@ -97,7 +97,7 @@ function WheelMetaTable:UpdateVelocity()
         local upSign = math.sign(Vec2Dot(perpendicularPlatformVector, self.groundVector))
 
         local vehicleVelocity = self.velocity * velocitySign * upSign * -1
-        local wheelVelocity = self.angularVelocity / RadToDeg * self.type:GetRadius()
+        local wheelVelocity = self.angularVelocity * DegToRad * self.type:GetRadius()
         local delta = vehicleVelocity - wheelVelocity
 
          --divide by radius and multiply by radtodeg to get angular velocity
@@ -107,13 +107,13 @@ function WheelMetaTable:UpdateVelocity()
         self.angularVelocity = self.angularVelocity + (delta * wheelGain) * RadToDeg / self.type:GetRadius()
         --As well as slowing down the wheel, we should apply a force to the vehicle to speed it up to meet the wheel
 
-        local vehicleForce = vehicleGain * delta * Vec2Normalize(self.velocityVector) * -1
+        local vehicleForce = vehicleGain * delta * Vec2Normalize(self.velocityVector)
         self:ApplyForce(vehicleForce)
     end
     --For animation
     self.rotation = self.rotation + self.angularVelocity % 360
     --Energy loss through friction over time
-    self.angularVelocity = self.angularVelocity / 500000000000
+    self.angularVelocity = self.angularVelocity / self.type:GetBearingEnergyLoss()
 end
 
 function WheelMetaTable:UpdateTeam(teamId)
