@@ -55,14 +55,11 @@ function DeviceManager.OnDeviceTeamUpdated(oldTeamId, newTeamId, deviceId, saveN
             wheel:UpdateTeam(newTeamId)
             TrackManager.RemoveWheel(wheel)
             TrackManager.AddWheel(wheel)
-            --temporary solution until OnDeviceStructureUpdated is added
-            local structureId = GetDeviceStructureId(deviceId)
-            BetterLog(structureId)
-            wheel:UpdateStructure(structureId)
             return
         end
     end
 end
+
 
 function DeviceManager.RemoveDevice(deviceId, saveName)
     DeviceManager.RemoveWheel(deviceId)

@@ -16,6 +16,7 @@ WheelMetaTable = {
     nodeVelB = Vec3(0,0,0),
     actualPos = Vec3(0,0,0),
     displacedPos = Vec3(0,0,0),
+    previousPos = Vec3(0,0,0),
     type = DefaultWheelDefinition
 }
 
@@ -39,6 +40,7 @@ function WheelMetaTable:new(deviceId, teamId)
     o.nodePosA = NodePosition(o.nodeIdA)
     o.nodePosB = NodePosition(o.nodeIdB)
     o.actualPos = Vec3(0,0)
+    o.previousPos = Vec3(0,0)
     o.type = WheelDefinitionHelpers.GetWheelDefinitionBySaveName(o.saveName)
     if not o.type then return nil end
     return o
@@ -47,18 +49,26 @@ end
 
 
 function WheelMetaTable:Update()
+    self.previousPos = DeepCopy(self.displacedPos)
     self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
     self.nodePosB = NodePosition(self.nodeIdB)
     self.nodeVelA = NodeVelocity(self.nodeIdA)
     self.nodeVelB = NodeVelocity(self.nodeIdB)
-    self.structureId = GetDeviceStructureId(self.deviceId) --Wait for devs to add OnDeviceStructureUpdated, then can remove this
+    
     local platformVector = Vec2Normalize(self.nodePosB - self.nodePosA)
     local platformPerp = Vec2Perp(platformVector)
     local platformOffset = self.type:GetHeight() * platformPerp
     self.actualPos = self.devicePos + platformOffset
     self.displacedPos = self.actualPos
-    
+
+    local newId = GetDeviceStructureId(self.deviceId)
+    --this is bad
+    if self.structureId ~= newId then
+        TrackManager.RemoveWheel(self)
+        self.structureId = newId
+        TrackManager.AddWheel(self)
+    end
 end
 
 function WheelMetaTable:UpdateTeam(teamId)
