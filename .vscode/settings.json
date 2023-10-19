@@ -6,6 +6,7 @@
     ],
     "Lua.workspace.checkThirdParty": false,
     "Lua.workspace.library": [
-        "c:\\Users\\willi\\.vscode\\extensions\\tretinv3.forts-api-extention-0.3.0\\fortsAPI"
-    ]
+      "c:\\Users\\willi\\.vscode\\extensions\\tretinv3.forts-api-extention-0.3.0\\fortsAPI",
+      "c:\\Users\\Flinn\\.vscode\\extensions\\tretinv3.forts-api-extention-0.3.0\\fortsAPI"
+   ]
 }
