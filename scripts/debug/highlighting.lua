@@ -1,3 +1,5 @@
+--scripts/debug/highlighting.lua
+
 Highlighting = {}
 function Highlighting.HighlightCoords(coords)
     for k, coord in pairs(coords) do

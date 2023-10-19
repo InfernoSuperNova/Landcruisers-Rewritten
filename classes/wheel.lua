@@ -1,4 +1,4 @@
---WHEEL OBJECT
+--classes/wheel.lua
 
 WheelMetaTable = {
     deviceId = 0,
@@ -69,6 +69,8 @@ function WheelMetaTable:Update()
         self.structureId = newId
         TrackManager.AddWheel(self)
     end
+
+    local velocity = 
 end
 
 function WheelMetaTable:UpdateTeam(teamId)

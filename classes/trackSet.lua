@@ -1,3 +1,5 @@
+--trackSet.lua (class)
+
 TrackSetMetaTable = {
     position = 0,
     wheels = {},
