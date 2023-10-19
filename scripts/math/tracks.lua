@@ -1,3 +1,5 @@
+--scripts/math/tracks.lua
+
 Tracks = {}
 
 -- Helper function to check if three points are clockwise, counterclockwise, or collinear

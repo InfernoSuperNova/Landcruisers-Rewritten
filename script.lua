@@ -1,3 +1,5 @@
+--script.lua
+
 -----------------DOFILES-----------------
 dofile(path .. "/debugMagic.lua")
 dofile("scripts/forts.lua")
@@ -64,6 +66,7 @@ function ModLoop(frame)
     UpdateFunction("DeviceManager", "Update", frame)
     UpdateFunction("WheelManager", "Update", frame)
     UpdateFunction("TrackManager", "Update", frame)
+    UpdateFunction("ForceManager", "Update", frame)
 
     if ModDebug.update then
         local endUpdateTime = GetRealTime()

@@ -1,3 +1,5 @@
+--fileList.lua
+
 
 FileList = {
 
@@ -8,9 +10,9 @@ FileList = {
     },
     ["config"] = {
         "modDebug",
-        "terrainConfig",
+        "terrain",
         "wheelDefinitions",
-        "wheelConfig",
+        "wheel",
     },
     ["scripts"] = {
         ["wheels"] = {
@@ -31,6 +33,9 @@ FileList = {
             "vector",
             "dampening",
             "tracks",
+        },
+        ["force"] = {
+            "forceManager"
         }
     }
 }

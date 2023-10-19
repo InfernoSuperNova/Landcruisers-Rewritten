@@ -1,3 +1,4 @@
+--config/wheelDefinitions.lua
 WheelDefinitions = {
     {
         saveName = "smallSuspension",
@@ -61,9 +62,9 @@ function WheelDefinitionHelpers.ConstructWheelDefinitions()
     local newDefinitions = {}
     for _, wheelDefinition in ipairs(WheelDefinitions) do
         local wheel = WheelDefinition:new(wheelDefinition.radius, wheelDefinition.height, wheelDefinition.dampening, wheelDefinition.spring, wheelDefinition.traction,
-        wheelDefinition.mass, wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite)
+        wheelDefinition.bearingEnergyLoss, wheelDefinition.mass, wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite)
         table.insert(newDefinitions, wheel)
-        if wheelDefinition.radius > LargestWheelRadius then LargestWheelRadius = wheelDefinition.radius end
+        if wheelDefinition.radius > LargestWheelRadius then LargestWheelRadius = wheelDefinition.radius end --set largest wheel radius
     end
     WheelDefinitions = newDefinitions
 end

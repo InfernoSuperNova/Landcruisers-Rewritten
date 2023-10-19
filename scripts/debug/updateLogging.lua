@@ -1,3 +1,5 @@
+--scripts/debug/updateLogging.lua
+
 UpdateLogging = {
     text = ""
 }

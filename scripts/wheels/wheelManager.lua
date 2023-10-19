@@ -1,3 +1,5 @@
+--scripts/wheels/wheelManager.lua
+
 WheelManager = {}
 
 function WheelManager.Update(frame)
@@ -135,8 +137,8 @@ function CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPo
 
 
     
-    dlc2_ApplyForce(wheel.nodeIdA, force)
-    dlc2_ApplyForce(wheel.nodeIdB, force)
+    ApplyForce(wheel.nodeIdA, force)
+    ApplyForce(wheel.nodeIdB, force)
 
 end
 
