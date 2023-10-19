@@ -1,4 +1,4 @@
---trackSet.lua (class)
+--classes/trackSet.lua
 
 TrackSetMetaTable = {
     position = 0,
@@ -56,7 +56,7 @@ function TrackSetMetaTable:Draw(time, duration)
         local pos = Vec3Lerp(oldWheel, newWheel:GetDisplacedPos(), time)
         if pos == nil then continue end --I hate this
         SpawnCircle(pos, newWheel.type:GetRadius(), {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
-
+        local effect = SpawnEffectEx(newWheel:GetSprocketSprite(), pos, Vec3FromDegrees(newWheel:GetRotation()))
     end
     for i = 1, #self.track - 1, 2 do
         local oldStraight = self.previousTrack[i + 1]
