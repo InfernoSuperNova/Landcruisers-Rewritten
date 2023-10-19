@@ -94,9 +94,14 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     local segmentDir = segmentEnd - segmentStart
     local segmentNormal = Vec2Normalize(Vec2Perp(segmentDir))  -- Calculate the perpendicular vector
     local wheelToSegment = segmentStart - wheelPos
-    local distance = math.abs(Vec2Dot(wheelToSegment, segmentNormal))
+
+    local distance = Vec2Dot(wheelToSegment, segmentNormal)
     local radius = wheel.type:GetRadius()
-    local intersectionValue = 0
+    --remove this check to enable sticky wheels or set radius to *2
+    if math.abs(distance) > radius then
+        return
+    end
+    local intersectionValue = (radius - distance)
     --we should move to doing normalization only once per segment, as this will add up very quickly
     local prevSegmentNormal = Vec2Normalize(Vec2Perp(segmentStart - prevSegmentStart))
     local nextSegmentNormal = Vec2Normalize(Vec2Perp(nextSegmentEnd - segmentEnd))
@@ -116,12 +121,11 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     if Vec2Cross(segment1ToWheel, prevSegmentBoundary) > 0 
     or Vec2Cross(segment2ToWheel, nextSegmentBoundary) < 0 
     then return end
-    --remove this check to enable sticky wheels or set radius to *2
-    if distance > radius then
-        return
-    else
-        intersectionValue = (radius - distance)
-    end
+    
+    
+
+    
+    
     
     CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPos)
 end
