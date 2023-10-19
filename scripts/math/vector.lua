@@ -3,7 +3,7 @@ function Vec2Perp(v)
 end
 
 function Vec2Normalize(v)
-    local mag = math.sqrt(v.x * v.x + v.y * v.y)
+    local mag = Vec2Mag(v)
     if mag > 0 then
         v.x = v.x / mag
         v.y = v.y / mag
