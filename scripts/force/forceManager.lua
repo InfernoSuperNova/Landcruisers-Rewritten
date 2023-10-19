@@ -5,11 +5,10 @@ ForceManager = {
 }
 
 function ForceManager.Update(frame)
-    local forceTable = DeepCopy(ForceManager.forceTable)
-    for node, force in pairs(forceTable) do
+    for node, force in pairs(ForceManager.forceTable) do
         dlc2_ApplyForce(node, force)
-        table.remove(ForceManager.nodesToForce, node)
     end
+    ForceManager.forceTable = {}
 end
 
 function ApplyForce(node, force)
