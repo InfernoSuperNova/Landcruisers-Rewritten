@@ -37,6 +37,7 @@ function TrackManager.RemoveWheel(wheel)
     end
 end
 
+
 function TrackManager.IndexAtLoad()
     --Group wheels based on structure id
     local wheelStructures = {}
@@ -52,5 +53,15 @@ function TrackManager.IndexAtLoad()
             TrackManager.trackSets[structure] = {}
         end
         TrackManager.trackSets[structure] = trackSet
+    end
+end
+
+
+function TrackManager.Draw(PreviousUpdateTime, CurrentTime, PreviousDrawTime)
+    local time = CurrentTime - PreviousUpdateTime
+    local t = time / data.updateDelta
+    local duration = (CurrentTime - PreviousDrawTime)
+    for _, trackSet in pairs(TrackManager.trackSets) do
+        trackSet:Draw(t, duration)
     end
 end

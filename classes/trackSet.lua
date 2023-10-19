@@ -1,8 +1,9 @@
 TrackSetMetaTable = {
-    prevPosition = 0, --For interpolation
     position = 0,
     wheels = {},
     track = {},
+    previousWheelPositions = {},
+    previousTrack = {},
 }
 
 function TrackSet(wheels)
@@ -15,10 +16,21 @@ function TrackSetMetaTable:new(wheels)
     self.__index = self
     o.wheels = wheels
     o.track = {}
+    o.previousWheelPositions = {}
+    o.previousTrack = {}
     return o
 end
 
 function TrackSetMetaTable:Update()
+    
+    self.previousWheelPositions = {}
+    for i = 1, #self.wheels do
+        local wheel = self.wheels[i]
+        table.insert(self.previousWheelPositions, wheel:GetPreviousPos())
+    end
+
+    self.previousTrack = {}
+    self.previousTrack = self.track
     self.track = {}
     local circles = {}
     for _, wheel in pairs(self.wheels) do
@@ -31,6 +43,26 @@ function TrackSetMetaTable:Update()
     for i = 1, #self.wheels do
         table.insert(self.track, self.wheels[i])
         table.insert(self.track, straightSegments[i])
+    end
+end
+
+function TrackSetMetaTable:Draw(time, duration)
+    for i = 1, #self.wheels do
+        local oldWheel = self.previousWheelPositions[i]
+        local newWheel = self.wheels[i]
+
+        local pos = Vec3Lerp(oldWheel, newWheel:GetDisplacedPos(), time)
+        if pos == nil then continue end --I hate this
+        SpawnCircle(pos, newWheel.type:GetRadius(), {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
+
+    end
+    for i = 1, #self.track - 1, 2 do
+        local oldStraight = self.previousTrack[i + 1]
+        local newStraight = self.track[i + 1]
+        if oldStraight == nil or newStraight.a == nil or oldStraight.a == nil then return end
+        local posA = Vec3Lerp(oldStraight.a, newStraight.a, time)
+        local posB = Vec3Lerp(oldStraight.b, newStraight.b, time)
+        SpawnLine(posA, posB, {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
     end
 end
 

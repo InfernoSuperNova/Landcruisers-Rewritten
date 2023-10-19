@@ -134,9 +134,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "bd93624a7ddf7d9a",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.4.14"
+              }
+            }
           }
         ],
-        "currentTab": 10
+        "currentTab": 11
       }
     ],
     "direction": "vertical"
@@ -263,20 +273,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "18e55a0808e25d43",
+  "active": "bd93624a7ddf7d9a",
   "lastOpenFiles": [
-    "Collisions and stuff.md",
+    "Vector notes.md",
     "Things before and after tournament.md",
+    "Global tables.md",
+    "General notes.md",
+    "Collisions and stuff.md",
     "wheel/Friction and rolling resistance.md",
     "wheel/Collisions.md",
-    "General notes.md",
-    "Global tables.md",
     "Track set/How best to structure track object.md",
     "Track set/Considerations for seamless tracks.md",
     "script.lua/Important Notes!.md",
     "Fuuuutureee/Classes.md",
     "wheel/Dampening.md",
-    "Vector notes.md",
     "wheel",
     "Track set",
     "Fuuuutureee",

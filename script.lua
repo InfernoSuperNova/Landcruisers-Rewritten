@@ -1,6 +1,7 @@
 -----------------DOFILES-----------------
 dofile(path .. "/debugMagic.lua")
 dofile("scripts/forts.lua")
+dofile("scripts/core.lua")
 dofile(path .. "/fileList.lua")
 dofile(path .. "/BetterLog.lua")
 FileList.LoadFiles()
@@ -20,6 +21,9 @@ function OnSeekStart()
 end
 function Update(frame)
     ModLoop(frame)
+end
+function OnUpdate()
+    ModDraw()
 end
 function OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
     DeviceManager.OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
@@ -47,12 +51,14 @@ function LoadMod()
     TrackManager.Load()
     TerrainManager.Load()
 end
-
+PreviousUpdateTime = 0
 function ModLoop(frame)
+    
     local startUpdateTime
     if ModDebug.update then
         startUpdateTime = GetRealTime()
     end
+    PreviousUpdateTime = startUpdateTime
     UpdateFunction("UpdateLogging", "Update", frame)
     UpdateFunction("TerrainManager", "Update", frame)
     UpdateFunction("DeviceManager", "Update", frame)
@@ -66,6 +72,16 @@ function ModLoop(frame)
     end
     
 end
+PreviousDrawTime = 0
+function ModDraw()
+        local newDrawTime = GetRealTime()
+        TrackManager.Draw(PreviousUpdateTime, newDrawTime, PreviousDrawTime)
+        PreviousDrawTime = newDrawTime
+end
+
+
+
+
 
 function DeepCopy(orig)
     local orig_type = type(orig)
