@@ -1,11 +1,15 @@
-In a nutshell:
-Each wheel will have a traction coefficient
-And also an energy loss coefficient
-Wheels will also have an angular velocity value
-Velocity will be ADDED when travelling across a surface. Specifically:
-It'll store the last collided position
-If a frame exists where there is no collision, it will not apply velocity
-Otherwise
-It will take the difference between the two collision positions, do some funky stuff with the width of the wheel and the velocity coefficient
-It will also remove some lateral velocity when the wheel starts spinning, "storing" it in the spinning wheel
-Energy will be lost to the hub of the wheel passively
+Each wheel will have:
+A traction coefficient
+An energy loss coefficient
+A current spin velocity
+A mass
+
+When colliding with terrain, the difference between the last two points of collision will be calculated.
+
+If the difference is GREATER than the equivalent movement of the outside of the wheel, then a COUNTER force will be applied to the moving landcruiser, and velocity will be added to the WHEEL.
+
+If the difference is LESS than the equivalent movement of the outside of the wheel, then a COMPLIMENTARY force will be applied to the moving landcruiser, and velocity will be removed from the WHEEL.
+
+Therefore, as they have mass, wheels will be able to implicitly store potential energy.
+
+Note that some energy will be lost due to friction of the moving parts
