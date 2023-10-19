@@ -129,24 +129,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Things before and after tournament.md",
+                "file": "wheel/Traction.md",
                 "mode": "source",
                 "source": false
               }
             }
-          },
-          {
-            "id": "bd93624a7ddf7d9a",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.4.14"
-              }
-            }
           }
         ],
-        "currentTab": 11
+        "currentTab": 10
       }
     ],
     "direction": "vertical"
@@ -212,7 +202,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Things before and after tournament.md",
+                "file": "wheel/Traction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -229,7 +219,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Things before and after tournament.md",
+                "file": "wheel/Traction.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -252,7 +242,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Things before and after tournament.md"
+                "file": "wheel/Traction.md"
               }
             }
           }
@@ -273,10 +263,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bd93624a7ddf7d9a",
+  "active": "18e55a0808e25d43",
   "lastOpenFiles": [
-    "Vector notes.md",
     "Things before and after tournament.md",
+    "wheel/Traction.md",
+    "Vector notes.md",
     "Global tables.md",
     "General notes.md",
     "Collisions and stuff.md",
