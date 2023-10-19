@@ -87,6 +87,12 @@ function WheelMetaTable:GetDisplacedPos()
     return self.displacedPos
 end
 
+function WheelMetaTable:GetPreviousPos()
+    return self.previousPos
+end
+function WheelMetaTable:GetDeviceId()
+    return self.deviceId
+end
 
 
 
