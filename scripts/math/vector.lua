@@ -214,3 +214,8 @@ function Vec3Lerp(vec1, vec2, t)
         vec1.z + (vec2.z - vec1.z) * t
     )
 end
+
+function Vec3FromDegrees(degrees)
+    local radians = math.rad(degrees)
+    return Vec3(math.cos(radians), math.sin(radians))
+end
