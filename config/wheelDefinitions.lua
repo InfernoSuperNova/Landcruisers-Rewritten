@@ -6,6 +6,7 @@ WheelDefinitions = {
         spring = 30000,
         dampening = 3000,
         traction = 100,
+        bearingEnergyLoss = 100,
         mass = 100,
         sprocketSprite = "/effects/track_sprocket.lua",
         wheelSprite = "/effects/wheel.lua"
@@ -17,6 +18,7 @@ WheelDefinitions = {
         spring = 30000,
         dampening = 3000,
         traction = 100,
+        bearingEnergyLoss = 100,
         mass = 100,
         sprocketSprite = "/effects/track_sprocket.lua",
         wheelSprite = "/effects/wheel.lua"
@@ -28,6 +30,7 @@ WheelDefinitions = {
         spring = 60000,
         dampening = 3000,
         traction = 100,
+        bearingEnergyLoss = 100,
         mass = 400,
         sprocketSprite = "/effects/track_sprocket_large.lua",
         wheelSprite = "/effects/wheel_large.lua"
@@ -35,7 +38,7 @@ WheelDefinitions = {
 }
 LargestWheelRadius = 0
 
-DefaultWheelDefinition = WheelDefinition:new(75, 0, 30000, 3000, 100, 100, "smallSuspension", "/effects/track_sprocket.lua", "/effects/wheel.lua")
+DefaultWheelDefinition = WheelDefinition:new(75, 0, 30000, 3000, 100, 100, 100, "smallSuspension", "/effects/track_sprocket.lua", "/effects/wheel.lua")
 
 WheelDefinitionHelpers = {}
 
