@@ -95,8 +95,11 @@ function WheelMetaTable:UpdateVelocity()
         local velocitySign = math.sign(Vec2Dot(self.velocityVector, normalGroundVector))
         --multiply by sign of dot product of wheel up vector and ground vector perp to get direction
         local upSign = math.sign(Vec2Dot(perpendicularPlatformVector, self.groundVector))
-
-        local vehicleVelocity = self.velocity * velocitySign * upSign * -1
+        local invertedSign = 1
+        if self.type:GetIsInverted() then
+            invertedSign = -1
+        end
+        local vehicleVelocity = self.velocity * velocitySign * upSign * invertedSign * -1
         local wheelVelocity = self.angularVelocity * DegToRad * self.type:GetRadius()
         local delta = vehicleVelocity - wheelVelocity
 
@@ -194,10 +197,11 @@ WheelDefinition = {
     sprocketSprite = "",
     wheelSprite = "",
     saveName = "",
+    isInverted = false,
 }
 
 --Constructor
-function WheelDefinition:new(radius, height, dampening, spring, traction, bearingEnergyLoss, mass, saveName, sprocketSprite, wheelSprite)
+function WheelDefinition:new(radius, height, dampening, spring, traction, bearingEnergyLoss, mass, saveName, sprocketSprite, wheelSprite, isInverted)
     local o = {}
     setmetatable(o, self)
     self.__index = self
@@ -212,7 +216,7 @@ function WheelDefinition:new(radius, height, dampening, spring, traction, bearin
     o.saveName = saveName
     o.sprocketSprite = sprocketSprite
     o.wheelSprite = wheelSprite
-
+    o.isInverted = isInverted
     return o
 end
 --Getters
@@ -248,8 +252,10 @@ function WheelDefinition:GetSaveName()
     return self.saveName
 end
 
-function WheelDefinition:DeepCopy()
-    return WheelDefinition:new(self.radius, self.height, self.dampening, self.spring, self.saveName, self.sprocketSprite, self.wheelSprite)
+function WheelDefinition:GetIsInverted()
+    return self.isInverted
 end
+
+
 
 
