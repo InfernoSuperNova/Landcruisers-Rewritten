@@ -15,7 +15,7 @@ Sprites =
 					{ texture = path .. "/effects/media/sprocket.png" },
 					
 
-					duration = 0.04,
+					duration = 0.004,
 					blendColour = false,
 					blendCoordinates = false,
 				},
