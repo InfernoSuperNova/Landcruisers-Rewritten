@@ -70,7 +70,7 @@ function WheelMetaTable:Update()
         TrackManager.AddWheel(self)
     end
 
-    local velocity = 
+    --local velocity = 
 end
 
 function WheelMetaTable:UpdateTeam(teamId)
