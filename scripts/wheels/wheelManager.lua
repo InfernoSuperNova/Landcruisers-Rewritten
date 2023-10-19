@@ -99,8 +99,10 @@ function CheckWheelOnSegment(wheel, segment, prevSegmentStart, nextSegmentEnd)
     local radius = wheel.type:GetRadius()
     --remove this check to enable sticky wheels or set radius to *2
     if math.abs(distance) > radius then
+        wheel:SetOnGround(false)
         return
     end
+    wheel:SetOnGround(true)
     local intersectionValue = (radius - distance)
     --we should move to doing normalization only once per segment, as this will add up very quickly
     local prevSegmentNormal = Vec2Normalize(Vec2Perp(segmentStart - prevSegmentStart))
@@ -134,15 +136,17 @@ end
 function CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPos)
     local displacement = intersectionValue * -1 * segmentNormal
     wheel:SetDisplacedPos(wheelPos + displacement)
+    wheel:SetGroundVector(segmentNormal)
+    wheel:SetInGroundFactor(intersectionValue)
+    wheel:CalculateVelocity()
+    
     local velA = wheel:GetNodeVelA()
     local velB = wheel:GetNodeVelB()
     local velocity = Vec2Average({velA, velB})
     local force = Dampening.DirectionalDampening(wheel.type.spring, displacement, wheel.type.dampening, velocity, segmentNormal)
 
 
-    
-    ApplyForce(wheel.nodeIdA, force)
-    ApplyForce(wheel.nodeIdB, force)
+    wheel:ApplyForce(force)
 
 end
 
