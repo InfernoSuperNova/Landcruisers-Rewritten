@@ -21,6 +21,7 @@ WheelMetaTable = {
     velocity = 0,
     angularVelocity = 0,
     rotation = 0,
+    previousRotation = 0,
     direction = 0,
     groundVector = Vec3(0,0,0),
     groundFactor = 0,
@@ -52,6 +53,7 @@ function WheelMetaTable:new(deviceId, teamId)
     o.velocityVector = Vec3(0,0)
     o.angularVelocity = 10000
     o.rotation = 0
+    o.previousRotation = 0
     o.direction = 0
     o.groundVector = Vec3(0,0)
     o.groundFactor = 0
@@ -115,6 +117,7 @@ function WheelMetaTable:UpdateVelocity()
         self.onGround = false
     end
     --For animation
+    self.previousRotation = self.rotation
     self.rotation = self.rotation + self.angularVelocity % 360
     --Energy loss through friction over time
     self.angularVelocity = self.angularVelocity / self.type:GetBearingEnergyLoss()
@@ -159,6 +162,9 @@ end
 
 function WheelMetaTable:GetPreviousPos()
     return self.previousDisplacedPos
+end
+function WheelMetaTable:GetPreviousRotation()
+    return self.previousRotation
 end
 function WheelMetaTable:GetDeviceId()
     return self.deviceId

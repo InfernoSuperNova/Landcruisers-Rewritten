@@ -21,7 +21,9 @@ end
 function OnSeekStart()
     LoadMod()
 end
+
 function Update(frame)
+
     ModLoop(frame)
 end
 function OnUpdate()
@@ -54,13 +56,13 @@ function LoadMod()
     TerrainManager.Load()
 end
 PreviousUpdateTime = 0
+UpdateDelta = 0
 function ModLoop(frame)
     
-    local startUpdateTime
-    if ModDebug.update then
-        startUpdateTime = GetRealTime()
-    end
-    PreviousUpdateTime = startUpdateTime
+    local currentTime = GetRealTime()
+    local difference = currentTime - PreviousUpdateTime
+    UpdateDelta = math.floor(difference * 100 + 0.5) / 100
+    PreviousUpdateTime = currentTime
     UpdateFunction("UpdateLogging", "Update", frame)
     UpdateFunction("TerrainManager", "Update", frame)
     UpdateFunction("DeviceManager", "Update", frame)
@@ -70,7 +72,7 @@ function ModLoop(frame)
 
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
-        local delta = (endUpdateTime - startUpdateTime) * 1000
+        local delta = (endUpdateTime - currentTime) * 1000
         UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
     end
     

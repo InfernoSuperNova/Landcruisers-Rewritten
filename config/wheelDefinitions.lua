@@ -50,6 +50,7 @@ function WheelDefinitionHelpers.GetWheelDefinitionBySaveName(saveName)
         elseif saveName == definitionSaveName .. WheelConfig.invertedNameTag then
             local wheelDefinition = DeepCopy(wheelDefinition)
             wheelDefinition.height = -wheelDefinition.height
+            wheelDefinition.isInverted = true
             return wheelDefinition
         end
     end 
@@ -60,12 +61,8 @@ function WheelDefinitionHelpers.ConstructWheelDefinitions()
     local newDefinitions = {}
     for _, wheelDefinition in ipairs(WheelDefinitions) do
         --check if the last character of the saveName is the inverted tag
-        local isInverted = false
-        if string.sub(wheelDefinition.saveName, -string.len(WheelConfig.invertedNameTag)) == WheelConfig.invertedNameTag then
-            isInverted = true
-        end
         local wheel = WheelDefinition:new(wheelDefinition.radius, wheelDefinition.height, wheelDefinition.dampening, wheelDefinition.spring, wheelDefinition.traction,
-        wheelDefinition.bearingEnergyLoss, wheelDefinition.mass, wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite, isInverted)
+        wheelDefinition.bearingEnergyLoss, wheelDefinition.mass, wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite, false)
         table.insert(newDefinitions, wheel)
         if wheelDefinition.radius > LargestWheelRadius then LargestWheelRadius = wheelDefinition.radius end --set largest wheel radius
     end
