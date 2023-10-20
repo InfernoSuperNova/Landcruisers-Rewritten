@@ -54,6 +54,7 @@ function LoadMod()
     DeviceManager.Load()
     TrackManager.Load()
     TerrainManager.Load()
+    --UpdateLogging.Load()
 end
 PreviousUpdateTime = 0
 UpdateDelta = 0

@@ -39,7 +39,9 @@ function UpdateLogging.Update(frame)
     end
     UpdateLogging.text = ""
 end
-
+function UpdateLogging.Load()
+    AddTextControl("", "debugControl", "", ANCHOR_TOP_RIGHT, {x = 1050, y = 0}, false, "Console")
+end
 
 function UpdateLogging.ControlExists(parent, control)
     if GetControlAbsolutePos(parent, control).x == 0 then
