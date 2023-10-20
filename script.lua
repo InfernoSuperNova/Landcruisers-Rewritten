@@ -21,7 +21,9 @@ end
 function OnSeekStart()
     LoadMod()
 end
-
+function OnInstantReplay()
+    LoadMod()
+end
 function Update(frame)
 
     ModLoop(frame)
