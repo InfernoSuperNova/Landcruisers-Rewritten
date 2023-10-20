@@ -33,11 +33,20 @@ function TerrainManager.Update(frame)
     for _, block in pairs(data.terrain) do
 
         block:Update()
-        local nodes = block:GetNodes()
-        local collider = block:GetColliderPos()
-        local radius = block:GetColliderRadius()
+        
         if ModDebug.collisions then
-            SpawnCircle(Vec3(collider.x, collider.y), radius, Blue(), 0.04)
+            local nodes = block:GetNodes()
+            local collider = block:GetColliderPos()
+            local radius = block:GetColliderRadius()
+            local corners = block:GetColliderCorners()
+            SpawnCircle(Vec3(collider.x, collider.y), radius, {r = 50, g = 150, b = 200, a = 255}, 0.04)
+            Highlighting.HighlightPolygon(corners, {r = 200, g = 150, b = 0, a = 255})
+            for i = 1, #nodes do
+                local nodeA = nodes[i]
+                local nodeB = nodes[i % #nodes + 1]
+                Highlighting.HighlightLineWithWidth(nodeA, nodeB, 50, {r = 100, g = 100, b = 150, a = 255})
+                
+            end
         end
         
     end
