@@ -1,6 +1,7 @@
 --classes/wheel.lua
 
 WheelMetaTable = {
+    framesSinceCreation = 0,
     deviceId = 0,
     nodeIdA = 0, --platform node
     nodeidB = 0, --platform node
@@ -35,7 +36,7 @@ function WheelMetaTable:new(deviceId, teamId)
     local o = {}
     setmetatable(o, self)
     self.__index = self
-
+    o.framesSinceCreation = 0
     o.deviceId = deviceId
     o.nodeIdA = GetDevicePlatformA(deviceId)
     o.nodeIdB = GetDevicePlatformB(deviceId)
@@ -47,9 +48,9 @@ function WheelMetaTable:new(deviceId, teamId)
     o.devicePos = GetDevicePosition(deviceId)
     o.nodePosA = NodePosition(o.nodeIdA)
     o.nodePosB = NodePosition(o.nodeIdB)
-    o.actualPos = Vec3(0,0,0)
-    o.displacedPos = Vec3(0,0,0)
-    o.previousDisplacedPos = Vec3(0,0,0)
+    o.actualPos = o.devicePos
+    o.displacedPos = o.devicePos
+    o.previousDisplacedPos = o.devicePos
     o.velocity = 0
     o.velocityVector = Vec3(0,0,0)
     o.angularVelocity = 0
@@ -66,6 +67,10 @@ end
 
 
 function WheelMetaTable:Update()
+    self.framesSinceCreation = self.framesSinceCreation + 1
+    if self.framesSinceCreation == 2 then
+        BetterLog(self.velocityVector)
+    end
     self.previousDisplacedPos = DeepCopy(self.displacedPos)
     self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
@@ -114,7 +119,8 @@ function WheelMetaTable:UpdateVelocity()
         self.angularVelocity = self.angularVelocity + (delta * wheelGain) * RadToDeg / self.type:GetRadius()
         --As well as slowing down the wheel, we should apply a force to the vehicle to speed it up to meet the wheel
 
-        vehicleForce = vehicleGain * delta * Vec2Normalize(self.velocityVector)
+        vehicleForce = vehicleGain * delta * Vec3Normalize(self.velocityVector)
+        
         
         self.onGround = false
     end
