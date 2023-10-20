@@ -6,6 +6,7 @@ BlockMetaTable = {
     continuousUpdate = false,
     colliderPos =  Vec3(),
     colliderRadius = 0,
+    colliderCorners = {},
 }
 
 function Block(blockIndex, continuousUpdate)
@@ -27,6 +28,7 @@ function BlockMetaTable:new(blockIndex, continuousUpdate)
     local collider = MinimumCircularBoundary(o.nodes)
     o.colliderPos = Vec3(collider.x, collider.y)
     o.colliderRadius = collider.r
+    o.colliderCorners = collider.square
     return o
 end
 
@@ -48,6 +50,9 @@ function BlockMetaTable:GetColliderPos()
 end
 function BlockMetaTable:GetColliderRadius()
     return self.colliderRadius
+end
+function BlockMetaTable:GetColliderCorners()
+    return self.colliderCorners
 end
 function BlockMetaTable:GetNodes()
     return self.nodes
