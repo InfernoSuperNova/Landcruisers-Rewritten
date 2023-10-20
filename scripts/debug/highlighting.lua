@@ -51,3 +51,15 @@ function Highlighting.GetHighestIndex(tbl)
     end
     return highest
 end
+
+function Highlighting.HighlightLineWithWidth(p1, p2, width, colour)
+    local dirVector = p2 - p1
+    local perpVector = Vec2Perp(Vec3Normalize(dirVector)) * width
+
+    local boxPosA = p1 + perpVector
+    local boxPosB = p2 + perpVector
+    local boxPosC = p2 - perpVector
+    local boxPosD = p1 - perpVector
+    local coords = {boxPosA, boxPosB, boxPosC, boxPosD}
+    Highlighting.HighlightPolygon(coords,colour)
+end
