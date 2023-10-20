@@ -13,6 +13,8 @@ function Vec2Normalize(v)
     return v
 end
 
+
+
 function Vec2Average(vectors)
     local average = Vec3(0,0)
     for _, vector in pairs(vectors) do
@@ -198,6 +200,21 @@ function Vec3(x, y, z)
     vec.z = z or 0
     setmetatable(vec, VectorMetatable)
     return vec
+end
+
+function Vec3Normalize(v)
+    local mag = Vec3Mag(v)
+    if mag > 0 then
+        v.x = v.x / mag
+        v.y = v.y / mag
+        v.z = v.z / mag
+    end
+    setmetatable(v, VectorMetatable)
+    return v
+end
+
+function Vec3Mag(v)
+    return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z)
 end
 
 -- Sets properties to be that of a Vector.
