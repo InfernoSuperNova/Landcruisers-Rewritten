@@ -9,5 +9,42 @@
     "Lua.workspace.library": [
       "c:\\Users\\willi\\.vscode\\extensions\\tretinv3.forts-api-extention-0.3.0\\fortsAPI",
       "c:\\Users\\Flinn\\.vscode\\extensions\\tretinv3.forts-api-extention-0.3.0\\fortsAPI"
-   ]
+],
+"Lua.diagnostics.globals": [
+    "data",
+    "Merge",
+    "Device",
+    "L",
+    "Weapon",
+    "Material",
+    "FindFunctionName",
+    "GetRealTime",
+    "ANCHOR_TOP_RIGHT",
+    "Vec3Dist",
+    "White",
+    "Vec3Length",
+    "path",
+    "ButtonSprite",
+    "ButtonSpriteBottom",
+    "DetailSprite",
+    "InsertDeviceBehind",
+    "FindDevice",
+    "StandardDeviceSmokeEmitter",
+    "FindMaterial",
+    "RegisterApplyMod",
+    "WeaponsToMark",
+    "FindProjectile",
+    "DU_speed",
+    "ProjectilesToUranium",
+    "ProjectileEffects",
+    "gcinfo",
+    "Red",
+    "Green",
+    "MakeFlamingVersion",
+    "flamingTrail",
+    "Normal",
+    "FindWeapon",
+    "GroupButtonSpriteBottom",
+    "InheritType"
+]
 }

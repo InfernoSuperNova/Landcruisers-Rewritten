@@ -2,8 +2,22 @@
 
 Graph = {
     graphs = {}
-
 }
+
+---Creates a new graph object
+---@param posX number Screen space
+---@param posY number Screen Space
+---@param width number Screen space
+---@param height number Screen Space
+---@param maxTime number Oldest data that will persist on the graph in seconds
+---@param unit string Appended to the current value when displaying
+---@param name string Name of the graph, used for the UI
+---@return GraphMetaTable
+function Graph.New(posX, posY, width, height, maxTime, unit, name)
+    local graph = GraphMetaTable:new(Vec3(posX, posY), width, height, maxTime, unit, name)
+    table.insert(Graph.graphs, graph)
+    return graph
+end
 
 function Graph.Update()
     local realTime = GetRealTime()
@@ -13,8 +27,16 @@ function Graph.Update()
 
 end
 
-
-
+---@class GraphMetaTable
+---@field pos Vec3
+---@field width number
+---@field height number
+---@field prevTime number
+---@field maxTime number
+---@field data table<number, GraphPoint>
+---@field unit string
+---@field graphUI string
+---
 GraphMetaTable = {
     pos = Vec3(0,0,0),
     width = 0,
@@ -23,11 +45,26 @@ GraphMetaTable = {
     maxTime = 0,
     data = {},
     unit = "",
-    graphUI = nil,
+    graphUI = "",
 }
 
 
 
+function GraphMetaTable:new(pos, width, height, maxTime, unit, name)
+    local graph = {
+        pos = pos,
+        width = width,
+        height = height,
+        prevTime = 0,
+        maxTime = maxTime,
+        data = {},
+        unit = unit,
+        graphUI = name
+    }
+    setmetatable(graph, self)
+    self.__index = self
+    return graph
+end
 
 function GraphMetaTable:Update(time)
     local delta = time - self.prevTime
@@ -98,28 +135,6 @@ function GraphMetaTable:Log(height, time)
     table.insert(self.data, GraphPoint(height, delta))
 end
 
-function NewGraph(pos, width, height, maxTime, unit, name)
-    local graph = GraphMetaTable:new(pos, width, height, maxTime, unit, name)
-    table.insert(Graph.graphs, graph)
-    return graph
-end
-
--- Define the constructor for the Graph class
-function GraphMetaTable:new(pos, width, height, maxTime, unit, name)
-    local graph = {
-        pos = pos,
-        width = width,
-        height = height,
-        prevTime = 0,
-        maxTime = maxTime,
-        data = {},
-        unit = unit,
-        graphUI = name
-    }
-    setmetatable(graph, self)
-    self.__index = self
-    return graph
-end
 
 
 
@@ -127,6 +142,12 @@ end
 
 
 
+
+
+
+---@class GraphPoint
+---@field value number
+---@field time number
 GraphPointMetaTable = {
     value = 0,
     time = 0

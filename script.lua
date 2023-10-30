@@ -9,7 +9,7 @@ dofile(path .. "/BetterLog.lua")
 FileList.LoadFiles()
 
 ---------------API EVENTS----------------
-
+---@type GraphMetaTable
 TheGraph = nil
 function Load(gameStart)
     
@@ -62,13 +62,12 @@ function LoadMod()
     DeviceManager.Load()
     TrackManager.Load()
     TerrainManager.Load()
-    TheGraph = NewGraph(Vec3(850, 200), 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
+    TheGraph = Graph.New(850, 200, 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
     UpdateLogging.Load()
 end
 PreviousUpdateTime = 0
 UpdateDelta = 0
 function ModLoop(frame)
-    
     local currentTime = GetRealTime()
     local difference = currentTime - PreviousUpdateTime
     UpdateDelta = math.floor(difference * 100 + 0.5) / 100
