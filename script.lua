@@ -92,6 +92,7 @@ function ModDraw()
         local newDrawTime = GetRealTime()
         TrackManager.Draw(PreviousUpdateTime, newDrawTime, PreviousDrawTime)
         PreviousDrawTime = newDrawTime
+        Graph.Update()
 end
 
 
