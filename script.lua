@@ -9,7 +9,10 @@ dofile(path .. "/BetterLog.lua")
 FileList.LoadFiles()
 
 ---------------API EVENTS----------------
+
+TheGraph = nil
 function Load(gameStart)
+    
     LoadMod()
 end
 function OnRestart()
@@ -25,11 +28,14 @@ function OnInstantReplay()
     LoadMod()
 end
 function Update(frame)
-
+    TheGraph:Log(gcinfo(), GetRealTime())
     ModLoop(frame)
 end
 function OnUpdate()
     ModDraw()
+end
+function OnDraw()
+
 end
 function OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
     DeviceManager.OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
@@ -56,7 +62,8 @@ function LoadMod()
     DeviceManager.Load()
     TrackManager.Load()
     TerrainManager.Load()
-    --UpdateLogging.Load()
+    TheGraph = NewGraph(Vec3(850, 200), 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
+    UpdateLogging.Load()
 end
 PreviousUpdateTime = 0
 UpdateDelta = 0
