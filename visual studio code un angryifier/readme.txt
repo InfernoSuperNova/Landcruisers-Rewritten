@@ -1,0 +1,1 @@
+This folder literally only exists as somewhere to define stuff so that vscode doesn't get mad

@@ -126,6 +126,7 @@ local VectorMembers = {
 
 -- Metatable implementing operators using metafunctions
 -- All member functions are implemented via the __index metafunction
+---@class Vec3
 local VectorMetatable = {
     __add = function(value1, value2)
         if type(value1) == "table" and type(value2) == "table" then
@@ -190,9 +191,17 @@ local VectorMetatable = {
             return memberWrapper
         end
     end,
+    x = 0,
+    y = 0,
+    z = 0
 }
 
--- Vector constructor
+
+---Vector3 class (z is usually unused)
+---@param x number?
+---@param y number?
+---@param z number?
+---@return Vec3
 function Vec3(x, y, z)
     local vec = {}
     vec.x = x or 0
