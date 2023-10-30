@@ -68,9 +68,6 @@ end
 
 function WheelMetaTable:Update()
     self.framesSinceCreation = self.framesSinceCreation + 1
-    if self.framesSinceCreation == 2 then
-        BetterLog(self.velocityVector)
-    end
     self.previousDisplacedPos = DeepCopy(self.displacedPos)
     self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
