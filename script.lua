@@ -83,6 +83,10 @@ function ModLoop(frame)
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
         local delta = (endUpdateTime - currentTime) * 1000
+        if (UpdateLogging.updateGraph) then
+            UpdateLogging.updateGraph:Log(delta/(data.updateDelta * 1000) * 100, endUpdateTime)
+        end
+        
         UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
     end
     
