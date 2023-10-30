@@ -7,6 +7,7 @@ FileList = {
         "wheel",
         "terrain",
         "trackSet",
+        "graph",
     },
     ["config"] = {
         "modDebug",
