@@ -79,6 +79,7 @@ function ModLoop(frame)
     UpdateFunction("WheelManager", "Update", frame)
     UpdateFunction("TrackManager", "Update", frame)
     UpdateFunction("ForceManager", "Update", frame)
+    
 
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
@@ -91,7 +92,7 @@ function ModLoop(frame)
     end
     
 end
-PreviousDrawTime = 0
+PreviousDrawTime = 0    
 function ModDraw()
         local newDrawTime = GetRealTime()
         TrackManager.Draw(PreviousUpdateTime, newDrawTime, PreviousDrawTime)
