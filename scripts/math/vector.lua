@@ -13,6 +13,9 @@ function Vec2Normalize(v)
     return v
 end
 
+function Vec2Dist(v1, v2)
+    return math.sqrt((v1.x - v2.x)^2 + (v1.y - v2.y)^2)
+end
 
 
 function Vec2Average(vectors)
