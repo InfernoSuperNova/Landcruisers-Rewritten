@@ -12,7 +12,6 @@ FileList.LoadFiles()
 ---@type GraphMetaTable
 TheGraph = nil
 function Load(gameStart)
-    
     LoadMod()
 end
 function OnRestart()
@@ -24,15 +23,17 @@ end
 function OnSeekStart()
     LoadMod()
 end
-function OnInstantReplay()
-    LoadMod()
-end
 function Update(frame)
     TheGraph:Log(gcinfo(), GetRealTime())
     ModLoop(frame)
 end
+
+function OnInstantReplaySystem()
+    LoadMod()
+end
 function OnUpdate()
     ModDraw()
+    
 end
 function OnDraw()
 
