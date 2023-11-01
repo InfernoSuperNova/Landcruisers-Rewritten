@@ -10,6 +10,7 @@
 --IndentLevel : indentation level of the table content (ex : 1 if it's the first time the function is called)
 
 function LogTables(Table, IndentLevel)
+
     if Table == nil then
         Log("nil")
     else
@@ -27,7 +28,7 @@ function LogTables(Table, IndentLevel)
                         Log(indent .. "[" .. tostring(k) .. "] = ")
                         LogTables(v, IndentLevel + 1)
                     elseif type(v) == "function" then
-                        LogFunction(v)
+                        LogFunction(v, indent)
                     elseif type(v) == "string" then
                         Log(indent .. "[" .. tostring(k) .. '] = "' .. v .. '",')
                     else
@@ -38,7 +39,7 @@ function LogTables(Table, IndentLevel)
                         Log(indent .. tostring(k) .. " = ")
                         LogTables(v, IndentLevel + 1)
                     elseif type(v) == "function" then
-                        LogFunction(v)
+                        LogFunction(v, indent)
                     elseif type(v) == "string" then
                         Log(indent .. tostring(k) .. ' = "' .. v .. '",')
                     else
@@ -59,9 +60,9 @@ end
 --Function LogFunction
 --If FindFunctionName is present, logs the name of the function (instead of the memory adress)
 
-function LogFunction(Func)
+function LogFunction(Func, indent)
     if FindFunctionName and FindFunctionName(Func) then
-        Log("function : " .. FindFunctionName(Func))
+        Log(indent .. "function : " .. FindFunctionName(Func))
     else
         Log(tostring(Func))
     end
@@ -81,7 +82,7 @@ function BetterLog(v)
             LogTables(v) --otherwise use the default method of tables
         end
     elseif type(v) == "function" then
-        LogFunction(v)
+        LogFunction(v, "")
     else
         Log(tostring(v))
     end
