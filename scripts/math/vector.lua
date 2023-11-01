@@ -1,5 +1,16 @@
 --scripts/math/vector.lua
 
+
+
+function IsWithinDistance(vector1, vector2, distance)
+    local dx = vector1.x - vector2.x
+    local dy = vector1.y - vector2.y
+    local distanceSquared = dx * dx + dy * dy
+    local givenDistanceSquared = distance * distance
+
+    return distanceSquared <= givenDistanceSquared
+end
+
 function Vec2Perp(v)
     return Vec3(-v.y, v.x)
 end
