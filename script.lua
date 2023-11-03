@@ -3,8 +3,8 @@
 -----------------DOFILES-----------------
 dofile(path .. "/debugMagic.lua")
 dofile("scripts/forts.lua")
---dofile("scripts/core.lua")
---dofile("scripts/core_utility.lua") -- Doesn't seem to be required, only for deepcopy 
+--dofile("scripts/core.lua")           -- Already Loaded
+--dofile("scripts/core_utility.lua")   -- Already Loaded
 dofile(path .. "/BetterLog.lua")
 dofile(path .. "/fileList.lua")
 FileList.LoadFiles()
@@ -34,7 +34,6 @@ function OnInstantReplaySystem()
 end
 function OnUpdate()
     ModDraw()
-    
 end
 function OnDraw()
 
@@ -80,7 +79,7 @@ function ModLoop(frame)
     UpdateFunction("WheelManager", "Update", frame)
     UpdateFunction("TrackManager", "Update", frame)
     UpdateFunction("ForceManager", "Update", frame)
-    
+
 
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
@@ -88,12 +87,12 @@ function ModLoop(frame)
         if (UpdateLogging.updateGraph) then
             UpdateLogging.updateGraph:Log(delta/(data.updateDelta * 1000) * 100, endUpdateTime)
         end
-        
+
         UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
     end
-    
+
 end
-PreviousDrawTime = 0    
+PreviousDrawTime = 0
 function ModDraw()
         local newDrawTime = GetRealTime()
         TrackManager.Draw(PreviousUpdateTime, newDrawTime, PreviousDrawTime)
