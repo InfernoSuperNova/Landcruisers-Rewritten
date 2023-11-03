@@ -61,7 +61,7 @@ end
 
 function TrackManager.Draw(PreviousUpdateTime, CurrentTime, PreviousDrawTime)
     local time = CurrentTime - PreviousUpdateTime
-    local t = time / data.updateDelta
+    local t = time / UpdateDelta
     local duration = (CurrentTime - PreviousDrawTime)
     for _, trackSet in pairs(TrackManager.trackSets) do
         trackSet:Draw(t, duration)

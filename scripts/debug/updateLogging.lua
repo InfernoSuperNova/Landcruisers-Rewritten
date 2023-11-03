@@ -1,5 +1,7 @@
 --scripts/debug/updateLogging.lua
 
+
+--mostly lifted from landcruisers 1
 UpdateLogging = {
     text = ""
 }
@@ -39,7 +41,10 @@ function UpdateLogging.Update(frame)
     end
     UpdateLogging.text = ""
 end
-
+function UpdateLogging.Load()
+    AddTextControl("", "debugControl", "", ANCHOR_TOP_RIGHT, {x = 1050, y = 0}, false, "Console")
+    UpdateLogging.updateGraph = Graph.New(850, 100, 200, 100, 20, "%", "Thread Usage")
+end
 
 function UpdateLogging.ControlExists(parent, control)
     if GetControlAbsolutePos(parent, control).x == 0 then

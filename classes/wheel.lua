@@ -1,6 +1,7 @@
 --classes/wheel.lua
 
 WheelMetaTable = {
+    framesSinceCreation = 0,
     deviceId = 0,
     nodeIdA = 0, --platform node
     nodeidB = 0, --platform node
@@ -21,6 +22,7 @@ WheelMetaTable = {
     velocity = 0,
     angularVelocity = 0,
     rotation = 0,
+    previousRotation = 0,
     direction = 0,
     groundVector = Vec3(0,0,0),
     groundFactor = 0,
@@ -34,7 +36,7 @@ function WheelMetaTable:new(deviceId, teamId)
     local o = {}
     setmetatable(o, self)
     self.__index = self
-
+    o.framesSinceCreation = 0
     o.deviceId = deviceId
     o.nodeIdA = GetDevicePlatformA(deviceId)
     o.nodeIdB = GetDevicePlatformB(deviceId)
@@ -46,14 +48,16 @@ function WheelMetaTable:new(deviceId, teamId)
     o.devicePos = GetDevicePosition(deviceId)
     o.nodePosA = NodePosition(o.nodeIdA)
     o.nodePosB = NodePosition(o.nodeIdB)
-    o.actualPos = Vec3(0,0)
-    o.previousDisplacedPos = Vec3(0,0)
+    o.actualPos = o.devicePos
+    o.displacedPos = o.devicePos
+    o.previousDisplacedPos = o.devicePos
     o.velocity = 0
-    o.velocityVector = Vec3(0,0)
-    o.angularVelocity = 10000
+    o.velocityVector = Vec3(0,0,0)
+    o.angularVelocity = 0
     o.rotation = 0
+    o.previousRotation = 0
     o.direction = 0
-    o.groundVector = Vec3(0,0)
+    o.groundVector = Vec3(0,0,0)
     o.groundFactor = 0
     o.type = WheelDefinitionHelpers.GetWheelDefinitionBySaveName(o.saveName)
     if not o.type then return nil end
@@ -63,6 +67,7 @@ end
 
 
 function WheelMetaTable:Update()
+    self.framesSinceCreation = self.framesSinceCreation + 1
     self.previousDisplacedPos = DeepCopy(self.displacedPos)
     self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
@@ -87,6 +92,7 @@ function WheelMetaTable:Update()
 end
 
 function WheelMetaTable:UpdateVelocity()
+    local vehicleForce = Vec3(0,0,0)
     if self.onGround then
         local normalGroundVector = Vec2Perp(self.groundVector)
         local perpendicularPlatformVector = Vec2Perp(self.nodePosB - self.nodePosA)
@@ -105,19 +111,24 @@ function WheelMetaTable:UpdateVelocity()
 
          --divide by radius and multiply by radtodeg to get angular velocity
         local wheelGain = (self.type:GetTraction() * self.groundFactor) / self.type:GetMass()  --more mass means more time to make a change
-        local vehicleGain = (self.type:GetTraction() * self.groundFactor)
+        local vehicleGain = (self.type:GetTraction() * self.groundFactor) * 150 * velocitySign
 
         self.angularVelocity = self.angularVelocity + (delta * wheelGain) * RadToDeg / self.type:GetRadius()
         --As well as slowing down the wheel, we should apply a force to the vehicle to speed it up to meet the wheel
 
-        local vehicleForce = vehicleGain * delta * Vec2Normalize(self.velocityVector)
-        self:ApplyForce(vehicleForce)
+        vehicleForce = vehicleGain * delta * Vec3Normalize(self.velocityVector)
+        
+        
         self.onGround = false
     end
+    self:ApplyForce(vehicleForce)
     --For animation
-    self.rotation = self.rotation + self.angularVelocity % 360
+    self.previousRotation = self.rotation
+    
     --Energy loss through friction over time
-    self.angularVelocity = self.angularVelocity / self.type:GetBearingEnergyLoss()
+    local angularVelocitySign = math.sign(self.angularVelocity)
+    self.angularVelocity = math.max(0, math.abs(self.angularVelocity) - self.type:GetBearingEnergyLoss()) * angularVelocitySign
+    self.rotation = self.rotation + self.angularVelocity % 360
 end
 
 function WheelMetaTable:UpdateTeam(teamId)
@@ -147,6 +158,7 @@ function WheelMetaTable:SetDisplacedPos(displacedPos)
 end
 
 function WheelMetaTable:CalculateVelocity()
+    if self.previousDisplacedPos == Vec3(0,0,0) then return end
     self.velocityVector = self.displacedPos - self.previousDisplacedPos
     self.velocity = Vec2Mag(self.velocityVector)
 end
@@ -159,6 +171,9 @@ end
 
 function WheelMetaTable:GetPreviousPos()
     return self.previousDisplacedPos
+end
+function WheelMetaTable:GetPreviousRotation()
+    return self.previousRotation
 end
 function WheelMetaTable:GetDeviceId()
     return self.deviceId

@@ -3,9 +3,11 @@
 BlockMetaTable = {
     blockIndex = 0,
     nodes = {},
+    segments = {},
     continuousUpdate = false,
     colliderPos =  Vec3(),
     colliderRadius = 0,
+    colliderCorners = {},
 }
 
 function Block(blockIndex, continuousUpdate)
@@ -27,8 +29,40 @@ function BlockMetaTable:new(blockIndex, continuousUpdate)
     local collider = MinimumCircularBoundary(o.nodes)
     o.colliderPos = Vec3(collider.x, collider.y)
     o.colliderRadius = collider.r
+    o.colliderCorners = collider.square
+
+    o.segments = {}
+    for index, nodePos in ipairs(o.nodes) do
+        local prevSegmentStart = o.nodes[(index - 2) % #o.nodes + 1]  --index - 1
+        local nodeA = nodePos                                               --index
+        local nodeB = o.nodes[index % #o.nodes + 1]                   --index + 1
+        local nextSegmentEnd = o.nodes[(index + 2 - 1) % #o.nodes + 1]--index + 2
+
+
+        local segmentStart = nodeA
+        local segmentEnd = nodeB
+        local segmentDir = segmentEnd - segmentStart
+        local segmentNormal = Vec2Normalize(Vec2Perp(segmentDir))  -- Calculate the perpendicular vector
+        local prevSegmentNormal = Vec2Normalize(Vec2Perp(segmentStart - prevSegmentStart))
+        local nextSegmentNormal = Vec2Normalize(Vec2Perp(nextSegmentEnd - segmentEnd))
+        local prevSegmentBoundary = -Vec2Average({prevSegmentNormal, segmentNormal})
+        local nextSegmentBoundary = -Vec2Average({nextSegmentNormal, segmentNormal})
+
+
+        local segment = {nodeA = nodeA, nodeB = nodeB, segmentStart = segmentStart, segmentEnd = segmentEnd, 
+        segmentDir = segmentDir, segmentNormal = segmentNormal, prevSegmentNormal = prevSegmentNormal,
+        nextSegmentNormal = nextSegmentNormal, prevSegmentBoundary = prevSegmentBoundary, nextSegmentBoundary = nextSegmentBoundary}
+        table.insert(o.segments, segment)
+    end
+
     return o
 end
+
+
+
+
+
+
 
 function BlockMetaTable:Update()
     if self.continuousUpdate then
@@ -49,7 +83,14 @@ end
 function BlockMetaTable:GetColliderRadius()
     return self.colliderRadius
 end
+function BlockMetaTable:GetColliderCorners()
+    return self.colliderCorners
+end
 function BlockMetaTable:GetNodes()
     return self.nodes
+end
+
+function BlockMetaTable:GetSegments()
+    return self.segments
 end
 

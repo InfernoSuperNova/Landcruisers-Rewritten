@@ -7,7 +7,7 @@ WheelDefinitions = {
         spring = 35000,
         dampening = 3000,
         traction = 100,
-        bearingEnergyLoss = 1.01,
+        bearingEnergyLoss = 0.01,
         mass = 100,
         sprocketSprite = path .. "/effects/track_sprocket.lua",
         wheelSprite = path .. "/effects/wheel.lua"
@@ -19,7 +19,7 @@ WheelDefinitions = {
         spring = 30000,
         dampening = 3000,
         traction = 100,
-        bearingEnergyLoss = 1.01,
+        bearingEnergyLoss = 0.01,
         mass = 100,
         sprocketSprite = path .. "/effects/track_sprocket.lua",
         wheelSprite = path .. "/effects/wheel.lua"
@@ -31,7 +31,7 @@ WheelDefinitions = {
         spring = 60000,
         dampening = 3000,
         traction = 100,
-        bearingEnergyLoss = 1.01,
+        bearingEnergyLoss = 0.01,
         mass = 450,
         sprocketSprite = path .. "/effects/track_sprocket_large.lua",
         wheelSprite = path .. "/effects/wheel_large.lua"
@@ -50,6 +50,7 @@ function WheelDefinitionHelpers.GetWheelDefinitionBySaveName(saveName)
         elseif saveName == definitionSaveName .. WheelConfig.invertedNameTag then
             local wheelDefinition = DeepCopy(wheelDefinition)
             wheelDefinition.height = -wheelDefinition.height
+            wheelDefinition.isInverted = true
             return wheelDefinition
         end
     end 
@@ -60,12 +61,8 @@ function WheelDefinitionHelpers.ConstructWheelDefinitions()
     local newDefinitions = {}
     for _, wheelDefinition in ipairs(WheelDefinitions) do
         --check if the last character of the saveName is the inverted tag
-        local isInverted = false
-        if string.sub(wheelDefinition.saveName, -string.len(WheelConfig.invertedNameTag)) == WheelConfig.invertedNameTag then
-            isInverted = true
-        end
         local wheel = WheelDefinition:new(wheelDefinition.radius, wheelDefinition.height, wheelDefinition.dampening, wheelDefinition.spring, wheelDefinition.traction,
-        wheelDefinition.bearingEnergyLoss, wheelDefinition.mass, wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite, isInverted)
+        wheelDefinition.bearingEnergyLoss, wheelDefinition.mass, wheelDefinition.saveName, wheelDefinition.sprocketSprite, wheelDefinition.wheelSprite, false)
         table.insert(newDefinitions, wheel)
         if wheelDefinition.radius > LargestWheelRadius then LargestWheelRadius = wheelDefinition.radius end --set largest wheel radius
     end

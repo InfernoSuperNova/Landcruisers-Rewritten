@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 table.insert(Sprites, ButtonSprite("hud-engine-icon", "HUD/HUD-engine", nil, ButtonSpriteBottom, nil, nil, path))
 table.insert(Sprites, DetailSprite("hud-detail-engine", "engine", path))
 local engine = 

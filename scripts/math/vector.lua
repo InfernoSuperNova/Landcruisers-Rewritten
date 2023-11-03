@@ -1,5 +1,16 @@
 --scripts/math/vector.lua
 
+
+
+function IsWithinDistance(vector1, vector2, distance)
+    local dx = vector1.x - vector2.x
+    local dy = vector1.y - vector2.y
+    local distanceSquared = dx * dx + dy * dy
+    local givenDistanceSquared = distance * distance
+
+    return distanceSquared <= givenDistanceSquared
+end
+
 function Vec2Perp(v)
     return Vec3(-v.y, v.x)
 end
@@ -12,6 +23,11 @@ function Vec2Normalize(v)
     end
     return v
 end
+
+function Vec2Dist(v1, v2)
+    return math.sqrt((v1.x - v2.x)^2 + (v1.y - v2.y)^2)
+end
+
 
 function Vec2Average(vectors)
     local average = Vec3(0,0)
@@ -124,6 +140,7 @@ local VectorMembers = {
 
 -- Metatable implementing operators using metafunctions
 -- All member functions are implemented via the __index metafunction
+---@class Vec3
 local VectorMetatable = {
     __add = function(value1, value2)
         if type(value1) == "table" and type(value2) == "table" then
@@ -188,9 +205,17 @@ local VectorMetatable = {
             return memberWrapper
         end
     end,
+    x = 0,
+    y = 0,
+    z = 0
 }
 
--- Vector constructor
+
+---Vector3 class (z is usually unused)
+---@param x number?
+---@param y number?
+---@param z number?
+---@return Vec3
 function Vec3(x, y, z)
     local vec = {}
     vec.x = x or 0
@@ -198,6 +223,21 @@ function Vec3(x, y, z)
     vec.z = z or 0
     setmetatable(vec, VectorMetatable)
     return vec
+end
+
+function Vec3Normalize(v)
+    local mag = Vec3Mag(v)
+    if mag > 0 then
+        v.x = v.x / mag
+        v.y = v.y / mag
+        v.z = v.z / mag
+    end
+    setmetatable(v, VectorMetatable)
+    return v
+end
+
+function Vec3Mag(v)
+    return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z)
 end
 
 -- Sets properties to be that of a Vector.

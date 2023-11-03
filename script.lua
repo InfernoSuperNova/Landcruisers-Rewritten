@@ -9,6 +9,8 @@ dofile(path .. "/BetterLog.lua")
 FileList.LoadFiles()
 
 ---------------API EVENTS----------------
+---@type GraphMetaTable
+TheGraph = nil
 function Load(gameStart)
     LoadMod()
 end
@@ -22,10 +24,19 @@ function OnSeekStart()
     LoadMod()
 end
 function Update(frame)
+    TheGraph:Log(gcinfo(), GetRealTime())
     ModLoop(frame)
+end
+
+function OnInstantReplaySystem()
+    LoadMod()
 end
 function OnUpdate()
     ModDraw()
+    
+end
+function OnDraw()
+
 end
 function OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
     DeviceManager.OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
@@ -52,34 +63,41 @@ function LoadMod()
     DeviceManager.Load()
     TrackManager.Load()
     TerrainManager.Load()
+    TheGraph = Graph.New(850, 200, 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
+    UpdateLogging.Load()
 end
 PreviousUpdateTime = 0
+UpdateDelta = 0
 function ModLoop(frame)
-    
-    local startUpdateTime
-    if ModDebug.update then
-        startUpdateTime = GetRealTime()
-    end
-    PreviousUpdateTime = startUpdateTime
+    local currentTime = GetRealTime()
+    local difference = currentTime - PreviousUpdateTime
+    UpdateDelta = math.floor(difference * 100 + 0.5) / 100
+    PreviousUpdateTime = currentTime
     UpdateFunction("UpdateLogging", "Update", frame)
     UpdateFunction("TerrainManager", "Update", frame)
     UpdateFunction("DeviceManager", "Update", frame)
     UpdateFunction("WheelManager", "Update", frame)
     UpdateFunction("TrackManager", "Update", frame)
     UpdateFunction("ForceManager", "Update", frame)
+    
 
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
-        local delta = (endUpdateTime - startUpdateTime) * 1000
+        local delta = (endUpdateTime - currentTime) * 1000
+        if (UpdateLogging.updateGraph) then
+            UpdateLogging.updateGraph:Log(delta/(data.updateDelta * 1000) * 100, endUpdateTime)
+        end
+        
         UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
     end
     
 end
-PreviousDrawTime = 0
+PreviousDrawTime = 0    
 function ModDraw()
         local newDrawTime = GetRealTime()
         TrackManager.Draw(PreviousUpdateTime, newDrawTime, PreviousDrawTime)
         PreviousDrawTime = newDrawTime
+        Graph.Update()
 end
 
 

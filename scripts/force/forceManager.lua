@@ -3,14 +3,14 @@
 ForceManager = {
     forceTable = {}
 }
-
+data.forceTable = {}
 function ForceManager.Update(frame)
-    for node, force in pairs(ForceManager.forceTable) do
+    for node, force in pairs(data.forceTable) do
         dlc2_ApplyForce(node, force)
     end
-    ForceManager.forceTable = {}
+    data.forceTable = {}
 end
 
 function ApplyForce(node, force)
-    ForceManager.forceTable[node] = (ForceManager.forceTable[node] or Vec3(0,0,0)) + force
+    data.forceTable[node] = (data.forceTable[node] or Vec3(0,0,0)) + force
 end

@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 dofile("scripts/forts.lua")
 dofile(path .. "/scripts/BetterLog.lua")
 for k, v in pairs(Materials) do
