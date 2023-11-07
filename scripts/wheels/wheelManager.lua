@@ -18,11 +18,11 @@ function WheelManager.Update(frame)
     for _, wheelGroup in pairs(wheelStructureGroups) do
         local wheelCollider = WheelManager.GetWheelCollider(wheelGroup)
         local collidingBlocks = WheelManager.CheckWheelGroupCollisions(wheelCollider)
-        
+
         for _, block in pairs(collidingBlocks) do
             WheelManager.CheckWheelGroupOnSegmentColliders(wheelGroup, wheelCollider, block)
         end
-        
+
     end
 end
 
@@ -111,7 +111,7 @@ function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, w
     wheel:SetGroundVector(segmentNormal)
     wheel:SetInGroundFactor(intersectionValue)
     wheel:CalculateVelocity()
-    
+
     local velA = wheel:GetNodeVelA()
     local velB = wheel:GetNodeVelB()
     local velocity = Vec2Average({velA, velB})

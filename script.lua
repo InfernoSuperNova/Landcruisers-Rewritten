@@ -3,9 +3,10 @@
 -----------------DOFILES-----------------
 dofile(path .. "/debugMagic.lua")
 dofile("scripts/forts.lua")
-dofile("scripts/core.lua")
-dofile(path .. "/fileList.lua")
+--dofile("scripts/core.lua")           -- Already Loaded
+--dofile("scripts/core_utility.lua")   -- Already Loaded
 dofile(path .. "/BetterLog.lua")
+dofile(path .. "/fileList.lua")
 FileList.LoadFiles()
 
 ---------------API EVENTS----------------
@@ -33,7 +34,6 @@ function OnInstantReplaySystem()
 end
 function OnUpdate()
     ModDraw()
-    
 end
 function OnDraw()
 
@@ -79,7 +79,7 @@ function ModLoop(frame)
     UpdateFunction("WheelManager", "Update", frame)
     UpdateFunction("TrackManager", "Update", frame)
     UpdateFunction("ForceManager", "Update", frame)
-    
+
 
     if ModDebug.update then
         local endUpdateTime = GetRealTime()
@@ -87,37 +87,17 @@ function ModLoop(frame)
         if (UpdateLogging.updateGraph) then
             UpdateLogging.updateGraph:Log(delta/(data.updateDelta * 1000) * 100, endUpdateTime)
         end
-        
+
         UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
     end
-    
+
 end
-PreviousDrawTime = 0    
+PreviousDrawTime = 0
 function ModDraw()
         local newDrawTime = GetRealTime()
         TrackManager.Draw(PreviousUpdateTime, newDrawTime, PreviousDrawTime)
         PreviousDrawTime = newDrawTime
         Graph.Update()
 end
-
-
-
-
-
-function DeepCopy(orig)
-    local orig_type = type(orig)
-    local copy
-    if orig_type == 'table' then
-        copy = {}
-        for orig_key, orig_value in next, orig, nil do
-            copy[DeepCopy(orig_key)] = DeepCopy(orig_value)
-        end
-        setmetatable(copy, DeepCopy(getmetatable(orig)))
-    else -- number, string, boolean, etc
-        copy = orig
-    end
-    return copy
-end
-
 
 dofile(path .. "/debugMagic.lua")
