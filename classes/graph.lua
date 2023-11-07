@@ -104,10 +104,10 @@ function GraphMetaTable:Draw(delta)
     local transformedPos = ScreenToWorld(self.pos)
     local zoomLevel = GetCameraZoom()
     local corners = {
-        topLeft = Vec3(transformedPos.x, transformedPos.y, 0),
-        topRight = Vec3(transformedPos.x + self.width * zoomLevel, transformedPos.y, 0),
-        bottomLeft = Vec3(transformedPos.x, transformedPos.y + self.height * zoomLevel, 0),
-        bottomRight = Vec3(transformedPos.x + self.width * zoomLevel, transformedPos.y + self.height * zoomLevel, 0)
+        topLeft = Vec3(transformedPos.x, transformedPos.y, -100),
+        topRight = Vec3(transformedPos.x + self.width * zoomLevel, transformedPos.y, -100),
+        bottomLeft = Vec3(transformedPos.x, transformedPos.y + self.height * zoomLevel, -100),
+        bottomRight = Vec3(transformedPos.x + self.width * zoomLevel, transformedPos.y + self.height * zoomLevel, -100)
     }
     SpawnLine(corners.topLeft, corners.topRight, {r = 255, g = 255, b = 255, a = 255}, delta * 1.1)
     SpawnLine(corners.topRight, corners.bottomRight, White(), delta * 1.1)
@@ -125,7 +125,7 @@ function GraphMetaTable:Draw(delta)
     for _, point in pairs(self.data) do
         local x = transformedPos.x + (point.time / self.maxTime) * self.width * zoomLevel
         local y = transformedPos.y + self.height * zoomLevel - (point.value * scale)
-        local currentPoint = Vec3(x, y, 0)
+        local currentPoint = Vec3(x, y, -100)
         if prevPoint then
             SpawnLine(prevPoint, currentPoint, White(), delta * 1.1)
         end
