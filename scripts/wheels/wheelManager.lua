@@ -1,12 +1,16 @@
 --scripts/wheels/wheelManager.lua
 
-WheelManager = {}
+WheelManager = {
+    --keyed by wheel, value is a table containing intersection value, segment normal
+    IntersectionValues = {}
+}
 data.wheels = {}
 function WheelManager.AddWheel(wheel)
     table.insert(data.wheels, wheel)
 end
 --Main wheel manager entrypoint, called every update frame
 function WheelManager.Update(frame)
+    WheelManager.IntersectionValues = {}
     --Group wheels by structureId
     local wheelStructureGroups = {}
     for _, wheel in ipairs(data.wheels) do
@@ -23,6 +27,13 @@ function WheelManager.Update(frame)
             WheelManager.CheckWheelGroupOnSegmentColliders(wheelGroup, wheelCollider, block)
         end
 
+    end
+
+
+    --final step of collisions: Calculate forces
+    for wheel, _ in pairs(WheelManager.IntersectionValues) do
+        local highestIntersectionValue = WheelManager.GetHighestIntersectionValue(wheel)
+        WheelManager.CalculateResponseForce(highestIntersectionValue.intersectionValue, highestIntersectionValue.segmentNormal, wheel)
     end
 end
 
@@ -95,7 +106,7 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
         Vec2Cross(segment2ToWheel, segment.nextSegmentBoundary) < 0 then
         return
     end
-    WheelManager.CalculateResponseForce(intersectionValue, segment.segmentNormal, wheel, wheelPos)
+    WheelManager.CalculateResponseForce(intersectionValue, segment.segmentNormal, wheel)
     if ModDebug.collisions then
         Highlighting.HighlightUnitVector(segment.nodeA, segment.prevSegmentBoundary, 500, Green())
         Highlighting.HighlightUnitVector(segment.nodeB, segment.nextSegmentBoundary, 500, Green())
@@ -105,9 +116,27 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
 end
 
 
-function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, wheel, wheelPos)
+-- function WheelManager.SaveIntersectionValue(intersectionValue, segmentNormal, wheel)
+--     if not WheelManager.IntersectionValues[wheel] then
+--         WheelManager.IntersectionValues[wheel] = {}
+--     end
+--     table.insert(WheelManager.IntersectionValues[wheel], {intersectionValue = intersectionValue, segmentNormal = segmentNormal})
+-- end
+
+-- function WheelManager.GetHighestIntersectionValue(wheel)
+--     local highestValue = 0
+--     local associatedSegmentNormal = Vec3(0,0,0)
+--     for _, value in pairs(WheelManager.IntersectionValues[wheel]) do
+--         if value.intersectionValue > highestValue then
+--             highestValue = value.intersectionValue
+--             associatedSegmentNormal = value.segmentNormal
+--         end
+--     end
+--     return {intersectionValue = highestValue, segmentNormal = associatedSegmentNormal}
+-- end
+function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, wheel)
     local displacement = intersectionValue * -1 * segmentNormal
-    wheel:SetDisplacedPos(wheelPos + displacement)
+    wheel:SetDisplacedPos(wheel:GetPos() + displacement)
     wheel:SetGroundVector(segmentNormal)
     wheel:SetInGroundFactor(intersectionValue)
     wheel:CalculateVelocity()
