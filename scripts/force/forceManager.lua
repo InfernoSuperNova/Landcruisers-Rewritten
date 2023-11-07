@@ -1,9 +1,13 @@
 --scripts/force/forceManager.lua
 
 ForceManager = {
-    forceTable = {}
+
 }
 data.forceTable = {}
+
+function ForceManager.Load()
+    data.forceTable = {}
+end 
 function ForceManager.Update(frame)
     for node, force in pairs(data.forceTable) do
         dlc2_ApplyForce(node, force)

@@ -1,7 +1,7 @@
 --scripts/wheels/wheelManager.lua
 
 WheelManager = {}
-
+data.wheels = {}
 function WheelManager.AddWheel(wheel)
     table.insert(data.wheels, wheel)
 end

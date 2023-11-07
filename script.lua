@@ -56,13 +56,12 @@ end
 
 -----------------MOD-------------------
 
-data.wheels = {}
-data.terrain = {}
 function LoadMod()
     WheelDefinitionHelpers.ConstructWheelDefinitions()
     DeviceManager.Load()
     TrackManager.Load()
     TerrainManager.Load()
+    ForceManager.Load()
     TheGraph = Graph.New(850, 200, 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
     UpdateLogging.Load()
 end

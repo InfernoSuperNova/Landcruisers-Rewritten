@@ -5,7 +5,7 @@ TerrainManager = {}
 function TerrainManager.Load()
     TerrainManager.IndexAtLoad()
 end
-
+data.terrain = {}
 function TerrainManager.IndexAtLoad()
     data.terrain = {}
     local terrainCount = GetBlockCount()
