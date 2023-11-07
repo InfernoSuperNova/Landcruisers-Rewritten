@@ -1,0 +1,136 @@
+"filename", "language", "Lua", "Markdown", "JSON", "comment", "blank", "total"
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\BetterLog.lua", "Lua", 66, 0, 0, 17, 6, 89
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\README.md", "Markdown", 0, 1, 0, 0, 1, 2
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\classes\graph.lua", "Lua", 112, 0, 0, 23, 33, 168
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\classes\terrain.lua", "Lua", 77, 0, 0, 1, 19, 97
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\classes\trackSet.lua", "Lua", 89, 0, 0, 1, 15, 105
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\classes\wheel.lua", "Lua", 218, 0, 0, 12, 47, 277
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\config\modDebug.lua", "Lua", 4, 0, 0, 1, 1, 6
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\config\terrain.lua", "Lua", 4, 0, 0, 1, 1, 6
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\config\wheel.lua", "Lua", 3, 0, 0, 1, 0, 4
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\config\wheelDefinitions.lua", "Lua", 65, 0, 0, 2, 4, 71
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\db\constants.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\db\sprites.lua", "Lua", 2, 0, 0, 1, 1, 4
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\debugMagic.lua", "Lua", 90, 0, 0, 2, 9, 101
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\controller.lua", "Lua", 46, 0, 0, 3, 7, 56
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\device_list.lua", "Lua", 226, 0, 0, 7, 32, 265
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\drill.lua", "Lua", 57, 0, 0, 0, 2, 59
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\drill2.lua", "Lua", 87, 0, 0, 0, 3, 90
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\drill3.lua", "Lua", 31, 0, 0, 0, 1, 32
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\drill4.lua", "Lua", 62, 0, 0, 0, 1, 63
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\engine.lua", "Lua", 45, 0, 0, 3, 7, 55
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\gearbox.lua", "Lua", 45, 0, 0, 3, 7, 55
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\largeSuspension.lua", "Lua", 27, 0, 0, 7, 2, 36
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\largeSuspensionInverted.lua", "Lua", 5, 0, 0, 0, 0, 5
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\smallSuspension.lua", "Lua", 26, 0, 0, 7, 3, 36
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\smallSuspensionInverted.lua", "Lua", 5, 0, 0, 0, 0, 5
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\strings.lua", "Lua", 35, 0, 0, 0, 19, 54
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\suspension.lua", "Lua", 47, 0, 0, 8, 5, 60
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\devices\suspensionInverted.lua", "Lua", 5, 0, 0, 0, 0, 5
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\displayname.lua", "Lua", 13, 0, 0, 0, 0, 13
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\drill_extend.lua", "Lua", 5, 0, 0, 2, 2, 9
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\engine_complete.lua", "Lua", 5, 0, 0, 2, 2, 9
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\engine_loop.lua", "Lua", 5, 0, 0, 2, 2, 9
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\idle_drill.lua", "Lua", 112, 0, 0, 3, 8, 123
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\smoke_poof.lua", "Lua", 40, 0, 0, 3, 5, 48
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\track.lua", "Lua", 42, 0, 0, 2, 8, 52
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\track_link.lua", "Lua", 42, 0, 0, 2, 8, 52
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\track_sprocket.lua", "Lua", 42, 0, 0, 2, 8, 52
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\track_sprocket_large.lua", "Lua", 22, 0, 0, 1, 6, 29
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\wheel.lua", "Lua", 42, 0, 0, 2, 8, 52
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\wheel_large.lua", "Lua", 22, 0, 0, 1, 5, 28
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\effects\wheel_sound.lua", "Lua", 5, 0, 0, 2, 1, 8
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\fileList.lua", "Lua", 60, 0, 0, 1, 4, 65
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\itemversion.lua", "Lua", 1, 0, 0, 0, 1, 2
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\materials\building_materials.lua", "Lua", 38, 0, 0, 4, 4, 46
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\materials\strings.lua", "Lua", 6, 0, 0, 0, 0, 6
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mod.lua", "Lua", 2, 0, 0, 0, 1, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-bpo-scattershot\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-bpo-seep\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-bpo-shockenaugh\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-cf-buster\commander.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-cf-buster\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-cf-buster\weapons\projectile_list.lua", "Lua", 16, 0, 0, 0, 0, 16
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-cf-moonshine\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-cf-phantom\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-da-builder\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-da-overclocker\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-da-speed-demon\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-ee-fireman\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-ee-heavy-weapons\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-ee-marksman\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-ee-marksman\mods\2970318195\weapons\turretCannon.lua", "Lua", 1, 0, 0, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-ee-marksman\mods\2970318195\weapons\turretCannon3.lua", "Lua", 1, 0, 0, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-iba-miser\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-iba-spy\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\commander-iba-turtle\mods\2970318195\weapons\observer_dummy.lua", "Lua", 3, 0, 0, 0, 0, 3
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Chinese\devices\strings.lua", "Lua", 105, 0, 0, 0, 0, 105
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Chinese\weapons\strings.lua", "Lua", 49, 0, 0, 0, 0, 49
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-French\devices\strings.lua", "Lua", 59, 0, 0, 0, 0, 59
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-French\materials\strings.lua", "Lua", 0, 0, 0, 0, 1, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-German\devices\strings.lua", "Lua", 57, 0, 0, 0, 0, 57
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Hungarian\devices\strings.lua", "Lua", 55, 0, 0, 0, 0, 55
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Italian\devices\strings.lua", "Lua", 57, 0, 0, 0, 0, 57
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Russian\devices\strings.lua", "Lua", 55, 0, 0, 0, 0, 55
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Russian\materials\strings.lua", "Lua", 21, 0, 0, 0, 0, 21
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Russian\weapons\strings.lua", "Lua", 6, 0, 0, 0, 0, 6
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\language-Turkish\devices\strings.lua", "Lua", 55, 0, 0, 0, 0, 55
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\skirmish\weapons\missilelauncherstructure.lua", "Lua", 1, 0, 0, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\skirmish\weapons\missilelauncherstructure_inverted.lua", "Lua", 1, 0, 0, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\skirmish\weapons\missileswarmstructure.lua", "Lua", 1, 0, 0, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\skirmish\weapons\missileswarmstructure_inverted.lua", "Lua", 1, 0, 0, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\mods\weapon_pack\weapons\firebeam.lua", "Lua", 2, 0, 0, 0, 0, 2
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\.obsidian\app.json", "JSON", 0, 0, 1, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\.obsidian\appearance.json", "JSON", 0, 0, 4, 0, 0, 4
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\.obsidian\core-plugins-migration.json", "JSON", 0, 0, 30, 0, 0, 30
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\.obsidian\core-plugins.json", "JSON", 0, 0, 20, 0, 0, 20
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\.obsidian\hotkeys.json", "JSON", 0, 0, 1, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\.obsidian\workspace.json", "JSON", 0, 0, 288, 0, 0, 288
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\Collisions and stuff.md", "Markdown", 0, 0, 0, 0, 1, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\DeviceManager\General notes.md", "Markdown", 0, 3, 0, 0, 2, 5
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\Fuuuutureee\Classes.md", "Markdown", 0, 4, 0, 0, 5, 9
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\General notes.md", "Markdown", 0, 5, 0, 0, 3, 8
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\Global tables.md", "Markdown", 0, 2, 0, 0, 0, 2
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\Things before and after tournament.md", "Markdown", 0, 8, 0, 0, 83, 91
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\Track set\Considerations for seamless tracks.md", "Markdown", 0, 25, 0, 0, 27, 52
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\Track set\How best to structure track object.md", "Markdown", 0, 14, 0, 0, 11, 25
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\Vector notes.md", "Markdown", 0, 2, 0, 0, 0, 2
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\script.lua\Important Notes!.md", "Markdown", 0, 1, 0, 0, 0, 1
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\wheel\Collisions.md", "Markdown", 0, 2, 0, 0, 3, 5
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\wheel\Dampening.md", "Markdown", 0, 4, 0, 0, 3, 7
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\wheel\Friction and rolling resistance.md", "Markdown", 0, 4, 0, 0, 8, 12
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\notes\Landcruisers\wheel\Traction.md", "Markdown", 0, 19, 0, 0, 19, 38
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\publishedfileid.lua", "Lua", 1, 0, 0, 0, 1, 2
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\script.lua", "Lua", 94, 0, 0, 7, 14, 115
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\debug\highlighting.lua", "Lua", 55, 0, 0, 3, 7, 65
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\debug\updateLogging.lua", "Lua", 59, 0, 0, 2, 14, 75
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\devices\deviceManager.lua", "Lua", 62, 0, 0, 1, 12, 75
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\force\forceManager.lua", "Lua", 15, 0, 0, 1, 4, 20
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\math\dampening.lua", "Lua", 10, 0, 0, 2, 3, 15
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\math\math.lua", "Lua", 5, 0, 0, 1, 2, 8
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\math\tracks.lua", "Lua", 65, 0, 0, 6, 10, 81
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\math\vector.lua", "Lua", 199, 0, 0, 18, 44, 261
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\terrain\terrainManager.lua", "Lua", 42, 0, 0, 3, 10, 55
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\wheels\trackManager.lua", "Lua", 57, 0, 0, 2, 11, 70
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\scripts\wheels\wheelManager.lua", "Lua", 97, 0, 0, 10, 14, 121
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\strings\strings.lua", "Lua", 23, 0, 0, 0, 1, 24
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\ui\controls.lua", "Lua", 106, 0, 0, 12, 1, 119
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\visual studio code un angryifier\stuff.lua", "Lua", 14, 0, 0, 9, 3, 26
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\controllerNoStructure.lua", "Lua", 97, 0, 0, 3, 11, 111
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\controllerStructure.lua", "Lua", 98, 0, 0, 3, 11, 112
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\engine.lua", "Lua", 97, 0, 0, 0, 13, 110
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\missilelauncherstructure.lua", "Lua", 12, 0, 0, 0, 0, 12
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\missilelauncherstructure_inverted.lua", "Lua", 17, 0, 0, 0, 0, 17
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\missileswarmstructure.lua", "Lua", 9, 0, 0, 0, 0, 9
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\missileswarmstructure_inverted.lua", "Lua", 14, 0, 0, 0, 0, 14
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\observer_dummy.lua", "Lua", 4, 0, 0, 0, 0, 4
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\projectile_list.lua", "Lua", 25, 0, 0, 1, 5, 31
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\strings.lua", "Lua", 13, 0, 0, 7, 6, 26
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\turretCannon.lua", "Lua", 211, 0, 0, 1, 15, 227
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\turretCannon2.lua", "Lua", 22, 0, 0, 0, 7, 29
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\turretCannon3.lua", "Lua", 10, 0, 0, 0, 3, 13
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\turretCannonFlip1.lua", "Lua", 18, 0, 0, 0, 6, 24
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\turretCannonFlip2.lua", "Lua", 18, 0, 0, 0, 6, 24
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\turretCannonFlip3.lua", "Lua", 18, 0, 0, 0, 5, 23
+"c:\Program Files (x86)\Steam\steamapps\common\Forts\data\mods\LCR\weapons\weapon_list.lua", "Lua", 437, 0, 0, 3, 30, 470
+"Total", "-", 4601, 94, 344, 224, 734, 5997
