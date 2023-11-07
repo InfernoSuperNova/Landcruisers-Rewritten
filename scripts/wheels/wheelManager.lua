@@ -111,12 +111,8 @@ function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, w
     wheel:SetGroundVector(segmentNormal)
     wheel:SetInGroundFactor(intersectionValue)
     wheel:CalculateVelocity()
-
-    local velA = wheel:GetNodeVelA()
-    local velB = wheel:GetNodeVelB()
-    local velocity = Vec2Average({velA, velB})
+    local velocity = (wheel:GetNodeVelA() + wheel:GetNodeVelB()) / 2
     local force = Dampening.DirectionalDampening(wheel.type.spring, displacement, wheel.type.dampening, velocity, segmentNormal)
-
     wheel:ApplyForce(force)
 end
 
