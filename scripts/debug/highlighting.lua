@@ -12,6 +12,8 @@ function Highlighting.HighlightPolygon(coords, colour1)
     local newCoords = Highlighting.FlattenTable(coords)
     for coord = 1, Highlighting.GetHighestIndex(newCoords) do
         --SpawnCircle(coords[coord], 50, colour1, data.updateDelta)
+        newCoords[coord].z = -100
+        newCoords[coord % #newCoords + 1].z = -100
         SpawnLine(newCoords[coord], newCoords[coord % #newCoords + 1], colour1, data.updateDelta)
     end
 end
@@ -36,8 +38,9 @@ function Highlighting.FlattenTable(tbl)
 end
 
 function Highlighting.HighlightUnitVector(pos, direction, mag, col)
+    pos.z = -100
     col = col or {r = 255, g = 255, b= 255, a = 255}
-    local pos2 = Vec3( pos.x + direction.x * mag, pos.y + direction.y * mag, -10)
+    local pos2 = Vec3( pos.x + direction.x * mag, pos.y + direction.y * mag, -100)
     SpawnLine(pos, pos2, col, 0.04)
     SpawnCircle(pos, Vec3Dist(pos, pos2) / 5, col, 0.04)
 end

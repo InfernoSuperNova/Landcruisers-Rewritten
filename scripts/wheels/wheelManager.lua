@@ -81,6 +81,8 @@ function CheckWheelsOnSegmentCollider(wheelGroup, segmentCollider, segment)
         local wheelPos = wheel:GetPos()
         if IsWithinDistance(wheelPos, segmentCollider, segmentCollider.r + wheel.type:GetRadius()) then
             if ModDebug.collisions then
+                wheelPos.z = -100
+                segmentCollider.z = -100
                 SpawnLine(wheelPos, segmentCollider, {r = 255, g = 128, b = 0, a = 255}, 0.04)
             end
             WheelManager.CheckWheelOnSegment(wheel, segment)
@@ -91,25 +93,36 @@ end
 --Final step: Check individual wheels on segments
 function WheelManager.CheckWheelOnSegment(wheel, segment)
     local wheelPos = wheel:GetPos()
+    
     local wheelToSegment = segment.nodeA - wheelPos
-    local distance = Vec2Dot(wheelToSegment, segment.segmentNormal)
+    local distanceToTerrainSegment = Vec2Dot(wheelToSegment, segment.segmentNormal)
     local radius = wheel.type:GetRadius()
     --remove this check to enable sticky wheels or set radius to *2
-    if math.abs(distance) > radius then
+    if math.abs(distanceToTerrainSegment) > radius then
         return
     end
-    wheel:SetOnGround(true)
-    local intersectionValue = (radius - distance)
+    
     local segment1ToWheel = wheelPos - segment.nodeA
     local segment2ToWheel = wheelPos - segment.nodeB
-    if Vec2Cross(segment1ToWheel, segment.prevSegmentBoundary) > 0 or
-        Vec2Cross(segment2ToWheel, segment.nextSegmentBoundary) < 0 then
-        return
-    end
+    local distToPrevSegmentEdge = Vec2Cross(segment1ToWheel, segment.segmentNormal)
+    local distToNextSegmentEdge = Vec2Cross(segment2ToWheel, segment.segmentNormal)
+    
+    -- if distToPrevBoundary > 0 or distToNextBoundary < 0 then
+    --     return
+    -- end
+    local cornerMultiplier = math.clamp(1 + distToPrevSegmentEdge / radius, 0, 1) * math.clamp(1 - distToNextSegmentEdge / radius, 0, 1) * math.pi / 2
+    local intersectionValue = (radius - distanceToTerrainSegment) * math.sin(cornerMultiplier)
+    
+    
+
+    wheel:SetOnGround(true)
     WheelManager.CalculateResponseForce(intersectionValue, segment.segmentNormal, wheel)
     if ModDebug.collisions then
         Highlighting.HighlightUnitVector(segment.nodeA, segment.prevSegmentBoundary, 500, Green())
         Highlighting.HighlightUnitVector(segment.nodeB, segment.nextSegmentBoundary, 500, Green())
+        wheelPos.z = -100
+        segment.nodeA.z = -100
+        segment.nodeB.z = -100
         SpawnLine(wheelPos, segment.nodeA, { r = 255, g = 128, b = 0, a = 100 }, 0.04)
         SpawnLine(wheelPos, segment.nodeB, { r = 255, g = 128, b = 0, a = 100 }, 0.04)
     end

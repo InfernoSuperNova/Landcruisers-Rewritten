@@ -44,7 +44,7 @@ function TerrainManager.Update(frame)
             for i = 1, #nodes do
                 local nodeA = nodes[i]
                 local nodeB = nodes[i % #nodes + 1]
-                Highlighting.HighlightLineWithWidth(nodeA, nodeB, 50, {r = 100, g = 100, b = 150, a = 255})
+                Highlighting.HighlightLineWithWidth(nodeA, nodeB, 3, {r = 100, g = 100, b = 150, a = 255})
                 
             end
         end

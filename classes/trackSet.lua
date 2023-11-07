@@ -67,6 +67,8 @@ function TrackSetMetaTable:Draw(time, duration)
         if oldStraight == nil or newStraight.a == nil or oldStraight.a == nil then return end
         local posA = Vec3Lerp(oldStraight.a, newStraight.a, time)
         local posB = Vec3Lerp(oldStraight.b, newStraight.b, time)
+        posA.z = -100
+        posB.z = -100
         SpawnLine(posA, posB, {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
     end
 end
