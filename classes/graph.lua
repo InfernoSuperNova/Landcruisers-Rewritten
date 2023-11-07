@@ -82,15 +82,12 @@ function GraphMetaTable:Update(time)
 
 
 
-    if #self.data == 1 then
+    if #self.data == 0 then
         AddTextControl("", self.graphUI, self.graphUI, ANCHOR_TOP_RIGHT, self.pos + Vec3(-20, 0, 0), false, "Console")
         AddTextControl(self.graphUI, "graphCurrentValue", "", ANCHOR_TOP_RIGHT, Vec3(0,20,0), false, "Readout")
         
     else
-        if GetControlSize(self.graphUI, "graphCurrentValue").x  ~= 0 then
-            SetControlText(self.graphUI, "graphCurrentValue", self.data[#self.data].value .. " " .. self.unit)
-        end
-        
+        SetControlText(self.graphUI, "graphCurrentValue", self.data[#self.data].value .. " " .. self.unit)
     end
 
     
