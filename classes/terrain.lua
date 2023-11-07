@@ -51,7 +51,8 @@ function BlockMetaTable:new(blockIndex, continuousUpdate)
 
         local segment = {nodeA = nodeA, nodeB = nodeB, segmentStart = segmentStart, segmentEnd = segmentEnd, 
         segmentDir = segmentDir, segmentNormal = segmentNormal, prevSegmentNormal = prevSegmentNormal,
-        nextSegmentNormal = nextSegmentNormal, prevSegmentBoundary = prevSegmentBoundary, nextSegmentBoundary = nextSegmentBoundary}
+        nextSegmentNormal = nextSegmentNormal, prevSegmentBoundary = prevSegmentBoundary, nextSegmentBoundary = nextSegmentBoundary,
+         prevSegmentStart = prevSegmentStart, nextSegmentEnd = nextSegmentEnd}
         table.insert(o.segments, segment)
     end
 
