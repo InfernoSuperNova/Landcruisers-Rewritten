@@ -3,7 +3,8 @@
 
 --mostly lifted from landcruisers 1
 UpdateLogging = {
-    text = ""
+    text = "",
+    currentLineCount = 0,
 }
 
 function UpdateFunction(table, callback, frame)
@@ -26,11 +27,9 @@ end
 function UpdateLogging.Update(frame)
     SetControlFrame(0)
     UpdateLogging.Log("Press Ctrl + Alt + T to hide")
-    if not UpdateLogging.ControlExists("root", "debugControl") then
-        AddTextControl("", "debugControl", "", ANCHOR_TOP_RIGHT, {x = 1050, y = 0}, false, "Console")
-    end
 
     local lines = UpdateLogging.SplitLines(UpdateLogging.text)
+    UpdateLogging.currentLineCount = 0
     for i = 1, #lines do
         local text = lines[i]  
         if not UpdateLogging.ControlExists("debugControl", "debugLine" .. i) then
@@ -38,13 +37,24 @@ function UpdateLogging.Update(frame)
         else
             SetControlText("debugControl", "debugLine" .. i, text)
         end
+        UpdateLogging.currentLineCount = UpdateLogging.currentLineCount + 1
     end
     UpdateLogging.text = ""
 end
+
+
+
 function UpdateLogging.Load()
+    for i = 0, UpdateLogging.currentLineCount do
+        DeleteControl("debugControl", "debugLine" .. i)
+    end
+    DeleteControl("root", "debugControl")
+    UpdateLogging.text = ""
+
     AddTextControl("", "debugControl", "", ANCHOR_TOP_RIGHT, {x = 1050, y = 0}, false, "Console")
     UpdateLogging.updateGraph = Graph.New(850, 100, 200, 100, 20, "%", "Thread Usage")
 end
+
 
 function UpdateLogging.ControlExists(parent, control)
     if GetControlAbsolutePos(parent, control).x == 0 then
