@@ -87,7 +87,10 @@ function GraphMetaTable:Update(time)
         AddTextControl(self.graphUI, "graphCurrentValue", "", ANCHOR_TOP_RIGHT, Vec3(0,20,0), false, "Readout")
         
     else
-        SetControlText(self.graphUI, "graphCurrentValue", self.data[#self.data].value .. " " .. self.unit)
+        if GetControlSize(self.graphUI, "graphCurrentValue").x  ~= 0 then
+            SetControlText(self.graphUI, "graphCurrentValue", self.data[#self.data].value .. " " .. self.unit)
+        end
+        
     end
 
     
