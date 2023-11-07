@@ -19,6 +19,7 @@ function OnRestart()
     LoadMod()
 end
 function OnSeek()
+    
     LoadMod()
 end
 function OnSeekStart()
@@ -30,7 +31,10 @@ function Update(frame)
 end
 
 function OnInstantReplaySystem()
-    LoadMod()
+    for i = 0, 255, 40 do
+        Notice(RgbaToHex(i, 255, 255 - i, 255, false) .. "Warning: Instant replays are currently broken in Landcruisers, please view from the replay menu instead.")
+    end
+    
 end
 function OnUpdate()
     ModDraw()
@@ -99,4 +103,13 @@ function ModDraw()
         Graph.Update()
 end
 
+
+function RgbaToHex(r, g, b, a, UTF16)
+    local hex = string.format("%02X%02X%02X%02X", r, g, b, a)
+    if UTF16 == true then 
+      return L"[HL="..towstring(hex)..L"]" 
+    else
+      return "[HL="..hex.."]"
+    end
+  end
 dofile(path .. "/debugMagic.lua")
