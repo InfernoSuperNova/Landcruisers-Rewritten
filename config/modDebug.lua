@@ -2,5 +2,5 @@
 
 ModDebug = {
     update = true,
-    collisions = true,
+    collisions = false,
 }
