@@ -134,9 +134,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "fab40293b5d1892a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "To do today.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 10
+        "currentTab": 11
       }
     ],
     "direction": "vertical"
@@ -202,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "wheel/Traction.md",
+                "file": "To do today.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -219,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "wheel/Traction.md",
+                "file": "To do today.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -242,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "wheel/Traction.md"
+                "file": "To do today.md"
               }
             }
           }
@@ -263,10 +275,16 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "18e55a0808e25d43",
+  "active": "fab40293b5d1892a",
   "lastOpenFiles": [
-    "Things before and after tournament.md",
+    "Pasted image 20231108164447.png",
+    "Pasted image 20231108162653.png",
+    "Pasted image 20231108162604.png",
+    "Pasted image 20231108162349.png",
+    "Pasted image 20231108162044.png",
     "wheel/Traction.md",
+    "To do today.md",
+    "Things before and after tournament.md",
     "Vector notes.md",
     "Global tables.md",
     "General notes.md",
