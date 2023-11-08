@@ -19,8 +19,7 @@ function Graph.New(posX, posY, width, height, maxTime, unit, name)
     return graph
 end
 
-function Graph.Update()
-    local realTime = GetRealTime()
+function Graph.Update(realTime)
     for _, graph in pairs(Graph.graphs) do
         graph:Update(realTime)
     end
