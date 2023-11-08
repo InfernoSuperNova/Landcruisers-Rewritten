@@ -259,3 +259,33 @@ function Vec3FromDegrees(degrees)
     local radians = math.rad(degrees)
     return Vec3(math.cos(radians), math.sin(radians))
 end
+
+
+
+
+function IsConcave(a, b, c)
+    local ab = b - a
+    local bc = c - b
+    local cross = Vec2Cross(ab, bc)
+    return cross < 0
+end
+
+function IsConvex(a, b, c)
+    local ab = b - a
+    local bc = c - b
+    local cross = Vec2Cross(ab, bc)
+    return cross > 0
+end
+
+function IsObtuse(a, b, c)
+    local ab = b - a
+    local bc = c - b
+    local dot = Vec2Dot(ab, bc)
+    return dot > 0
+end
+function IsAcute(a, b, c)
+    local ab = b - a
+    local bc = c - b
+    local dot = Vec2Dot(ab, bc)
+    return dot < 0
+end
