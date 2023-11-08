@@ -55,21 +55,28 @@ function TrackSetMetaTable:Draw(time, duration)
 
         local pos = Vec3Lerp(oldWheel, newWheel:GetDisplacedPos(), time)
         if pos == nil then continue end --I hate this
-        SpawnCircle(pos, newWheel.type:GetRadius(), {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
-        local wheelRotationOld = Vec3FromDegrees(newWheel:GetPreviousRotation())
-        local wheelRotationNew = Vec3FromDegrees(newWheel:GetRotation())
-        local rotation = Vec3Lerp(wheelRotationOld, wheelRotationNew, time)
-        local effect = SpawnEffectEx(newWheel:GetSprocketSprite(), pos, rotation)
+        if DrawingConfig.drawWheelWireframes then
+            local rotation = math.lerp(newWheel:GetPreviousRotation(), newWheel:GetRotation(), time)
+            DrawableWheel.Draw(pos, newWheel.type:GetRadius(), rotation, duration * 1.1)
+        end
+        if DrawingConfig.drawWheelSprites then
+            local wheelRotationOld = Vec3FromDegrees(newWheel:GetPreviousRotation())
+            local wheelRotationNew = Vec3FromDegrees(newWheel:GetRotation())
+            local rotation = Vec3Lerp(wheelRotationOld, wheelRotationNew, time)
+            local effect = SpawnEffectEx(newWheel:GetSprocketSprite(), pos, rotation)
+        end
     end
-    for i = 1, #self.track - 1, 2 do
-        local oldStraight = self.previousTrack[i + 1]
-        local newStraight = self.track[i + 1]
-        if oldStraight == nil or newStraight.a == nil or oldStraight.a == nil then return end
-        local posA = Vec3Lerp(oldStraight.a, newStraight.a, time)
-        local posB = Vec3Lerp(oldStraight.b, newStraight.b, time)
-        posA.z = -100
-        posB.z = -100
-        SpawnLine(posA, posB, {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
+    if DrawingConfig.drawTracks then
+        for i = 1, #self.track - 1, 2 do
+            local oldStraight = self.previousTrack[i + 1]
+            local newStraight = self.track[i + 1]
+            if oldStraight == nil or newStraight.a == nil or oldStraight.a == nil then return end
+            local posA = Vec3Lerp(oldStraight.a, newStraight.a, time)
+            local posB = Vec3Lerp(oldStraight.b, newStraight.b, time)
+            posA.z = -100
+            posB.z = -100
+            SpawnLine(posA, posB, {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
+        end
     end
 end
 
