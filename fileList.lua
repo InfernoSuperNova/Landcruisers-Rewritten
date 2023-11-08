@@ -8,12 +8,16 @@ FileList = {
         "terrain",
         "trackSet",
         "graph",
+        ["wireframe"] = {
+            "drawableWheel",
+        }
     },
     ["config"] = {
         "modDebug",
         "terrain",
         "wheelDefinitions",
         "wheel",
+        "drawing",
     },
     ["scripts"] = {
         ["wheels"] = {
