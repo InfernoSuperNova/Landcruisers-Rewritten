@@ -128,7 +128,7 @@ function WheelMetaTable:UpdateVelocity()
     --Energy loss through friction over time
     local angularVelocitySign = math.sign(self.angularVelocity)
     self.angularVelocity = math.max(0, math.abs(self.angularVelocity) - self.type:GetBearingEnergyLoss()) * angularVelocitySign
-    self.rotation = self.rotation + self.angularVelocity % 360
+    self.rotation = self.rotation + math.abs(self.angularVelocity) % 360 * math.sign(self.angularVelocity)
 end
 
 function WheelMetaTable:UpdateTeam(teamId)
