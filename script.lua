@@ -56,10 +56,10 @@ function OnInstantReplaySystem()
     
 end
 function OnUpdate()
-    ModDraw()
+
 end
 function OnDraw()
-
+    ModDraw()
 end
 function OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
     DeviceManager.OnDeviceCreated(teamId, deviceId, saveName, nodeA, nodeB, t, upgradedId)
@@ -115,11 +115,13 @@ function ModLoop(frame)
 
 end
 PreviousDrawTime = 0
+
 function ModDraw()
         local newDrawTime = GetRealTime()
+        if IsPaused() then PreviousDrawTime = newDrawTime; return end
         TrackManager.Draw(PreviousUpdateTime, newDrawTime, PreviousDrawTime)
         PreviousDrawTime = newDrawTime
-        Graph.Update()
+        Graph.Update(newDrawTime)
 end
 
 
