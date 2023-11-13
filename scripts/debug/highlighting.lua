@@ -3,7 +3,7 @@
 Highlighting = {}
 function Highlighting.HighlightCoords(coords)
     for k, coord in pairs(coords) do
-        SpawnCircle(coord, 50, { r = 255, g = 100, b = 100, a = 255 }, data.updateDelta)
+        SpawnCircle(coord, 50, { r = 255, g = 100, b = 100, a = 255 }, UpdateDelta * 1.1)
     end
 end
 
@@ -14,7 +14,7 @@ function Highlighting.HighlightPolygon(coords, colour1)
         --SpawnCircle(coords[coord], 50, colour1, data.updateDelta)
         newCoords[coord].z = -100
         newCoords[coord % #newCoords + 1].z = -100
-        SpawnLine(newCoords[coord], newCoords[coord % #newCoords + 1], colour1, data.updateDelta)
+        SpawnLine(newCoords[coord], newCoords[coord % #newCoords + 1], colour1, UpdateDelta * 1.1)
     end
 end
 
@@ -41,8 +41,8 @@ function Highlighting.HighlightUnitVector(pos, direction, mag, col)
     pos.z = -100
     col = col or {r = 255, g = 255, b= 255, a = 255}
     local pos2 = Vec3( pos.x + direction.x * mag, pos.y + direction.y * mag, -100)
-    SpawnLine(pos, pos2, col, 0.04)
-    SpawnCircle(pos, Vec3Dist(pos, pos2) / 5, col, 0.04)
+    SpawnLine(pos, pos2, col, UpdateDelta * 1.1)
+    SpawnCircle(pos, Vec3Dist(pos, pos2) / 5, col, UpdateDelta * 1.1)
 end
 
 function Highlighting.GetHighestIndex(tbl)

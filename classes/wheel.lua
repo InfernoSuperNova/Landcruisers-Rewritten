@@ -153,6 +153,9 @@ end
 function WheelMetaTable:GetNodeVelB()
     return self.nodeVelB
 end
+function WheelMetaTable:GetNodeVels()
+    return (self.nodeVelA + self.nodeVelB) / 2
+end
 function WheelMetaTable:SetDisplacedPos(displacedPos)
     self.displacedPos = displacedPos
 end
@@ -171,6 +174,9 @@ end
 
 function WheelMetaTable:GetPreviousPos()
     return self.previousDisplacedPos
+end
+function WheelMetaTable:GetVelocityVector()
+    return self.velocityVector
 end
 function WheelMetaTable:GetPreviousRotation()
     return self.previousRotation

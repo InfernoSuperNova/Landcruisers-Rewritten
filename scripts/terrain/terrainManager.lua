@@ -28,6 +28,7 @@ function TerrainManager.IndexAtLoad()
     end
 end
 
+
 function TerrainManager.Update(frame)
 
     for _, block in pairs(data.terrain) do

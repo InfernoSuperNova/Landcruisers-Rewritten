@@ -26,25 +26,6 @@ function OnSeekStart()
     LoadMod()
 end
 function Update(frame)
-
-    local pointA = ProcessedMousePos()
-    local pointB = Vec3(100, -400)
-    local pointC = Vec3(1000, -1500)
-    SpawnLine(pointA, pointB, {r = 255, g = 255, b = 255, a = 255}, 0.1)
-    SpawnLine(pointB, pointC, {r = 255, g = 255, b = 255, a = 255}, 0.1)
-
-    local nextString = "Segment is "
-    if IsObtuse(pointA, pointB, pointC) then
-        nextString = nextString .. "obtusely "
-    else
-        nextString = nextString .. "acutely "
-    end
-    if IsConcave(pointA, pointB, pointC) then
-        BetterLog (nextString .. "concave")
-    else
-        BetterLog (nextString .. "convex")
-    end
-
     TheGraph:Log(gcinfo(), GetRealTime())
     ModLoop(frame)
 end
@@ -109,10 +90,10 @@ function ModLoop(frame)
         local endUpdateTime = GetRealTime()
         local delta = (endUpdateTime - currentTime) * 1000
         if (UpdateLogging.updateGraph) then
-            UpdateLogging.updateGraph:Log(delta/(data.updateDelta * 1000) * 100, endUpdateTime)
+            UpdateLogging.updateGraph:Log(delta/(UpdateDelta * 1000) * 100, endUpdateTime)
         end
 
-        UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(data.updateDelta * 1000) * 100) .. "%")
+        UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(UpdateDelta * 1000) * 100) .. "%")
     end
 
 end
