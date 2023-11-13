@@ -97,36 +97,40 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
     local wheelToSegment = segment.nodeA - wheelPos
     local distanceToTerrainSegment = Vec2Dot(wheelToSegment, segment.segmentNormal)
     local radius = wheel.type:GetRadius()
-    --remove this check to enable sticky wheels or set radius to *2
+    local intersectionValue = (radius - distanceToTerrainSegment)
+    --If not touching terrain then return - remove this check to enable sticky wheels or set radius to *2
     if math.abs(distanceToTerrainSegment) > radius then
         return
     end
     
     local segment1ToWheel = wheelPos - segment.nodeA
     local segment2ToWheel = wheelPos - segment.nodeB
-
-    local displacedWheelPos = wheel:GetPreviousPos()
-    SpawnCircle(displacedWheelPos, wheel.type:GetRadius(), Red(), 0.04)
-    local segment1ToDisplacedWheelPos = displacedWheelPos - segment.nodeA
-    local segment2ToDisplacedWheelPos = displacedWheelPos - segment.nodeB
-
-    local distToPrevNodeNormal = Vec2Cross(segment1ToDisplacedWheelPos, segment.segmentNormal)
-    local distToNextNodeNormal = Vec2Cross(segment2ToDisplacedWheelPos, segment.segmentNormal)
-
     local distToPrevSegmentNormal = Vec2Cross(segment1ToWheel, -segment.prevSegmentNormal)
     local distToNextSegmentNormal = Vec2Cross(segment2ToWheel, -segment.nextSegmentNormal)
 
-    if (distToPrevSegmentNormal > 0 
-    and  IsConvex(segment.prevSegmentStart, segment.nodeA, segment.nodeB) )
-    
-    or (distToNextSegmentNormal < 0 
-    and  IsConvex(segment.nodeA, segment.nodeB, segment.nextSegmentEnd) )
-    then
+    local distToPrevNodeNormal
+    local distToNextNodeNormal
 
-    else
-        local cornerMultiplier = math.clamp(1 + distToPrevNodeNormal / radius, 0, 1) *
-        math.clamp(1 - distToNextNodeNormal / radius, 0, 1) * math.pi / 2
-        local intersectionValue = (radius - distanceToTerrainSegment) * math.sin(cornerMultiplier)
+    local distToPrevSegmentBoundary = Vec2Cross(segment1ToWheel, -segment.prevSegmentBoundary)
+    local distToNextSegmentBoundary = Vec2Cross(segment2ToWheel, -segment.nextSegmentBoundary)
+    
+    local segmentATrue = distToPrevSegmentNormal < 0 or IsConcave(segment.prevSegmentStart, segment.nodeA, segment.nodeB) or IsAcute(segment.prevSegmentStart, segment.nodeA, segment.nodeB)
+    local segmentBTrue = distToNextSegmentNormal > 0 or IsConcave(segment.nodeA, segment.nodeB, segment.nextSegmentEnd) or IsAcute(segment.nodeA, segment.nodeB, segment.nextSegmentEnd)
+
+    if segmentATrue and segmentBTrue
+    then
+        local displacedWheelPos = wheel:GetPreviousPos() + wheel:GetNodeVels() * data.updateDelta
+        local segment1ToDisplacedWheelPos = displacedWheelPos - segment.nodeA
+        local segment2ToDisplacedWheelPos = displacedWheelPos - segment.nodeB
+    
+        distToPrevNodeNormal = Vec2Cross(segment1ToDisplacedWheelPos, segment.segmentNormal)
+        distToNextNodeNormal = Vec2Cross(segment2ToDisplacedWheelPos, segment.segmentNormal)
+        
+        local cornerMultiplier = 
+        math.clamp(1 + distToPrevNodeNormal / radius, 0, 1) *
+        math.clamp(1 - distToNextNodeNormal / radius, 0, 1) * 
+        math.pi / 2
+        intersectionValue = intersectionValue * math.sin(cornerMultiplier)
         wheel:SetOnGround(true)
         WheelManager.CalculateResponseForce(intersectionValue, segment.segmentNormal, wheel)
     end
@@ -138,11 +142,11 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
         segment.nodeA.z = -100
         segment.nodeB.z = -100
 
-        local colourValuePrevNormal = math.clamp(255 - math.abs(distToPrevNodeNormal), 0, 255)
-        local colourValueNextNormal = math.clamp(255 - math.abs(distToNextNodeNormal), 0, 255)
+        local colourValuePrevNormal = math.clamp(255 - math.abs(distToPrevNodeNormal or 255), 0, 255)
+        local colourValueNextNormal = math.clamp(255 - math.abs(distToNextNodeNormal or 255), 0, 255)
 
-        SpawnLine(wheelPos, segment.nodeA, { r = 255, g = 0, b = 0, a = colourValuePrevNormal }, 0.04)
-        SpawnLine(wheelPos, segment.nodeB, { r = 255, g = 0, b = 0, a = colourValueNextNormal }, 0.04)
+        SpawnLine(wheelPos, segment.nodeA, { r = 255, g = 0, b = 0, a = colourValuePrevNormal }, data.updateDelta * 1.1)
+        SpawnLine(wheelPos, segment.nodeB, { r = 255, g = 0, b = 0, a = colourValueNextNormal }, data.updateDelta * 1.1)
     end
 end
 
@@ -167,7 +171,8 @@ end
 -- end
 function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, wheel)
     local displacement = intersectionValue * -1 * segmentNormal
-    wheel:SetDisplacedPos(wheel:GetPos() + displacement)
+    local displacedWheelPos = displacement + wheel:GetPos()
+    wheel:SetDisplacedPos(displacedWheelPos)
     wheel:SetGroundVector(segmentNormal)
     wheel:SetInGroundFactor(intersectionValue)
     wheel:CalculateVelocity()
