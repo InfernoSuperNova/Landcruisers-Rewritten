@@ -31,6 +31,14 @@ function BlockMetaTable:new(blockIndex, continuousUpdate)
     o.colliderRadius = collider.r
     o.colliderCorners = collider.square
 
+
+    self.SetSegments(o)
+    return o
+end
+
+
+function BlockMetaTable:SetSegments(o)
+    o = o or self
     o.segments = {}
     for index, nodePos in ipairs(o.nodes) do
         local prevSegmentStart = o.nodes[(index - 2) % #o.nodes + 1]  --index - 1
@@ -56,11 +64,7 @@ function BlockMetaTable:new(blockIndex, continuousUpdate)
         table.insert(o.segments, segment)
     end
 
-    return o
 end
-
-
-
 
 
 
@@ -76,6 +80,9 @@ function BlockMetaTable:Update()
         local collider = MinimumCircularBoundary(self.nodes)
         self.colliderPos = Vec3(collider.x, collider.y)
         self.colliderRadius = collider.r
+        self.colliderCorners = collider.square
+
+        self.SetSegments(self)
     end
 end
 function BlockMetaTable:GetColliderPos()
