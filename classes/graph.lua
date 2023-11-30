@@ -105,10 +105,10 @@ function GraphMetaTable:Draw(delta)
         bottomLeft = Vec3(transformedPos.x, transformedPos.y + self.height * zoomLevel, -100),
         bottomRight = Vec3(transformedPos.x + self.width * zoomLevel, transformedPos.y + self.height * zoomLevel, -100)
     }
-    SpawnLine(corners.topLeft, corners.topRight, {r = 255, g = 255, b = 255, a = 255}, delta * 1.1)
-    SpawnLine(corners.topRight, corners.bottomRight, White(), delta * 1.1)
-    SpawnLine(corners.bottomRight, corners.bottomLeft, White(), delta * 1.1)
-    SpawnLine(corners.bottomLeft, corners.topLeft, White(), delta * 1.1)
+    SpawnLine(corners.topLeft, corners.topRight, {r = 255, g = 255, b = 255, a = 255}, delta * 1.2)
+    SpawnLine(corners.topRight, corners.bottomRight, White(), delta * 1.2)
+    SpawnLine(corners.bottomRight, corners.bottomLeft, White(), delta * 1.2)
+    SpawnLine(corners.bottomLeft, corners.topLeft, White(), delta * 1.2)
 
     local largestValue = 0
     for _, point in pairs(self.data) do
@@ -123,7 +123,7 @@ function GraphMetaTable:Draw(delta)
         local y = transformedPos.y + self.height * zoomLevel - (point.value * scale)
         local currentPoint = Vec3(x, y, -100)
         if prevPoint then
-            SpawnLine(prevPoint, currentPoint, White(), delta * 1.1)
+            SpawnLine(prevPoint, currentPoint, White(), delta * 1.2)
         end
         prevPoint = currentPoint
     end

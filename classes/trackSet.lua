@@ -57,7 +57,7 @@ function TrackSetMetaTable:Draw(time, duration)
         if pos == nil then continue end --I hate this
         if DrawingConfig.drawWheelWireframes then
             local rotation = math.lerp(newWheel:GetPreviousRotation(), newWheel:GetRotation(), time)
-            DrawableWheel.Draw(pos, newWheel.type:GetRadius(), rotation, duration * 1.1)
+            DrawableWheel.Draw(pos, newWheel.type:GetRadius(), rotation, duration * 1.2)
         end
         if DrawingConfig.drawWheelSprites then
             local wheelRotationOld = Vec3FromDegrees(newWheel:GetPreviousRotation())
@@ -75,7 +75,7 @@ function TrackSetMetaTable:Draw(time, duration)
             local posB = Vec3Lerp(oldStraight.b, newStraight.b, time)
             posA.z = -100
             posB.z = -100
-            SpawnLine(posA, posB, {r = 255, g = 255, b = 255, a = 255}, duration * 1.1)
+            SpawnLine(posA, posB, {r = 255, g = 255, b = 255, a = 255}, duration * 1.2)
         end
     end
 end
