@@ -42,7 +42,7 @@ function WheelManager.GetWheelCollider(wheelGroup)
     local wheelGroupBoundary = MinimumWheelCircularBoundary(wheelGroup)
     wheelGroupBoundary.r = wheelGroupBoundary.r + LargestWheelRadius
     if ModDebug.collisions then
-        SpawnCircle(wheelGroupBoundary, wheelGroupBoundary.r, Red(), 0.04)
+        SpawnCircle(wheelGroupBoundary, wheelGroupBoundary.r, Red(), data.updateDelta * 1.2)
     end
     return wheelGroupBoundary
 end
@@ -113,6 +113,10 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
 
     local distToPrevSegmentBoundary = Vec2Cross(segment1ToWheel, -segment.prevSegmentBoundary)
     local distToNextSegmentBoundary = Vec2Cross(segment2ToWheel, -segment.nextSegmentBoundary)
+
+    if distToPrevSegmentBoundary < 0 or distToNextSegmentBoundary > 0 then
+        return
+    end
     
     local segmentATrue = distToPrevSegmentNormal < 0 or IsConcave(segment.prevSegmentStart, segment.nodeA, segment.nodeB) or IsAcute(segment.prevSegmentStart, segment.nodeA, segment.nodeB)
     local segmentBTrue = distToNextSegmentNormal > 0 or IsConcave(segment.nodeA, segment.nodeB, segment.nextSegmentEnd) or IsAcute(segment.nodeA, segment.nodeB, segment.nextSegmentEnd)
@@ -145,8 +149,8 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
         local colourValuePrevNormal = math.clamp(255 - math.abs(distToPrevNodeNormal or 255), 0, 255)
         local colourValueNextNormal = math.clamp(255 - math.abs(distToNextNodeNormal or 255), 0, 255)
 
-        SpawnLine(wheelPos, segment.nodeA, { r = 255, g = 0, b = 0, a = colourValuePrevNormal }, data.updateDelta * 1.1)
-        SpawnLine(wheelPos, segment.nodeB, { r = 255, g = 0, b = 0, a = colourValueNextNormal }, data.updateDelta * 1.1)
+        SpawnLine(wheelPos, segment.nodeA, { r = 255, g = 0, b = 0, a = colourValuePrevNormal }, data.updateDelta * 1.2)
+        SpawnLine(wheelPos, segment.nodeB, { r = 255, g = 0, b = 0, a = colourValueNextNormal }, data.updateDelta * 1.2)
     end
 end
 
