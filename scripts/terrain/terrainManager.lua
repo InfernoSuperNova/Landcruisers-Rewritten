@@ -15,14 +15,15 @@ function TerrainManager.IndexAtLoad()
         local continuousUpdate = false
         --Check if ignored
         for i = 1, terrainCount do
-            if GetTerrainBlockIndex(TerrainConfig.ignoredName) == blockIndex then
+            if GetTerrainBlockIndex(TerrainConfig.ignoredName .. i) == blockIndex then
                 ignoreBlock = true
             end
-            if GetTerrainBlockIndex(TerrainConfig.continuousUpdateName) == blockIndex then
+            if GetTerrainBlockIndex(TerrainConfig.continuousUpdateName .. i) == blockIndex then
                 continuousUpdate = true
             end
         end
         if ignoreBlock then continue end
+        BetterLog(continuousUpdate)
         local block = Block(blockIndex, continuousUpdate)
         table.insert(data.terrain, block)
     end
@@ -40,7 +41,7 @@ function TerrainManager.Update(frame)
             local collider = block:GetColliderPos()
             local radius = block:GetColliderRadius()
             local corners = block:GetColliderCorners()
-            SpawnCircle(Vec3(collider.x, collider.y), radius, {r = 50, g = 150, b = 200, a = 255}, 0.04)
+            SpawnCircle(Vec3(collider.x, collider.y), radius, {r = 50, g = 150, b = 200, a = 255}, data.updateDelta * 1.2)
             Highlighting.HighlightPolygon(corners, {r = 200, g = 150, b = 0, a = 255})
             for i = 1, #nodes do
                 local nodeA = nodes[i]
