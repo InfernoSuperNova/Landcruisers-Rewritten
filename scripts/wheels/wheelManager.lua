@@ -101,44 +101,41 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
     --If not touching terrain then return - remove this check to enable sticky wheels or set radius to *2
     if math.abs(distanceToTerrainSegment) > radius then
         return
-    end
-    
+    end 
+    --NOTE TO SELF
+    --A solution to my dilemna may be to clamp possible positions on a line segment to between the two nodes
+    --And then have the displacement vector be between that and the closest point on the line segment
+    --None of this sin bullshit
+    --this idea was brought to you by me delving into the spaghetti code of landcruisers 1
+    --I should finish this so that I can get rid of landcruisers 1
     local segment1ToWheel = wheelPos - segment.nodeA
     local segment2ToWheel = wheelPos - segment.nodeB
-    local distToPrevSegmentNormal = Vec2Cross(segment1ToWheel, -segment.prevSegmentNormal)
-    local distToNextSegmentNormal = Vec2Cross(segment2ToWheel, -segment.nextSegmentNormal)
+    local distToSegmentStart = Vec2Cross(segment1ToWheel, segment.segmentNormal)
+    local distToSegmentEnd = Vec2Cross(segment2ToWheel, segment.segmentNormal)
 
-    local distToPrevNodeNormal
-    local distToNextNodeNormal
 
-    local distToPrevSegmentBoundary = Vec2Cross(segment1ToWheel, -segment.prevSegmentBoundary)
-    local distToNextSegmentBoundary = Vec2Cross(segment2ToWheel, -segment.nextSegmentBoundary)
+    --THE IDEA
+    --more expensive, but stupidly easy to implement
+    if (distToSegmentStart < 0 and Vec2Cross(segment1ToWheel, segment.prevSegmentNormal) < 0) or (distToSegmentEnd > 0 and Vec2Cross(segment2ToWheel, segment.nextSegmentNormal) > 0) then
+        return
+    end
 
-    if distToPrevSegmentBoundary < 0 or distToNextSegmentBoundary > 0 then
+    if distToSegmentStart < 0 then
+        wheel:SetOnGround(true)
+        local wheelToNode = segment.nodeA - wheelPos
+        WheelManager.CalculateResponseForceSimplified(wheelToNode, segment.segmentNormal, wheel)
+        return
+    end
+
+    if distToSegmentEnd > 0 then
+        wheel:SetOnGround(true)
+        local wheelToNode = segment.nodeB - wheelPos
+        WheelManager.CalculateResponseForceSimplified(wheelToNode, segment.segmentNormal, wheel)
         return
     end
     
-    local segmentATrue = distToPrevSegmentNormal < 0 or IsConcave(segment.prevSegmentStart, segment.nodeA, segment.nodeB) or IsAcute(segment.prevSegmentStart, segment.nodeA, segment.nodeB)
-    local segmentBTrue = distToNextSegmentNormal > 0 or IsConcave(segment.nodeA, segment.nodeB, segment.nextSegmentEnd) or IsAcute(segment.nodeA, segment.nodeB, segment.nextSegmentEnd)
-
-    if segmentATrue and segmentBTrue
-    then
-        local displacedWheelPos = wheel:GetPreviousPos() + wheel:GetNodeVels() * data.updateDelta
-        local segment1ToDisplacedWheelPos = displacedWheelPos - segment.nodeA
-        local segment2ToDisplacedWheelPos = displacedWheelPos - segment.nodeB
-    
-        distToPrevNodeNormal = Vec2Cross(segment1ToDisplacedWheelPos, segment.segmentNormal)
-        distToNextNodeNormal = Vec2Cross(segment2ToDisplacedWheelPos, segment.segmentNormal)
-        
-        local cornerMultiplier = 
-        math.clamp(1 + distToPrevNodeNormal / radius, 0, 1) *
-        math.clamp(1 - distToNextNodeNormal / radius, 0, 1) * 
-        math.pi / 2
-        intersectionValue = intersectionValue * math.sin(cornerMultiplier)
-        wheel:SetOnGround(true)
-        WheelManager.CalculateResponseForce(intersectionValue, segment.segmentNormal, wheel)
-    end
-    
+    wheel:SetOnGround(true)
+    WheelManager.CalculateResponseForce(intersectionValue, segment.segmentNormal, wheel)
     if ModDebug.collisions then
         Highlighting.HighlightUnitVector(segment.nodeA, -segment.segmentNormal, 500, Green())
         Highlighting.HighlightUnitVector(segment.nodeB, -segment.segmentNormal, 500, Green())
@@ -155,24 +152,6 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
 end
 
 
--- function WheelManager.SaveIntersectionValue(intersectionValue, segmentNormal, wheel)
---     if not WheelManager.IntersectionValues[wheel] then
---         WheelManager.IntersectionValues[wheel] = {}
---     end
---     table.insert(WheelManager.IntersectionValues[wheel], {intersectionValue = intersectionValue, segmentNormal = segmentNormal})
--- end
-
--- function WheelManager.GetHighestIntersectionValue(wheel)
---     local highestValue = 0
---     local associatedSegmentNormal = Vec3(0,0,0)
---     for _, value in pairs(WheelManager.IntersectionValues[wheel]) do
---         if value.intersectionValue > highestValue then
---             highestValue = value.intersectionValue
---             associatedSegmentNormal = value.segmentNormal
---         end
---     end
---     return {intersectionValue = highestValue, segmentNormal = associatedSegmentNormal}
--- end
 function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, wheel)
     local displacement = intersectionValue * -1 * segmentNormal
     local displacedWheelPos = displacement + wheel:GetPos()
@@ -186,6 +165,23 @@ function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, w
 end
 
 
+
+function WheelManager.CalculateResponseForceSimplified(wheelToNode, segmentNormal, wheel)
+
+    
+    local intersectionValue = wheel.type:GetRadius() - Vec2Mag(wheelToNode)
+    local displacement = intersectionValue * -Vec2Normalize(wheelToNode)
+    local displacedWheelPos = displacement + wheel:GetPos()
+    
+    wheel:SetDisplacedPos(displacedWheelPos)
+    wheel:SetGroundVector(segmentNormal)
+    wheel:SetInGroundFactor(intersectionValue)
+    wheel:CalculateVelocity()
+    local velocity = (wheel:GetNodeVelA() + wheel:GetNodeVelB()) / 2
+    local force = Dampening.DirectionalDampening(wheel.type.spring, displacement, wheel.type.dampening, velocity, segmentNormal) / 2
+    wheel:ApplyForce(force)
+    
+end
 --function CalculateFrictionForce
 
 
