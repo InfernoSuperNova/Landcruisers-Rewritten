@@ -1,6 +1,6 @@
 --config/modDebug.lua
 
 ModDebug = {
-    update = true,
-    collisions = true,
+    update = false,
+    collisions = false,
 }
