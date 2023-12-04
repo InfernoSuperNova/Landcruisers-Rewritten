@@ -42,6 +42,9 @@ FileList = {
         },
         ["force"] = {
             "forceManager"
+        },
+        ["other"] = {
+            "json",
         }
     }
 }
