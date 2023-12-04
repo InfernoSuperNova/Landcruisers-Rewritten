@@ -39,6 +39,9 @@ WheelDefinitions = {
 }
 LargestWheelRadius = 0
 DefaultWheelDefinition = WheelDefinition:new(75, 0, 30000, 3000, 100, 100, 100, "smallSuspension", "/effects/track_sprocket.lua", "/effects/wheel.lua")
+
+MetaModdingParamName = "LCWheelStats"
+NoParamName = "noParams"
 WheelDefinitionHelpers = {}
 
 
