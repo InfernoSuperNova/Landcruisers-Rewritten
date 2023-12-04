@@ -23,7 +23,6 @@ function TerrainManager.IndexAtLoad()
             end
         end
         if ignoreBlock then continue end
-        BetterLog(continuousUpdate)
         local block = Block(blockIndex, continuousUpdate)
         table.insert(data.terrain, block)
     end
