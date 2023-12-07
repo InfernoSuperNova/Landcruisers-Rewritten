@@ -14,4 +14,30 @@ EngineMetaTable = {
     -- nodePosB = Vec3(0,0,0),
     -- nodeVelA = Vec3(0,0,0),
     -- nodeVelB = Vec3(0,0,0),
+    type = DefaultEngineDefinition
 }
+
+
+
+
+function Engine(deviceid, teamId)
+    return EngineMetaTable:new(deviceid, teamId)
+end
+
+function EngineMetaTable:new(deviceId, teamId)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+    o.framesSinceCreation = 0
+    o.deviceId = deviceId
+    o.nodeIdA = GetDevicePlatformA(deviceId)
+    o.nodeIdB = GetDevicePlatformB(deviceId)
+    o.teamId = teamId
+    o.structureId = GetDeviceStructureId(deviceId)
+    o.saveName = GetDeviceType(deviceId)
+
+   
+    o.type = EngineDefinitionHelpers.GetEngineDefinitionBySaveName(o.saveName)
+    if not o.type then return nil end
+    return o
+end
