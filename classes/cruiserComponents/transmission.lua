@@ -14,4 +14,28 @@ TransmissionMetaTable = {
     -- nodePosB = Vec3(0,0,0),
     -- nodeVelA = Vec3(0,0,0),
     -- nodeVelB = Vec3(0,0,0),
+    type = DefaultTransmissionDefinition
 }
+
+function Transmission(deviceid, teamId)
+    return TransmissionMetaTable:new(deviceid, teamId)
+end
+
+
+function TransmissionMetaTable:new(deviceId, teamId)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+    o.framesSinceCreation = 0
+    o.deviceId = deviceId
+    o.nodeIdA = GetDevicePlatformA(deviceId)
+    o.nodeIdB = GetDevicePlatformB(deviceId)
+    o.teamId = teamId
+    o.structureId = GetDeviceStructureId(deviceId)
+    o.saveName = GetDeviceType(deviceId)
+
+   
+    o.type = TransmissionDefinitionHelpers.GetTransmissionDefinitionBySaveName(o.saveName)
+    if not o.type then return nil end
+    return o
+end
