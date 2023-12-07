@@ -52,3 +52,15 @@ function EngineMetaTable:Update()
         self.structureId = newId
     end
 end
+
+function EngineMetaTable:UpdateTeam(teamId)
+    self.teamId = teamId
+end
+
+function EngineMetaTable:UpdateStructure(structureId)
+    self.structureId = structureId
+end
+
+function EngineMetaTable:GetDeviceId()
+    return self.deviceId
+end
