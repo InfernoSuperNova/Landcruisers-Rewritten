@@ -41,3 +41,14 @@ function EngineMetaTable:new(deviceId, teamId)
     if not o.type then return nil end
     return o
 end
+
+function EngineMetaTable:Update()
+    self.framesSinceCreation = self.framesSinceCreation + 1
+    
+
+    local newId = GetDeviceStructureId(self.deviceId)
+    --this is bad
+    if self.structureId ~= newId then
+        self.structureId = newId
+    end
+end
