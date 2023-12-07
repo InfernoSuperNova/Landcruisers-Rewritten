@@ -64,3 +64,23 @@ end
 function EngineMetaTable:GetDeviceId()
     return self.deviceId
 end
+
+
+
+
+EngineDefinition = {
+    Torque = 0,
+    SoundEvent = ""
+
+}
+
+--Constructor
+function EngineDefinition:new(Torque, SoundEvent)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+
+    o.Torque = Torque
+    o.SoundEvent = SoundEvent
+    return o
+end
