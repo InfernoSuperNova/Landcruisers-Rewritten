@@ -45,6 +45,7 @@
     "Normal",
     "FindWeapon",
     "GroupButtonSpriteBottom",
-    "InheritType"
+    "InheritType",
+    "DeepCopy"
 ]
 }
