@@ -102,20 +102,13 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
     if math.abs(distanceToTerrainSegment) > radius then
         return
     end 
-    --NOTE TO SELF
-    --A solution to my dilemna may be to clamp possible positions on a line segment to between the two nodes
-    --And then have the displacement vector be between that and the closest point on the line segment
-    --None of this sin bullshit
-    --this idea was brought to you by me delving into the spaghetti code of landcruisers 1
-    --I should finish this so that I can get rid of landcruisers 1
+
     local segment1ToWheel = wheelPos - segment.nodeA
     local segment2ToWheel = wheelPos - segment.nodeB
     local distToSegmentStart = Vec2Cross(segment1ToWheel, segment.segmentNormal)
     local distToSegmentEnd = Vec2Cross(segment2ToWheel, segment.segmentNormal)
 
 
-    --THE IDEA
-    --more expensive, but stupidly easy to implement
     if (distToSegmentStart < 0 and Vec2Cross(segment1ToWheel, segment.prevSegmentNormal) < 0) or (distToSegmentEnd > 0 and Vec2Cross(segment2ToWheel, segment.nextSegmentNormal) > 0) then
         return
     end
@@ -142,12 +135,6 @@ function WheelManager.CheckWheelOnSegment(wheel, segment)
         wheelPos.z = -100
         segment.nodeA.z = -100
         segment.nodeB.z = -100
-
-        local colourValuePrevNormal = math.clamp(255 - math.abs(distToPrevNodeNormal or 255), 0, 255)
-        local colourValueNextNormal = math.clamp(255 - math.abs(distToNextNodeNormal or 255), 0, 255)
-
-        SpawnLine(wheelPos, segment.nodeA, { r = 255, g = 0, b = 0, a = colourValuePrevNormal }, data.updateDelta * 1.2)
-        SpawnLine(wheelPos, segment.nodeB, { r = 255, g = 0, b = 0, a = colourValueNextNormal }, data.updateDelta * 1.2)
     end
 end
 
