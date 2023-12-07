@@ -50,3 +50,15 @@ function TransmissionMetaTable:Update()
         self.structureId = newId
     end
 end
+
+function WheelMetaTable:UpdateTeam(teamId)
+    self.teamId = teamId
+end
+
+function WheelMetaTable:UpdateStructure(structureId)
+    self.structureId = structureId
+end
+
+function WheelMetaTable:GetDeviceId()
+    return self.deviceId
+end
