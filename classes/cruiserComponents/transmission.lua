@@ -8,6 +8,7 @@ TransmissionMetaTable = {
     teamId = 0,
     structureId = 0,
     saveName = "",
+    soundEffect = 0,
 
     -- devicePos = Vec3(0,0),
     -- nodePosA = Vec3(0,0,0),
@@ -33,7 +34,7 @@ function TransmissionMetaTable:new(deviceId, teamId)
     o.teamId = teamId
     o.structureId = GetDeviceStructureId(deviceId)
     o.saveName = GetDeviceType(deviceId)
-
+    o.soundEffect = 0
    
     o.type = TransmissionDefinitionHelpers.GetTransmissionDefinitionBySaveName(o.saveName)
     if not o.type then return nil end

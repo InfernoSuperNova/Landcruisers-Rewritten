@@ -14,7 +14,8 @@ EngineMetaTable = {
     -- nodePosB = Vec3(0,0,0),
     -- nodeVelA = Vec3(0,0,0),
     -- nodeVelB = Vec3(0,0,0),
-    type = DefaultEngineDefinition
+    type = DefaultEngineDefinition,
+    soundEffect = 0,
 }
 
 
@@ -38,6 +39,7 @@ function EngineMetaTable:new(deviceId, teamId)
 
    
     o.type = EngineDefinitionHelpers.GetEngineDefinitionBySaveName(o.saveName)
+    o.soundEffect = 0
     if not o.type then return nil end
     return o
 end

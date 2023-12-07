@@ -26,7 +26,8 @@ WheelMetaTable = {
     direction = 0,
     groundVector = Vec3(0,0,0),
     groundFactor = 0,
-    type = DefaultWheelDefinition
+    type = DefaultWheelDefinition,
+    soundEffect = 0,
 }
 
 function Wheel(deviceid, teamId)
@@ -60,6 +61,7 @@ function WheelMetaTable:new(deviceId, teamId)
     o.groundVector = Vec3(0,0,0)
     o.groundFactor = 0
     o.type = WheelDefinitionHelpers.GetWheelDefinitionBySaveName(o.saveName)
+    o.soundEffect = 0
     if not o.type then return nil end
     return o
 end
