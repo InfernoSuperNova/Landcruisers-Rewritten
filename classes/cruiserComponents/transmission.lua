@@ -51,14 +51,35 @@ function TransmissionMetaTable:Update()
     end
 end
 
-function WheelMetaTable:UpdateTeam(teamId)
+function TransmissionMetaTable:UpdateTeam(teamId)
     self.teamId = teamId
 end
 
-function WheelMetaTable:UpdateStructure(structureId)
+function TransmissionMetaTable:UpdateStructure(structureId)
     self.structureId = structureId
 end
 
-function WheelMetaTable:GetDeviceId()
+function TransmissionMetaTable:GetDeviceId()
     return self.deviceId
+end
+
+
+TransmissionDefinition = {
+    GearRatio = 0,
+    SwitchSpeed = 0,
+    EnergyLoss = 0,
+    SoundEvent = ""
+}
+
+--Constructor
+function TransmissionDefinition:new(GearRatio, SwitchSpeed, EnergyLoss, SoundEvent)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+
+    o.GearRatio = GearRatio
+    o.SwitchSpeed = SwitchSpeed
+    o.EnergyLoss = EnergyLoss
+    o.SoundEvent = SoundEvent
+    return o
 end
