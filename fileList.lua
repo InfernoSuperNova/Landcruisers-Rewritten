@@ -4,12 +4,16 @@
 FileList = {
 
     ["classes"] = {
-        "wheel",
+        
         "terrain",
         "trackSet",
         "graph",
         ["wireframe"] = {
             "drawableWheel",
+        },
+        ["cruiserComponents"] = {
+            "wheel",
+            "engine",
         }
     },
     ["config"] = {
