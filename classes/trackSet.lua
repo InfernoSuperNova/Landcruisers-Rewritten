@@ -24,7 +24,6 @@ function TrackSetMetaTable:new(wheels)
 end
 
 function TrackSetMetaTable:Update()
-    
     self.previousWheelPositions = {}
     for i = 1, #self.wheels do
         local wheel = self.wheels[i]

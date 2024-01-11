@@ -11,7 +11,7 @@ FileList.LoadFiles()
 
 ---------------API EVENTS----------------
 ---@type GraphMetaTable
-TheGraph = nil
+-- TheGraph = nil
 function Load(gameStart)
     LoadMod()
 end
@@ -26,7 +26,7 @@ function OnSeekStart()
     LoadMod()
 end
 function Update(frame)
-    TheGraph:Log(gcinfo(), GetRealTime())
+    -- TheGraph:Log(gcinfo(), GetRealTime())
     ModLoop(frame)
 end
 
@@ -67,8 +67,9 @@ function LoadMod()
     DrawableWheel.Load()
     TerrainManager.Load()
     ForceManager.Load()
-    TheGraph = Graph.New(850, 200, 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
+    -- TheGraph = Graph.New(850, 200, 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
     UpdateLogging.Load()
+    MouseWheel.Load()
     
 end
 PreviousUpdateTime = 0
@@ -81,9 +82,11 @@ function ModLoop(frame)
     UpdateFunction("UpdateLogging", "Update", frame)
     UpdateFunction("TerrainManager", "Update", frame)
     UpdateFunction("DeviceManager", "Update", frame)
+    UpdateFunction("MouseWheel", "Update", frame)
     UpdateFunction("WheelManager", "Update", frame)
     UpdateFunction("TrackManager", "Update", frame)
     UpdateFunction("ForceManager", "Update", frame)
+    
 
 
     if ModDebug.update then

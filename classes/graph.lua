@@ -45,6 +45,7 @@ GraphMetaTable = {
     data = {},
     unit = "",
     graphUI = "",
+    visible = true,
 }
 
 
@@ -58,7 +59,8 @@ function GraphMetaTable:new(pos, width, height, maxTime, unit, name)
         maxTime = maxTime,
         data = {},
         unit = unit,
-        graphUI = name
+        graphUI = name,
+        visible = true
     }
     setmetatable(graph, self)
     self.__index = self
@@ -68,7 +70,9 @@ end
 function GraphMetaTable:Update(time)
     local delta = time - self.prevTime
     self.prevTime = time
-    
+    if not self.visible then
+        return
+    end
     local newPoints = {}
     for _, point in pairs(self.data) do
         point.time = point.time + delta
@@ -135,7 +139,13 @@ function GraphMetaTable:Log(height, time)
 end
 
 
+function GraphMetaTable:Hide()
+    self.visible = false
+end
 
+function GraphMetaTable:Show()
+    self.visible = true
+end
 
 
 

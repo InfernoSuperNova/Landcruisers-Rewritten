@@ -28,6 +28,7 @@ WheelMetaTable = {
     groundFactor = 0,
     type = DefaultWheelDefinition,
     soundEffect = 0,
+    shouldUpdate = true,
 }
 
 function Wheel(deviceid, teamId)
@@ -39,16 +40,19 @@ function WheelMetaTable:new(deviceId, teamId)
     self.__index = self
     o.framesSinceCreation = 0
     o.deviceId = deviceId
-    o.nodeIdA = GetDevicePlatformA(deviceId)
-    o.nodeIdB = GetDevicePlatformB(deviceId)
     o.teamId = teamId
-    o.structureId = GetDeviceStructureId(deviceId)
-    o.saveName = GetDeviceType(deviceId)
+    if deviceId and teamId then
+        o.nodeIdA = GetDevicePlatformA(deviceId)
+        o.nodeIdB = GetDevicePlatformB(deviceId)
+        o.structureId = GetDeviceStructureId(deviceId)
+        o.saveName = GetDeviceType(deviceId)
+        o.devicePos = GetDevicePosition(deviceId)
+        o.nodePosA = NodePosition(o.nodeIdA)
+        o.nodePosB = NodePosition(o.nodeIdB)
+        o.type = WheelDefinitionHelpers.GetWheelDefinitionBySaveName(o.saveName)
+    end
+    
     o.onGround = false
-
-    o.devicePos = GetDevicePosition(deviceId)
-    o.nodePosA = NodePosition(o.nodeIdA)
-    o.nodePosB = NodePosition(o.nodeIdB)
     o.actualPos = o.devicePos
     o.displacedPos = o.devicePos
     o.previousDisplacedPos = o.devicePos
@@ -60,15 +64,17 @@ function WheelMetaTable:new(deviceId, teamId)
     o.direction = 0
     o.groundVector = Vec3(0,0,0)
     o.groundFactor = 0
-    o.type = WheelDefinitionHelpers.GetWheelDefinitionBySaveName(o.saveName)
     o.soundEffect = 0
-    if not o.type then return nil end
+    o.shouldUpdate = true
+    if not o.type and deviceId then return nil end
+    
     return o
 end
 
 
 
 function WheelMetaTable:Update()
+    if not self.shouldUpdate then return end
     self.framesSinceCreation = self.framesSinceCreation + 1
     self.previousDisplacedPos = DeepCopy(self.displacedPos)
     self.devicePos = GetDevicePosition(self.deviceId)

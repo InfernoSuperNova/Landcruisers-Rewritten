@@ -53,6 +53,7 @@ function UpdateLogging.Load()
 
     AddTextControl("", "debugControl", "", ANCHOR_TOP_RIGHT, {x = 1050, y = 0}, false, "Console")
     UpdateLogging.updateGraph = Graph.New(850, 100, 200, 100, 20, "%", "Thread Usage")
+    UpdateLogging.updateGraph:Hide();
 end
 
 

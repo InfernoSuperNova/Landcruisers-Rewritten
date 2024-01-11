@@ -34,6 +34,7 @@ FileList = {
         ["debug"] = {
             "highlighting",
             "updateLogging",
+            "mouseWheel",
         },
         ["terrain"] = {
             "terrainManager",
