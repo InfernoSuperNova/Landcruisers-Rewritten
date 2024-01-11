@@ -1,0 +1,1 @@
+Wheel suspension should be controllable, with variable spring values via the controller UI. You can select the controler, then use a custom selection method to select many wheelst o change their values.
