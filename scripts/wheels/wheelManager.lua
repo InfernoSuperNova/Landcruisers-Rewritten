@@ -27,7 +27,7 @@ function WheelManager.Update(frame)
     end
 
 
-    --final step of collisions: Calculate forces
+    --finally, calculate forces
     for _, wheel in pairs(data.wheels) do
         WheelManager.DetermineBlockCollision(wheel)
     end
@@ -189,7 +189,7 @@ function WheelManager.DetermineBlockCollision(wheel)
     wheel:ApplyForce(highest.force)
 end
 
---function CalculateFrictionForce
+
 
 
 

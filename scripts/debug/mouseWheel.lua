@@ -22,11 +22,12 @@ function MouseWheel.Update()
         MouseWheel.wheel.previousDisplacedPos = MouseWheel.wheel.displacedPos
         MouseWheel.wheel.devicePos = mousePos
         MouseWheel.wheel.actualPos = mousePos
-        MouseWheel.wheel.displacedPos = mousePos
+        --MouseWheel.wheel.displacedPos = mousePos
         MouseWheel.wheel.nodePosA = mousePos
         MouseWheel.wheel.nodePosB = mousePos
         MouseWheel.wheel.nodeVelA = delta
         MouseWheel.wheel.nodeVelB = delta
-        MouseWheel.wheel:UpdateVelocity()
+        MouseWheel.wheel:UpdateAngularVelocity()
+        MouseWheel.wheel.blockCollisionCandidates = {}
     end
 end

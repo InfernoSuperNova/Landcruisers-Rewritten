@@ -4,7 +4,8 @@ WheelMetaTable = {
     framesSinceCreation = 0,
     deviceId = 0,
     nodeIdA = 0, --platform node
-    nodeidB = 0, --platform node
+    nodeIdB = 0, --platform node
+    linkPos = 0,
     teamId = 0,
     structureId = 0,
     saveName = "",
@@ -45,6 +46,7 @@ function WheelMetaTable:new(deviceId, teamId)
     if deviceId and teamId then
         o.nodeIdA = GetDevicePlatformA(deviceId)
         o.nodeIdB = GetDevicePlatformB(deviceId)
+        o.linkPos = GetDeviceLinkPosition(deviceId)
         o.structureId = GetDeviceStructureId(deviceId)
         o.saveName = GetDeviceType(deviceId)
         o.devicePos = GetDevicePosition(deviceId)
@@ -79,9 +81,10 @@ function WheelMetaTable:Update()
     if not self.shouldUpdate then return end
     self.framesSinceCreation = self.framesSinceCreation + 1
     self.previousDisplacedPos = DeepCopy(self.displacedPos)
-    self.devicePos = GetDevicePosition(self.deviceId)
+    --self.devicePos = GetDevicePosition(self.deviceId)
     self.nodePosA = NodePosition(self.nodeIdA)
     self.nodePosB = NodePosition(self.nodeIdB)
+    self.devicePos = Vec3Lerp(self.nodePosA, self.nodePosB, self.linkPos)
     self.nodeVelA = NodeVelocity(self.nodeIdA)
     self.nodeVelB = NodeVelocity(self.nodeIdB)
     
@@ -98,10 +101,10 @@ function WheelMetaTable:Update()
         self.structureId = newId
         TrackManager.AddWheel(self)
     end
-    self:UpdateVelocity()
+    --self:UpdateAngularVelocity()
 end
 
-function WheelMetaTable:UpdateVelocity()
+function WheelMetaTable:UpdateAngularVelocity()
     local vehicleForce = Vec3(0,0,0)
     if self.onGround then
         local normalGroundVector = Vec2Perp(self.groundVector)
@@ -149,6 +152,22 @@ function WheelMetaTable:UpdateStructure(structureId)
     self.structureId = structureId
 end
 
+function WheelMetaTable:RefreshNodes()
+    self.nodeIdA = GetDevicePlatformA(self.deviceId)
+    self.nodeIdB = GetDevicePlatformB(self.deviceId)
+end
+
+function WheelMetaTable:UpdateNodes(nodeId, nodeIdNew) 
+    --we cannot use nodeIdNew because we don't know for certain if it is the new node
+    if self.nodeIdA == nodeId then
+        self.nodeIdA = GetDevicePlatformA(self.deviceId)
+        self.nodeVelA = NodeVelocity(nodeIdNew)
+    end
+    if self.nodeIdB == nodeId then
+        self.nodeIdB = GetDevicePlatformB(self.deviceId)
+        self.nodeVelB = NodeVelocity(nodeIdNew)
+    end
+end
 function WheelMetaTable:ApplyForce(force)
     ApplyForce(self.nodeIdA, force)
     ApplyForce(self.nodeIdB, force)
@@ -188,6 +207,7 @@ end
 function WheelMetaTable:CalculateVelocity()
     if self.previousDisplacedPos == Vec3(0,0,0) then return end
     self.velocityVector = self.displacedPos - self.previousDisplacedPos
+    --why don't I just use node velocity?
     self.velocity = Vec2Mag(self.velocityVector)
 end
 function WheelMetaTable:GetDisplacedPos()

@@ -58,6 +58,10 @@ function OnDeviceTeamUpdated(oldTeamId, newTeamId, deviceId, saveName)
     DeviceManager.OnDeviceTeamUpdated(oldTeamId, newTeamId, deviceId, saveName)
 end
 
+function OnNodeBroken(nodeId, nodeIdNew)
+    DeviceManager.OnNodeBroken(nodeId, nodeIdNew)
+end
+
 -----------------MOD-------------------
 
 function LoadMod()

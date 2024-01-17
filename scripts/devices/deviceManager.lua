@@ -48,6 +48,9 @@ end
 function DeviceManager.OnDeviceDestroyed(teamId, deviceId, saveName, nodeA, nodeB, t)
     DeviceManager.RemoveDevice(deviceId, saveName)
 end
+function DeviceManager.OnNodeBroken(nodeId, nodeIdNew)
+    DeviceManager.UpdateWheelNodes(nodeId, nodeIdNew)
+end
 
 function DeviceManager.OnDeviceTeamUpdated(oldTeamId, newTeamId, deviceId, saveName)
     for _, wheel in ipairs(data.wheels) do
@@ -71,5 +74,11 @@ function DeviceManager.RemoveWheel(deviceId)
             TrackManager.RemoveWheel(wheel)
             return
         end
+    end
+end
+
+function DeviceManager.UpdateWheelNodes(nodeId, nodeIdNew)
+    for _, wheel in ipairs(data.wheels) do
+        wheel:UpdateNodes(nodeId, nodeIdNew)
     end
 end
