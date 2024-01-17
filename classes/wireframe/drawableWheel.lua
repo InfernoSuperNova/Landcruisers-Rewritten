@@ -1,8 +1,8 @@
 --classes/wireframe/drawableWheel.lua
 DrawableWheel = {
     config = {
-        spokeCount = 5,
-        innerCircleRatio = 0.25,
+        spokeCount = 1,
+        innerCircleRatio = 0.75,
     }
 }
 function DrawableWheel.Load() 
