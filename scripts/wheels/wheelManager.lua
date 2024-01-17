@@ -1,8 +1,6 @@
 --scripts/wheels/wheelManager.lua
 
 WheelManager = {
-    --keyed by wheel, value is a table containing intersection value, segment normal
-    IntersectionValues = {}
 }
 data.wheels = {}
 function WheelManager.AddWheel(wheel)
@@ -10,7 +8,6 @@ function WheelManager.AddWheel(wheel)
 end
 --Main wheel manager entrypoint, called every update frame
 function WheelManager.Update(frame)
-    WheelManager.IntersectionValues = {}
     --Group wheels by structureId
     local wheelStructureGroups = {}
     for _, wheel in ipairs(data.wheels) do
@@ -31,9 +28,8 @@ function WheelManager.Update(frame)
 
 
     --final step of collisions: Calculate forces
-    for wheel, _ in pairs(WheelManager.IntersectionValues) do
-        local highestIntersectionValue = WheelManager.GetHighestIntersectionValue(wheel)
-        WheelManager.CalculateResponseForce(highestIntersectionValue.intersectionValue, highestIntersectionValue.segmentNormal, wheel)
+    for _, wheel in pairs(data.wheels) do
+        WheelManager.DetermineBlockCollision(wheel)
     end
 end
 
@@ -142,13 +138,15 @@ end
 function WheelManager.CalculateResponseForce(intersectionValue, segmentNormal, wheel)
     local displacement = intersectionValue * -1 * segmentNormal
     local displacedWheelPos = displacement + wheel:GetPos()
-    wheel:SetDisplacedPos(displacedWheelPos)
-    wheel:SetGroundVector(segmentNormal)
-    wheel:SetInGroundFactor(intersectionValue)
-    wheel:CalculateVelocity()
+    -- wheel:SetDisplacedPos(displacedWheelPos)
+    -- wheel:SetGroundVector(segmentNormal)
+    -- wheel:SetInGroundFactor(intersectionValue)
+    -- wheel:CalculateVelocity()
     local velocity = (wheel:GetNodeVelA() + wheel:GetNodeVelB()) / 2
     local force = Dampening.DirectionalDampening(wheel.type.spring, displacement, wheel.type.dampening, velocity, segmentNormal)
-    wheel:ApplyForce(force)
+    -- wheel:ApplyForce(force)
+
+    wheel:AddBlockCollisionCandidate(displacedWheelPos, segmentNormal, intersectionValue, force)
 end
 
 
@@ -160,15 +158,37 @@ function WheelManager.CalculateResponseForceSimplified(wheelToNode, segmentNorma
     local displacement = intersectionValue * -Vec2Normalize(wheelToNode)
     local displacedWheelPos = displacement + wheel:GetPos()
     
-    wheel:SetDisplacedPos(displacedWheelPos)
-    wheel:SetGroundVector(segmentNormal)
-    wheel:SetInGroundFactor(intersectionValue)
-    wheel:CalculateVelocity()
+    -- wheel:SetDisplacedPos(displacedWheelPos)
+    -- wheel:SetGroundVector(segmentNormal)
+    -- wheel:SetInGroundFactor(intersectionValue)
+    -- wheel:CalculateVelocity()
     local velocity = (wheel:GetNodeVelA() + wheel:GetNodeVelB()) / 2
     local force = Dampening.DirectionalDampening(wheel.type.spring, displacement, wheel.type.dampening, velocity, segmentNormal) / 2
-    wheel:ApplyForce(force)
+    -- wheel:ApplyForce(force)
     
+    wheel:AddBlockCollisionCandidate(displacedWheelPos, segmentNormal, intersectionValue, force)
 end
+
+
+
+function WheelManager.DetermineBlockCollision(wheel)
+    local blockCandidates = wheel:GetBlockCollisionCandidates()
+    local highestIntersectionValue = 0
+    local highest = {}
+    for _, blockCandidate in pairs(blockCandidates) do
+        if blockCandidate.intersectionValue > highestIntersectionValue then
+            highestIntersectionValue = blockCandidate.intersectionValue
+            highest = blockCandidate
+        end
+    end
+    if highestIntersectionValue == 0 then return end
+    wheel:SetDisplacedPos(highest.displacedPos)
+    wheel:SetGroundVector(highest.segmentNormal)
+    wheel:SetInGroundFactor(highest.intersectionValue)
+    wheel:CalculateVelocity()
+    wheel:ApplyForce(highest.force)
+end
+
 --function CalculateFrictionForce
 
 

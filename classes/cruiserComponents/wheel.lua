@@ -17,6 +17,7 @@ WheelMetaTable = {
     nodeVelB = Vec3(0,0,0),
     actualPos = Vec3(0,0,0),
     displacedPos = Vec3(0,0,0),
+    blockCollisionCandidates = {},
     previousDisplacedPos = Vec3(0,0,0),
     velocityVector = Vec3(0,0,0),
     velocity = 0,
@@ -55,6 +56,7 @@ function WheelMetaTable:new(deviceId, teamId)
     o.onGround = false
     o.actualPos = o.devicePos
     o.displacedPos = o.devicePos
+    o.blockCollisionCandidates = {}
     o.previousDisplacedPos = o.devicePos
     o.velocity = 0
     o.velocityVector = Vec3(0,0,0)
@@ -88,7 +90,7 @@ function WheelMetaTable:Update()
     local platformOffset = self.type:GetHeight() * platformPerp
     self.actualPos = self.devicePos + platformOffset
     self.displacedPos = self.actualPos
-
+    self.blockCollisionCandidates = {}
     local newId = GetDeviceStructureId(self.deviceId)
     --this is bad
     if self.structureId ~= newId then
@@ -166,6 +168,21 @@ function WheelMetaTable:GetNodeVels()
 end
 function WheelMetaTable:SetDisplacedPos(displacedPos)
     self.displacedPos = displacedPos
+end
+
+function WheelMetaTable:AddBlockCollisionCandidate(displacedPos, segmentNormal, intersectionValue, force)
+
+    local blockCollisionCandidate = {
+        displacedPos = displacedPos,
+        segmentNormal = segmentNormal,
+        intersectionValue = intersectionValue,
+        force = force
+    }
+    table.insert(self.blockCollisionCandidates, blockCollisionCandidate)
+end
+
+function WheelMetaTable:GetBlockCollisionCandidates()
+    return self.blockCollisionCandidates
 end
 
 function WheelMetaTable:CalculateVelocity()

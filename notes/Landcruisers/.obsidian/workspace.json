@@ -141,7 +141,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "wheel/Control.md",
+                "file": "wheel/Revised collision algorithm.md",
                 "mode": "source",
                 "source": false
               }
@@ -214,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "wheel/Control.md",
+                "file": "wheel/Revised collision algorithm.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -231,7 +231,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "wheel/Control.md",
+                "file": "wheel/Revised collision algorithm.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +254,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "wheel/Control.md"
+                "file": "wheel/Revised collision algorithm.md"
               }
             }
           }
@@ -278,6 +278,7 @@
   "active": "fab40293b5d1892a",
   "lastOpenFiles": [
     "wheel/Collisions.md",
+    "wheel/Revised collision algorithm.md",
     "wheel/Control.md",
     "To do today.md",
     "Pasted image 20231108164447.png",

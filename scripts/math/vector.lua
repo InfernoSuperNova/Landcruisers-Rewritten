@@ -260,6 +260,14 @@ function Vec3FromDegrees(degrees)
     return Vec3(math.cos(radians), math.sin(radians))
 end
 
+function Vec3AverageTable(vectors)
+    local average = Vec3(0,0,0)
+    for _, vector in pairs(vectors) do
+        average = average + vector
+    end
+    return Vec3(average.x / #vectors, average.y / #vectors, average.z / #vectors)
+end
+
 
 
 
