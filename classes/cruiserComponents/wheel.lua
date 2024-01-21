@@ -101,7 +101,7 @@ function WheelMetaTable:Update()
         self.structureId = newId
         TrackManager.AddWheel(self)
     end
-    --self:UpdateAngularVelocity()
+    self:UpdateAngularVelocity()
 end
 
 function WheelMetaTable:UpdateAngularVelocity()
