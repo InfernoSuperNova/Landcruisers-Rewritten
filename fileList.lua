@@ -14,7 +14,8 @@ FileList = {
         ["cruiserComponents"] = {
             "wheel",
             "engine",
-        }
+        },
+        "worldPartition",
     },
     ["config"] = {
         "modDebug",
@@ -22,6 +23,7 @@ FileList = {
         "wheelDefinitions",
         "wheel",
         "drawing",
+        "worldPartitioner",
     },
     ["scripts"] = {
         ["wheels"] = {
@@ -38,12 +40,15 @@ FileList = {
         },
         ["terrain"] = {
             "terrainManager",
+            "worldPartitionManager",
         },
         ["math"] = {
             "vector",
             "dampening",
             "tracks",
             "math",
+            "line",
+            "polygon",
         },
         ["force"] = {
             "forceManager"

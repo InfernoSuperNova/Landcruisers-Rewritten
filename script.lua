@@ -65,16 +65,18 @@ end
 -----------------MOD-------------------
 
 function LoadMod()
+
     WheelDefinitionHelpers.ConstructWheelDefinitions()
     DeviceManager.Load()
     TrackManager.Load()
     DrawableWheel.Load()
+    WorldPartitionManager.Load()
     TerrainManager.Load()
     ForceManager.Load()
     -- TheGraph = Graph.New(850, 200, 200, 100, 20, "kB / 100,000 kB", "Memory Usage")
     UpdateLogging.Load()
-    MouseWheel.Load()
-    
+    --MouseWheel.Load()
+
 end
 PreviousUpdateTime = 0
 UpdateDelta = 0
@@ -84,9 +86,10 @@ function ModLoop(frame)
     UpdateDelta = math.floor(difference * 100 + 0.5) / 100
     PreviousUpdateTime = currentTime
     UpdateFunction("UpdateLogging", "Update", frame)
+    UpdateFunction("WorldPartitionManager", "Update", frame)
     UpdateFunction("TerrainManager", "Update", frame)
     UpdateFunction("DeviceManager", "Update", frame)
-    UpdateFunction("MouseWheel", "Update", frame)
+    --UpdateFunction("MouseWheel", "Update", frame)
     UpdateFunction("WheelManager", "Update", frame)
     UpdateFunction("TrackManager", "Update", frame)
     UpdateFunction("ForceManager", "Update", frame)
@@ -102,6 +105,27 @@ function ModLoop(frame)
 
         UpdateLogging.Log("Mod loop took " .. string.format("%.2f", delta) .. "ms, " .. string.format("%.1f", delta/(UpdateDelta * 1000) * 100) .. "%")
     end
+
+
+
+    local poly1 = {Vec3(-8000, -4500), Vec3(-8000, -5000), Vec3(-7000, -5000), Vec3(-7000, -4500)}
+    local poly2 = {Vec3(-0, -0), Vec3(1000,-250), Vec3(1000, 250)}
+
+    local mousePos = ProcessedMousePos()
+
+    poly2[1] = poly2[1] + mousePos
+    poly2[2] = poly2[2] + mousePos
+    poly2[3] = poly2[3] + mousePos
+
+    local union = Polygon.Union(poly1, poly2)
+    
+    if #union < 6 then
+        Highlighting.HighlightPolygon(poly1, {r = 255, g = 0, b = 0, a = 255})
+        Highlighting.HighlightPolygon(poly2, {r = 255, g = 0, b = 0, a = 255})
+    else
+        Highlighting.HighlightPolygon(union, {r = 0, g = 255, b = 0, a = 255})
+    end
+    
 
 end
 PreviousDrawTime = 0
@@ -124,3 +148,7 @@ function RgbaToHex(r, g, b, a, UTF16)
     end
   end
 dofile(path .. "/debugMagic.lua")
+
+function BoolToNumber(value)
+    return value and 1 or 0
+  end

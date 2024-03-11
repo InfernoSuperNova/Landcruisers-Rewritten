@@ -15,3 +15,5 @@ Starting with the highest displacement segment collider, we take the necessary s
 Then, we run the collision checks on the other segments in range, starting with the next biggest from the new position.
 
 We repeat that until the displaced position is either too far away from the original position, or until the collision is entirely resolved.
+
+

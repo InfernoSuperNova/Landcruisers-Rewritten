@@ -6,6 +6,7 @@ function TerrainManager.Load()
     TerrainManager.IndexAtLoad()
 end
 data.terrain = {}
+data.homogenousTerrain = {}
 function TerrainManager.IndexAtLoad()
     data.terrain = {}
     local terrainCount = GetBlockCount()
@@ -26,6 +27,24 @@ function TerrainManager.IndexAtLoad()
         local block = Block(blockIndex, continuousUpdate)
         table.insert(data.terrain, block)
     end
+    --TerrainManager.GenerateHomogenousTerrain()
+end
+
+function TerrainManager.GenerateHomogenousTerrain()
+    local timeStart = GetRealTime()
+    for _, blockA in pairs(data.terrain) do
+        for _, blockB in pairs(data.terrain) do
+            if blockA == blockB then continue end
+            if IsWithinDistance(blockA:GetColliderPos(), blockB:GetColliderPos(), blockA:GetColliderRadius() + blockB:GetColliderRadius()) then
+                if Polygon.GetIntersecting(blockA:GetNodes(), blockB:GetNodes()) then
+                    local polygon = Polygon.Union(blockA:GetNodes(), blockB:GetNodes())
+                    Highlighting.HighlightPolygon(polygon.regions[1], {r = 255, g = 0, b = 0, a = 255})
+                end
+            end
+        end
+    end
+    local timeEnd = GetRealTime()
+    BetterLog("Terrain collision check took " .. timeEnd - timeStart .. " seconds")
 end
 
 

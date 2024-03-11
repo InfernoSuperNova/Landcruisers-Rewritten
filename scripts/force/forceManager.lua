@@ -19,6 +19,5 @@ function ApplyForce(node, force)
     if node == nil or force == nil then
         return
     end
-    SpawnCircle(NodePosition(node), 50, Red(), data.updateDelta * 1.2)
     data.forceTable[node] = (data.forceTable[node] or Vec3(0,0,0)) + force
 end

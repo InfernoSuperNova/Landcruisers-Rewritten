@@ -269,6 +269,16 @@ function Vec3AverageTable(vectors)
 end
 
 
+function Vec3SquareDistance(v1, v2)
+    v1.x = v1.x or 0
+    v1.y = v1.y or 0
+    v1.z = v1.z or 0
+    v2.x = v2.x or 0
+    v2.y = v2.y or 0
+    v2.z = v2.z or 0
+    return (v1.x - v2.x)^2 + (v1.y - v2.y)^2 + (v1.z - v2.z)^2
+end
+
 
 
 function IsConcave(a, b, c)

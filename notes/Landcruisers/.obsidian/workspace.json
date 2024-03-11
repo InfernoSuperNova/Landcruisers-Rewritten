@@ -146,9 +146,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "9350fa498dc61595",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Track drawing 2.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 11
+        "currentTab": 12
       }
     ],
     "direction": "vertical"
@@ -214,7 +226,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "wheel/Revised collision algorithm.md",
+                "file": "Track drawing 2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -231,7 +243,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "wheel/Revised collision algorithm.md",
+                "file": "Track drawing 2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -254,7 +266,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "wheel/Revised collision algorithm.md"
+                "file": "Track drawing 2.md"
               }
             }
           }
@@ -275,10 +287,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fab40293b5d1892a",
+  "active": "9350fa498dc61595",
   "lastOpenFiles": [
-    "wheel/Collisions.md",
     "wheel/Revised collision algorithm.md",
+    "Track drawing 2.md",
+    "wheel/Collisions.md",
     "wheel/Control.md",
     "To do today.md",
     "Pasted image 20231108164447.png",
